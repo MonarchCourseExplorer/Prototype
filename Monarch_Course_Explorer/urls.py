@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Monarch_Course_Explorer import views
 
 urlpatterns = [
+    path('', views.homeView, name='home'),
     path('admin/', admin.site.urls),
+    path('pages/gallery.html', views.galleryView, name='gallery'),
+    path('pages/portfolio.html', views.portfolioView, name='portfolio'),
+    path('pages/full-width.html', views.fullWidthView, name='full width'),
+    path('pages/sidebar-left.html', views.sidebarLeftView, name='left side bar'),
 ]
