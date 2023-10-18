@@ -19,7 +19,8 @@ from django.urls import path
 from Monarch_Course_Explorer import views
 
 urlpatterns = [
-    path('', views.homeView, name='home'),
+    path('', views.homeView),
+    path('index.html', views.homeView, name='home'),
     path('admin/', admin.site.urls),
     path('pages/gallery.html', views.galleryView, name='gallery'),
     path('pages/portfolio.html', views.portfolioView, name='portfolio'),
