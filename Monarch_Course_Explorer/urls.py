@@ -24,6 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('pages/gallery.html', views.galleryView, name='gallery'),
     path('pages/portfolio.html', views.portfolioView, name='portfolio'),
-    path('pages/full-width.html', views.fullWidthView, name='full width'),
-    path('pages/sidebar-left.html', views.sidebarLeftView, name='left side bar'),
+    path('pages/full-width.html', views.fullWidthView, name='full-width'),
+    path('pages/sidebar-left.html', views.sidebarLeftView, name='sidebar-left'),
+    path('pages/sidebar-left-2.html', views.sidebarLeftView2, name='sidebar-left 2'),
+    path('pages/sidebar-right.html', views.sidebarRightView, name='sidebar-right'),
+    path('pages/sidebar-right-2.html', views.sidebarRightView2, name='sidebar-right 2'),
+    path('pages/basic-grid.html', views.basicGridView, name='basic-grid')
 ]

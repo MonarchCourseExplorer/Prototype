@@ -16,7 +16,22 @@ def portfolioView(request):
 def fullWidthView(request):
     return render(request, 'pages/full-width.html')
 
-# Render the sidebar left page
+# Render the sidebar-left page
 def sidebarLeftView(request):
     return render(request, 'pages/sidebar-left.html')
 
+# Render the sidebar-left 2 page
+def sidebarLeftView2(request):
+    return render(request, 'pages/sidebar-left-2.html')
+
+# Render the sidebar-right page
+def sidebarRightView(request):
+    return render(request, 'pages/sidebar-right.html')
+
+# Render the sidebar-right 2 page
+def sidebarRightView2(request):
+    return render(request, 'pages/sidebar-right-2.html')
+
+# Render the basic-grid page
+def basicGridView(request):
+    return render(request, 'pages/basic-grid.html')
