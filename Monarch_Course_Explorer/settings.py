@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Monarch_Course_Explorer'
+    'Monarch_Course_Explorer',
+    'users',
+    'catalogue',
 ]
 
 MIDDLEWARE = [
