@@ -6,6 +6,7 @@ class Course(models.Model):
     description = models.TextField(blank= True)
 
     def __str__(self):
+        return self.name
     
 
 class Syllabus(models.Model):
@@ -15,10 +16,11 @@ class Syllabus(models.Model):
 
     def __str__(self):
         return self.SectionID
+
     
     
 
-class Feeback(models.Model):
+class Feedback(models.Model):
     SectionID = models.IntegerField('SectionID')
     StudentID = models.IntegerField('StudentID')
     Review =  models.TextField(blank= True)
