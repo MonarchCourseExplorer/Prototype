@@ -87,15 +87,16 @@ WSGI_APPLICATION = 'Monarch_Course_Explorer.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # The original setting.
-# DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES = {"default": env.db("DATABASE_URL")}
 
 # The setting I'm testing from the database documentation listed above
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "mydatabase",
-    }
-}
+# 
+# DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.sqlite3",
+#        "NAME": "mydatabase",
+#    }
+#}
 
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
