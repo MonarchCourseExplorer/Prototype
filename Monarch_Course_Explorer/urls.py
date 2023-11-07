@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from Monarch_Course_Explorer import views
 
 urlpatterns = [
@@ -29,5 +29,7 @@ urlpatterns = [
     path('pages/sidebar-left-2.html', views.sidebarLeftView2, name='sidebar-left 2'),
     path('pages/sidebar-right.html', views.sidebarRightView, name='sidebar-right'),
     path('pages/sidebar-right-2.html', views.sidebarRightView2, name='sidebar-right 2'),
-    path('pages/basic-grid.html', views.basicGridView, name='basic-grid')
+    path('pages/basic-grid.html', views.basicGridView, name='basic-grid'),
+    path('users/', include('django.contrib.auth.urls')) ,
+    path('users/', include('users.urls')) 
 ]
