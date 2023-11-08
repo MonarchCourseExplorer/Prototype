@@ -511,7 +511,7 @@ table a, #comments a{background-color:inherit;}
 	justify-content: center;
     /* flex-direction: row; */
 	text-align: center;
-	margin-top: 100px;
+	margin-top: 25px; /* orig 100 */
 	
 }
 .title-above-search h1{
