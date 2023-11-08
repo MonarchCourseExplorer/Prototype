@@ -21,14 +21,14 @@
               <li><a href="#">A - Z Index</a></li>
               {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href=" {% url 'logout' %} ">Student Logout</a>
+                <a class="nav-link" href=" {% url 'logout' %} ">Logout</a>
               </li>
 
 
               {% else %}
               
               <li><a href=" {% url 'login' %} ">Student Login</a></li>
-              <li><a href="#">Staff Login</a></li>
+              <li><a href=" {% url 'flogin' %} ">Staff Login</a></li>
               <li class="nav-item">
                 <a class="nav-link" href=" {% url 'register' %} ">Register</a>
               </li>
