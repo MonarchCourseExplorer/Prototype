@@ -511,7 +511,7 @@ table a, #comments a{background-color:inherit;}
 	justify-content: center;
     /* flex-direction: row; */
 	text-align: center;
-	margin-top: 100px;
+	margin-top: 25px; /* orig 100 */
 	
 }
 .title-above-search h1{
@@ -527,11 +527,12 @@ table a, #comments a{background-color:inherit;}
 .search-container{
     display: flex;
     justify-content: center;
-    margin-top: 20vh;
+    margin-top: 5vh;
 }
-.search-bar {
+.search-bar {        
     display: flex;
-    align-content: center; 
+    align-content: center;
+    justify-content: center; 
     padding: 10px;
 }
 
@@ -549,4 +550,10 @@ table a, #comments a{background-color:inherit;}
     border-radius: 6px; /* rounded  border appearance */
     margin-left: 10px; /* Add some space between the input and button */
     height: 40px; /* Adjust the height to match the input */
+}
+
+/* To put search box at the center of the page on index.html homepage*/
+.box{
+    width: 100%;
+    text-align:center;
 }
