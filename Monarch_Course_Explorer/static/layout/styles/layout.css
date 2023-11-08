@@ -527,10 +527,9 @@ table a, #comments a{background-color:inherit;}
 .search-container{
     display: flex;
     justify-content: center;
-    margin-top: 20vh;
+    margin-top: 5vh;
 }
-.search-bar {    
-    padding-left: 50px;
+.search-bar {        
     display: flex;
     align-content: center;
     justify-content: center; 
