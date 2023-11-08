@@ -531,7 +531,8 @@ table a, #comments a{background-color:inherit;}
 }
 .search-bar {
     display: flex;
-    align-content: center; 
+    align-content: center;
+    justify-content: center; 
     padding: 10px;
 }
 
