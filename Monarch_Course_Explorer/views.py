@@ -36,5 +36,6 @@ def sidebarRightView2(request):
 def basicGridView(request):
     return render(request, 'pages/basic-grid.html')
 
+# Render the provideFeedback page
 def provideFeedbackView(request):
     return render(request, 'pages/provideFeedback.html')
