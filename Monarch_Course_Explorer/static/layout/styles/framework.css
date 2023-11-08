@@ -84,3 +84,9 @@ address, article, aside, figcaption, figure, footer, header, main, nav, section{
 .btmspace-50{margin-bottom:50px;}
 
 .pright-10{margin-right:10px;}
+
+/* To put search box at the center of the page on index.html homepage*/
+.box{
+    width: 100%;
+    text-align:center;
+}
