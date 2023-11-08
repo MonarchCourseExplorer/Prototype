@@ -33,5 +33,7 @@ services:
       - mce_django_local_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
+    ports:
+      - '5432:5432'
 
   

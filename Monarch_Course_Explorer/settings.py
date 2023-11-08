@@ -98,6 +98,17 @@ DATABASES = {"default": env.db("DATABASE_URL")}
 #    }
 #}
 
+#PostgreSQL
+#DATABASES = {"default": {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'mce_django',
+#        'USER': 'qrAKoIzpncvkHaCzUeBwGkXnhKgVypHZ',
+#        'PASSWORD': 'yVzY2BMfTNn4jW4pPr3Xcvuz0St5snmVPPJiHEFc1oP4O3JMlJcYOjzkZSxzAgJO',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+#}
+
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
