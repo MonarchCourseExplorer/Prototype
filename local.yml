@@ -4,6 +4,10 @@ volumes:
   mce_django_local_postgres_data: {}
   mce_django_local_postgres_data_backups: {}
 
+networks:
+  mynet:
+    driver: bridge
+
 services:
   django:
     build:
@@ -37,8 +41,4 @@ services:
       - ./.envs/.local/.postgres
     networks:
       - mynet
-
-networks:
-  mynet:
-    driver: bridge
   
