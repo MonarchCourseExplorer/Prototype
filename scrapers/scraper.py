@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from course import Course
+import psycopg
+
 
 def scrapeCompSciCourses():
     url = "https://catalog.odu.edu/courses/cs/"
@@ -58,7 +60,7 @@ def createConnection():
 
     try:
         #This is SUPER bad practice, but...it's already out there
-        conn = psycopg2.connect(host="localhost",
+        conn = psycopg.connect(host="postgres",
             dbname="mce_django",
             user="qrAKoIzpncvkHaCzUeBwGkXnhKgVypHZ",
             password="yVzY2BMfTNn4jW4pPr3Xcvuz0St5snmVPPJiHEFc1oP4O3JMlJcYOjzkZSxzAgJO")
@@ -68,7 +70,5 @@ def createConnection():
     return conn
 
 if __name__ == "__main__":
-    import psycopg2
-
     courses = scrapeCompSciCourses()
     syncCourses(courses)
