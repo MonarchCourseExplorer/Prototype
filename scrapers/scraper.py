@@ -3,27 +3,49 @@ from bs4 import BeautifulSoup
 from course import Course
 import psycopg
 
-
-def scrapeCompSciCourses():
-    url = "https://catalog.odu.edu/courses/cs/"
-    page = requests.get(url)
+def scrapeDepartments():
+    page = requests.get("https://catalog.odu.edu/courses/")
 
     soup = BeautifulSoup(page.content, "html.parser")
 
-    results = soup.find(id="undergraduatecoursestextcontainer")
+    departmentUrls = []
 
-    course_elements = results.find_all("div", class_="courseblock") #these are the individual courses blocks
+    results = soup.find("div", class_="sitemap")
 
+    department_elements = soup.find_all("a", class_="sitemaplink", href=True)
+
+    for element in department_elements:
+        departmentUrls.append("https://catalog.odu.edu" + element["href"])
+
+    return departmentUrls
+
+def scrapeCourses(url):
+    page = requests.get(url)
+
+    soup = BeautifulSoup(page.content, "html.parser")
     courses = []
-    for element in course_elements:
-        number = element.find("span", class_="detail-xrefcode").text
-        title = element.find("span", class_="detail-title").text
-        hours = element.find("span", class_="detail-hours_html").text
-        detail = element.find("p", class_="courseblockextra").text
-        prereqs = element.find("span", class_="detail-prereq")
+    courseBlocks = ["undergraduatecoursestextcontainer", "graduatecoursestextcontainer"]
 
-        c = Course.parseCourse(number, title, hours, detail)
-        courses.extend(c)
+    for block in courseBlocks:
+        results = soup.find(id=block)
+
+        course_elements = results.find_all("div", class_="courseblock") #these are the individual courses blocks
+
+        for element in course_elements:
+            number = element.find("span", class_="detail-xrefcode").text
+
+            titleElement = element.find("span", class_="detail-title")
+            if titleElement != None: title = titleElement.text
+
+            hours = element.find("span", class_="detail-hours_html").text
+
+            detailElement = element.find("p", class_="courseblockextra")
+            if detailElement != None: detail = detailElement.text #apparently this is allowed to be blank
+            
+            prereqs = element.find("span", class_="detail-prereq")
+
+            c = Course.parseCourse(number, title, hours, detail)
+            courses.extend(c)
 
     return courses
 
@@ -70,5 +92,8 @@ def createConnection():
     return conn
 
 if __name__ == "__main__":
-    courses = scrapeCompSciCourses()
-    syncCourses(courses)
+    urls = scrapeDepartments()
+
+    for url in urls:
+        courses = scrapeCourses(url)
+        syncCourses(courses)
