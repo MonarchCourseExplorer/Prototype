@@ -30,6 +30,7 @@ urlpatterns = [
     path('pages/sidebar-right.html', views.sidebarRightView, name='sidebar-right'),
     path('pages/sidebar-right-2.html', views.sidebarRightView2, name='sidebar-right 2'),
     path('pages/basic-grid.html', views.basicGridView, name='basic-grid'),
+    path('pages/provideFeedback.html', views.provideFeedbackView, name='provideFeedback'),
     path('users/', include('django.contrib.auth.urls')) ,
     path('users/', include('users.urls')) 
 ]

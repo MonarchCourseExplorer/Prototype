@@ -537,6 +537,7 @@ table a, #comments a{background-color:inherit;}
 }
 
 .search-bar input {
+    color:black; /* change color inside search bar to black */ 
     width: 500px;
     padding: 10px;
     font-size: 16px;
