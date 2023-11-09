@@ -5,6 +5,8 @@ class Course(models.Model):
     name = models.CharField('Course Name', max_length= 120)
     department = models.CharField(max_length=120)
     description = models.TextField(blank= True)
+    number = models.CharField('Course Number', max_length=10) #probably excessive, but it doesn't hurt
+    credits = models.CharField(max_length=10) #We aren't doing anything with this, so leave it as char so 1-3 works
 
     def __str__(self):
         return self.name
