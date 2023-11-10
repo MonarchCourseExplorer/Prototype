@@ -10,8 +10,6 @@ def scrapeDepartments():
 
     departmentUrls = []
 
-    results = soup.find("div", class_="sitemap")
-
     department_elements = soup.find_all("a", class_="sitemaplink", href=True)
 
     for element in department_elements:
