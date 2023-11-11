@@ -196,6 +196,12 @@ Licence URI: http://www.os-templates.com/template-terms
     
     <div class="search-container">
         <div class="search-bar">
+          <select id="department-select">
+            <option></option>
+            {% for x in departments %}
+              <option>{{x.department}}</option>
+            {% endfor %}
+          </select>
           <input type="text" id="searchInput" placeholder="Search for a Course or a Professor" />
           <button onclick="search()">Search</button>
         </div>
