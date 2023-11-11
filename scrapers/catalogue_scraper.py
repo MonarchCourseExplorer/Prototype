@@ -1,21 +1,35 @@
 import requests
 from bs4 import BeautifulSoup
 from course import Course
-import psycopg
+from dataclasses import dataclass
+import psycopg2
+
+@dataclass
+class Department:
+    url = ""
+    abbreviation = ""
+    name = ""
 
 def scrapeDepartments():
     page = requests.get("https://catalog.odu.edu/courses/")
 
     soup = BeautifulSoup(page.content, "html.parser")
 
-    departmentUrls = []
+    departments = []
 
     department_elements = soup.find_all("a", class_="sitemaplink", href=True)
 
     for element in department_elements:
-        departmentUrls.append("https://catalog.odu.edu" + element["href"])
+        
+        d = Department()
+        d.url = "https://catalog.odu.edu" + element["href"]
+        sep = element.text.find(" - ")
+        d.abbreviation = element.text[0:sep]
+        d.name = element.text[sep+3:]
+        departments.append(d)
+        print(d.name + " " + d.abbreviation)
 
-    return departmentUrls
+    return departments
 
 def scrapeCourses(url):
     page = requests.get(url)
@@ -47,8 +61,27 @@ def scrapeCourses(url):
 
     return courses
 
-def syncCourses(courses):
-    conn = createConnection()
+def syncDepartments(departments, conn):
+    #Assumption - the abbreviation does not change, and changes that do occur are taken care of manually
+    selectSQL = "SELECT ID FROM catalogue_department WHERE abbreviation = %s;"
+    insertSQL = "INSERT INTO catalogue_department ( abbreviation, name ) VALUES (%s, %s);"
+    updateSQL = "UPDATE catalogue_department SET name = %s WHERE ID = %s;"
+
+    cur = conn.cursor()
+
+    for d in departments:
+        cur.execute(selectSQL, (d.abbreviation))
+
+        if cur.rowcount > 0:
+            cur.execute(updateSQL, (d.name, cur.fetchone()[0]))
+        else:
+            cur.execute(insertSQL, (d.abbreviation, d.name))
+
+    con.commit()
+    cur.close()
+
+
+def syncCourses(courses, conn):
     selectSQL = "SELECT ID FROM catalogue_course WHERE department = %s AND number = %s;"
     insertSQL = """INSERT INTO catalogue_course ( department, number, name, credits, description ) 
           VALUES (%s, %s, %s, %s, %s);"""
@@ -56,23 +89,21 @@ def syncCourses(courses):
             SET name = %s, credits = %s, description = %s
             WHERE ID = %s;"""
 
-    if conn != None:
-        cur = conn.cursor()
+    cur = conn.cursor()
 
-        for course in courses:
-            #check and see if the course is already in the table - match department and number
-            cur.execute(selectSQL, (course.department, course.number))
+    for course in courses:
+        #check and see if the course is already in the table - match department and number
+        cur.execute(selectSQL, (course.department, course.number))
 
-            if cur.rowcount > 0:
-                #if yes, update it - shouldn't we check to see if any updates are necessary? Logically yes, but how bad is the performance from NOT checking?
-                cur.execute(updateSQL, (course.title, course.credits, course.detail, cur.fetchone()[0]))
-            else:
-                #if not, insert it
-                cur.execute(insertSQL, (course.department, course.number, course.title, course.credits, course.detail))
+        if cur.rowcount > 0:
+            #if yes, update it - shouldn't we check to see if any updates are necessary? Logically yes, but how bad is the performance from NOT checking?
+            cur.execute(updateSQL, (course.title, course.credits, course.detail, cur.fetchone()[0]))
+        else:
+            #if not, insert it
+            cur.execute(insertSQL, (course.department, course.number, course.title, course.credits, course.detail))
 
-        conn.commit()
-        cur.close()
-        conn.close()
+    conn.commit()
+    cur.close()
 
 
 def createConnection():
@@ -90,8 +121,13 @@ def createConnection():
     return conn
 
 if __name__ == "__main__":
-    urls = scrapeDepartments()
+    conn = createConnection()
 
-    for url in urls:
-        courses = scrapeCourses(url)
-        syncCourses(courses)
+    if conn != None:
+        departments = scrapeDepartments()
+
+        for d in departments:
+            courses = scrapeCourses(d.url)
+            syncCourses(courses)
+
+        conn.close()

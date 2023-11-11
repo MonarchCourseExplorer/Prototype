@@ -1,6 +1,10 @@
 from django.db import models
 from users.models import Student, Professor
 
+class Department(models.Model):
+    abbreviation = models.CharField(max_length=10)
+    name = models.CharField(max_length=255)
+
 class Course(models.Model):
     name = models.CharField('Course Name', max_length= 120)
     department = models.CharField(max_length=120)
