@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings
 
 # Render the Monarch Course Explorer home page
 def homeView(request):
@@ -7,6 +8,10 @@ def homeView(request):
 # Render gallery page
 def galleryView(request):
     return render(request, 'pages/gallery.html')
+
+# Render the Monarch Course Explorer quiz page
+def quizView(request):
+    return render(request, str(settings.CATALOGUE_DIR) + '/RecQuestion.html')
 
 # Render the provideFeedback page
 def provideFeedbackView(request):
