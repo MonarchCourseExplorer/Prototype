@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monarch Course Explorer Recommendations Quiz</title>
+    <style>
+        /* Some basic styling for better presentation */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .choices input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Monarch Course Explorer Recommendations Quiz</h1>
+
+    <form action="/submit" method="post">
+        <div class="question">
+            <p>Please enter the course for which you're seeking:</p>
+            <div class="choices">
+                <label><input type="text" name="question1" placeholder="Enter the course">
+                <button type="button" onclick="submitTextAnswer('question1')">Enter</button>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>1. Do you prefer Asynchronous or Synchronous?</p>
+            <div class="choices">
+                <label><input type="radio" name="question2" value="Asynchronous"> Asynchronous</label>
+                <label><input type="radio" name="question2" value="Synchronous"> Synchronous</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. Do you prefer more theory or more hands-on?</p>
+            <div class="choices">
+                <label><input type="radio" name="question3" value="Theory"> Theory</label>
+                <label><input type="radio" name="question3" value="Hands-On"> Hands-On</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. Do you prefer smaller projects or larger projects?</p>
+            <div class="choices">
+                <label><input type="radio" name="question4" value="Smaller"> Smaller</label>
+                <label><input type="radio" name="question4" value="Larger"> Larger</label>
+        </div>
+
+        <div class="question">
+            <p>4. Do you prefer reading lectures or watching lecture videos?</p>
+            <div class="choices">
+                <label><input type="radio" name="question5" value="Reading"> Reading</label>
+                <label><input type="radio" name="question5" value="Watching Videos"> Watching Videos</label>
+            </div>
+        </div>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

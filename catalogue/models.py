@@ -11,8 +11,6 @@ class Course(models.Model):
     def __str__(self):
         return self.name
     
-
-
 class Section(models.Model):
     course = models.ForeignKey(Course, blank=True, null=True, on_delete=models.CASCADE)
     courseID = models.IntegerField()
@@ -26,7 +24,6 @@ class Section(models.Model):
     def __str__(self):
         return self.course + " " + self.professor.first_name + " " + self.professor.last_name
 
-
 class Syllabus(models.Model):
     SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
     OrginalLocation = models.CharField('Orginal Location', max_length = 120)
@@ -34,8 +31,6 @@ class Syllabus(models.Model):
 
     def __str__(self):
         return  "Syllabus for " + self.SectionID
-
-
 
 class Feedback(models.Model):
     SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
@@ -47,3 +42,18 @@ class Feedback(models.Model):
 
     def __str__(self):
         return "Feedback for " + self.SectionID
+    
+class MCEQuestions(models.Model):
+    questions_text = models.CharField(max_length=200)
+
+class MCEAnswer(models.Model):
+    question = models.ForeignKey(MCEQuestions, on_delete=models.CASCADE)
+    answer_text = models.CharField(max_length=200)
+
+class MCEUserResponse(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    answer = models.ForeignKey(MCEAnswer, on_delete=models.CASCADE)
+    
+class MCERecommendation(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
