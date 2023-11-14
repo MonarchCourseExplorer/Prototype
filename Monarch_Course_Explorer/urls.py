@@ -23,6 +23,7 @@ urlpatterns = [
     path('index.html', views.homeView, name='home'),
     path('admin/', admin.site.urls),
     path('pages/gallery.html', views.galleryView, name='gallery'),
+    path('catalogue/templates/MCEQuiz/RecQuestion.html', views.quizView, name='quiz'),
     path('pages/provideFeedback.html', views.provideFeedbackView, name='provideFeedback'),
     path('users/', include('django.contrib.auth.urls')) ,
     path('users/', include('users.urls')) 
