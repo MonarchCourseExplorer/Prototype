@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from course import Course
 from dataclasses import dataclass
-import psycopg2
+import psycopg
 
 @dataclass
 class Department:
@@ -23,11 +23,10 @@ def scrapeDepartments():
         
         d = Department()
         d.url = "https://catalog.odu.edu" + element["href"]
-        sep = element.text.find(" - ")
+        sep = element.text.find(" ")
         d.abbreviation = element.text[0:sep]
         d.name = element.text[sep+3:]
         departments.append(d)
-        print(d.name + " " + d.abbreviation)
 
     return departments
 
@@ -70,14 +69,14 @@ def syncDepartments(departments, conn):
     cur = conn.cursor()
 
     for d in departments:
-        cur.execute(selectSQL, (d.abbreviation))
+        cur.execute(selectSQL, (d.abbreviation, ))
 
         if cur.rowcount > 0:
             cur.execute(updateSQL, (d.name, cur.fetchone()[0]))
         else:
             cur.execute(insertSQL, (d.abbreviation, d.name))
 
-    con.commit()
+    conn.commit()
     cur.close()
 
 
@@ -125,9 +124,10 @@ if __name__ == "__main__":
 
     if conn != None:
         departments = scrapeDepartments()
+        syncDepartments(departments, conn)
 
         for d in departments:
             courses = scrapeCourses(d.url)
-            syncCourses(courses)
+            syncCourses(courses, conn)
 
         conn.close()
