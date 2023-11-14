@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import Student, Professor
 
+#MCE Standard Databases
 class Course(models.Model):
     name = models.CharField('Course Name', max_length= 120)
     department = models.CharField(max_length=120)
@@ -32,6 +33,7 @@ class Syllabus(models.Model):
     def __str__(self):
         return  "Syllabus for " + self.SectionID
 
+#MCE Feedback
 class Feedback(models.Model):
     SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
     #StudentID = models.IntegerField('StudentID')
@@ -43,6 +45,8 @@ class Feedback(models.Model):
     def __str__(self):
         return "Feedback for " + self.SectionID
     
+
+#MCE Recommendations Quiz
 class MCEQuestions(models.Model):
     questions_text = models.CharField(max_length=200)
 
