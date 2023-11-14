@@ -2,32 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monarch Course Explorer Feedback</title>
-    <style>
-        /* Some basic styling for better presentation */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .question {
-            margin-bottom: 15px;
-        }
-        .choices input {
-            margin-right: 10px;
-        }
-    </style>
 </head>
+
+<style>
+    /* Some basic styling for better presentation */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    .question {
+        margin-bottom: 15px;
+    }
+    .choices input {
+        margin-right: 10px;
+    }
+</style>
 <body>
-    <h1>Monarch Course Explorer Feedback</h1>
-    <br/> <br/>
+
+<form>
+    <label for="courseName">Course Name:</label>
+    <input type="text" id="courseName" name="courseName" required>
 
     <br>
-    <label for="feedback">Feedback:</label>
-    <textarea id="feedback" name="feedback" placeholder="Write your feedback here.." style="height:200px" required></textarea>
+
+    <label for="professorName">Professor Name:</label>
+    <input type="text" id="professorName" name="professorName" required>
+
     <br>
+
+    <label for="feedback">Feedback:</label>
+    <textarea id="feedback" name="feedback" placeholder="Write your feedback here.." style="height:100px" style="width:100px" required></textarea>
+
+    <br>
+
+    <input type="submit" value="Submit">
 
     {% if submitted %}
         Your feedback was submitted successfully!!!
@@ -45,3 +58,8 @@
 
         </form>
     {% endif %}
+</form>
+
+</body>
+</html>
+
