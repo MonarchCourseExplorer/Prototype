@@ -19,13 +19,14 @@ class Course(models.Model):
 
 class Section(models.Model):
     course = models.ForeignKey(Course, blank=True, null=True, on_delete=models.CASCADE)
-    courseID = models.IntegerField()
+    #courseID = models.IntegerField() #is this the CRN?
     semester = models.CharField('Semester', max_length=50)
     session = models.CharField('Session', max_length=25)
-    offeringTime = models.TimeField(auto_now=False, auto_now_add=False)
+    offering_time = models.CharField(255) # models.TimeField(auto_now=False, auto_now_add=False)
     professor = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    deliveryType = models.CharField(max_length=25)
-    meetingType = models.CharField(max_length=25)
+    delivery_type = models.CharField(max_length=25)
+    meeting_type = models.CharField(max_length=25)
+    crn = models.IntegerField()
 
     def __str__(self):
         return self.course + " " + self.professor.first_name + " " + self.professor.last_name

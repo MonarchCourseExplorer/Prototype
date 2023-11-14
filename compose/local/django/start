@@ -11,3 +11,4 @@ exec python manage.py runserver 0.0.0.0:8000
 #these aren't installing. if you see this, please make this run properly
 pip install requests
 pip install bs4
+pip install selenium
