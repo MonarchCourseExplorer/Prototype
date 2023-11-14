@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
 from .models import MCEQuestions, MCEAnswer, MCEUserResponse, MCERecommendation
+from .forms import FeedbackForm
+
+
 
 # MCE Recommendations Quiz Page
 def quiz_question(request, question_id):
@@ -11,3 +16,19 @@ def quiz_question(request, question_id):
  #   if request.method == 'POST':
 
 #def show_recomendation(request): 
+
+#MCE Feedback
+def add_feedback(request):
+    submitted = False
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #Redirect user back to feedback page. --look into how to output feedback
+            return HttpResponseRedirect('/add_feedback?submitted=True') 
+        else:
+            form = FeedbackForm
+            if 'submitted' in request.GET:
+                submitted = True
+    form = FeedbackForm
+    return render(request, 'Feedback/UserFeedback.html', {'form':form, 'submitted':submitted})

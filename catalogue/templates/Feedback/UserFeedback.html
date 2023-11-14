@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monarch Course Explorer Feedback</title>
+    <style>
+        /* Some basic styling for better presentation */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .choices input {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Monarch Course Explorer Feedback</h1>
+    <br/> <br/>
+    {% if submitted %}
+        Your feedback was submitted successfully!!!
+
+    {% else %}
+
+
+        <form action ="" method="post">
+            {% csrf_token %}
+
+            {{ form.as_p}}
+
+            <input type="submit" value="Submit" class="btn btn-sucondary">
+
+
+        </form>
+    {% endif %}
