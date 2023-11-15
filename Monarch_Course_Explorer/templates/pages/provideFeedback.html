@@ -1,95 +1,9 @@
-<!DOCTYPE html>
-<!--
-Template Name: Academic Education V2
-Author: <a href="http://www.os-templates.com/">OS Templates</a>
-Author URI: http://www.os-templates.com/
-Licence: Free to use under our free template licence terms
-Licence URI: http://www.os-templates.com/template-terms
--->
-<html>
-  <head>
-    <title>Monarch Course Explorer | Provide Course Feedback</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <link
-      href="../../static/layout/styles/layout.css"
-      rel="stylesheet"
-      type="text/css"
-      media="all"
-    />
-  </head>
-  <body id="top">
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <div class="wrapper row0">
-      <div id="topbar" class="clear">
-        <!-- ################################################################################################ -->
-        <nav>
-          <ul>
-            <li><a href="#">Student Login</a></li>
-            <li><a href="#">Staff Login</a></li>
-          </ul>
-        </nav>
-        <!-- ################################################################################################ -->
-      </div>
-    </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <div class="wrapper row1">
-      <header id="header" class="clear">
-        <!-- ################################################################################################ -->
-        <div id="logo" class="fl_left">
-          <h1><a href="../index.html">Monarch Course Explorer</a></h1>
-          <p>Prototype</p>
-        </div>
-        <div class="fl_right">
-          <form class="clear" method="post" action="#">
-            <fieldset>
-              <legend>Search:</legend>
-              <input type="text" value="" placeholder="Search Here" />
-              <button class="fa fa-search" type="submit" title="Search">
-                <em>Search</em>
-              </button>
-            </fieldset>
-          </form>
-        </div>
-        <!-- ################################################################################################ -->
-      </header>
-    </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <div class="wrapper row2">
-      <div class="rounded">
-        <nav id="mainav" class="clear">
-          <!-- ################################################################################################ -->
-          <ul class="clear">
-            <li><a href="../index.html">Home</a></li>
-            <li class="active">
-              <a class="drop" href="#">Pages</a>
-              <ul>
-                <li><a href="gallery.html">Gallery</a></li>
-              </ul>
-            </li>
-            <li>
+{% extends 'pages/base.html' %}
 
-          <!-- ################################################################################################ -->
-        </nav>
-      </div>
-    </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <div class="wrapper row3">
-      <div class="rounded">
-        <main class="container clear">
-          <!-- main body -->
-          <!-- ################################################################################################ -->
+
+{% block title %}Grades - Monarch Course Explorer{% endblock %}
+
+{% block content %}
 
           <div id="comments">
             <h1>Provide Course Feedback</h1>
@@ -99,50 +13,49 @@ Licence URI: http://www.os-templates.com/template-terms
             </label>
               <div class="block clear">
                 <div class="group">
-                  <div class="two_quarter">
-                    <div class="dropdown">
-                      <label for="subject">Subject:</label>
-                      <select name="subject" id="subject">
-                        <option value="Subject1">Subject 1</option>
-                        <option value="Subject2">Subject 2</option>
-                        <!-- Add more subjects as needed -->
-                      </select>
+                    <div class="subject-question">
+                      <p>Subject:</p>
+                      <div class="subject-input">
+                        <label>
+                          <input type="text" name="subject" list="subjects" placeholder="Enter subject here">
+                        </label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="dropdown">
-                    <label for="course">Course:</label>
-                    <select name="course" id="course">
-                      <option value="Course1">Course 1</option>
-                      <option value="Course2">Course 2</option>
-                      <!-- Add more courses as needed -->
-                    </select>
-                  </div>
+
+                    <div class="course-question">
+                      <p>Course Number:</p>
+                      <div class="course-input">
+                        <label>
+                          <input type="text" name="course" list="courses" placeholder="Enter course number here">
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="instructor-question">
+                      <p>Instructor:</p>
+                      <div class="instructor-input">
+                        <label>
+                          <input type="text" name="instructor" list="instructors" placeholder="Enter instructor here">
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="semester-question">
+                      <p>Semester:</p>
+                      <div class="semester-input">
+                        <label>
+                          <input type="text" name="semester" list=semesters" placeholder="Enter semester here">
+                        </label>
+                        <!-- Need to make this based on the chosen subject AND course previously AND semester -->
+                        {% comment %} <datalist id="instructors">
+                          <option value="Computer Science">
+                          <option value="Math"> 
+                        </datalist> {% endcomment %}
+                      </div>
+                    </div>
+
                 </div>
               </div>
-
-              <div class="block clear">
-                <div class="dropdown">
-                  <div class="group">
-                    <div class="two_quarter">
-                  <label for="instructor">Instructor:</label>
-                  <select name="instructor" id="instructor">
-                    <!-- TO DO: Grab Instructors from Database -->
-                    <option value="Instructor1">Instructor 1</option>
-                    <option value="Instructor2">Instructor 2</option>
-                  </select>
-                </div>
-
-                <div class="dropdown">
-                  <label for="semester">Semester:</label>
-                  <select name="semester" id="semester">
-                     <!-- TO DO: Grab Semesters from Database -->
-                    <option value="Semester1">Semester 1</option>
-                    <option value="Semester2">Semester 2</option>
-                    <!-- Add more semesters as needed -->
-                  </select>
-                </div>
-              </div>
-            </div>
 
               <div class="block clear">
                 <label for="comments"
@@ -162,12 +75,6 @@ Licence URI: http://www.os-templates.com/template-terms
               </div>
             </form>
           </div>
-          <!-- ################################################################################################ -->
-          <!-- / main body -->
-          <div class="clear"></div>
-        </main>
-      </div>
-    </div>
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
@@ -175,25 +82,13 @@ Licence URI: http://www.os-templates.com/template-terms
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
     <!-- ################################################################################################ -->
-    <div class="wrapper row5">
-      <div id="copyright" class="clear">
-        <!-- ################################################################################################ -->
-        <p class="fl_left">Copyright &copy; Team Silver 2023 - All Rights Reserved - <a href="#">Monarch Course Explorer</a></p>
-        <p class="fl_right">
-          Template by
-          <a
-            target="_blank"
-            href="http://www.os-templates.com/"
-            title="Free Website Templates"
-            >OS Templates</a
-          >
-        </p>
-        <!-- ################################################################################################ -->
-      </div>
-    </div>
-    <!-- JAVASCRIPTS -->
-    <script src="../../static/layout/scripts/jquery.min.js"></script>
-    <script src="../../static/layout/scripts/jquery.fitvids.min.js"></script>
-    <script src="../../static/layout/scripts/jquery.mobilemenu.js"></script>
+    
+
   </body>
 </html>
+
+
+{% endblock %}
+
+
+<!DOCTYPE html>
