@@ -25,6 +25,9 @@ urlpatterns = [
     path('pages/gallery.html', views.galleryView, name='gallery'),
     path('catalogue/templates/MCEQuiz/RecQuestion.html', views.quizView, name='quiz'),
     path('pages/provideFeedback.html', views.provideFeedbackView, name='provideFeedback'),
+    path('pages/browseFeedback.html', views.provideBrowseFeedbackView, name='browseFeedback'),
+    path('pages/grades.html', views.provideGradesView, name='grades'),
+    path('pages/syllabus.html', views.provideSyllabusView, name='syllabus'),
     path('users/', include('django.contrib.auth.urls')) ,
     path('users/', include('users.urls')) 
 ]

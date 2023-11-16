@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Monarch Course Explorer{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      href="../../static/layout/styles/layout.css"
+      rel="stylesheet"
+      type="text/css"
+      media="all"
+    />
+  </head>
+  <body id="top">
+    <div class="wrapper row0">
+      <div id="topbar" class="clear">
+        <nav>
+          <ul>
+            <li><a href="#">Student Login</a></li>
+            <li><a href="#">Staff Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="wrapper row1">
+      <header id="header" class="clear">
+        <div id="logo" class="fl_left">
+          <h1><a href="../index.html">Monarch Course Explorer</a></h1>
+          <p>Prototype</p>
+        </div>
+        <div class="fl_right">
+          <form class="clear" method="post" action="#">
+            <fieldset>
+              <legend>Search:</legend>
+              <input type="text" value="" placeholder="Search Here" />
+              <button class="fa fa-search" type="submit" title="Search">
+                <em>Search</em>
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </header>
+    </div>
+    <div class="wrapper row2">
+      <div class="rounded">
+        <nav id="mainav" class="clear">
+          <ul class="clear">
+            <li><a href="../index.html">Home</a></li>
+            <li class="active">
+              <a class="drop" href="#">Pages</a>
+              <ul>
+                <li><a href="gallery.html">Gallery</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  
+ 
+    <div class="wrapper row3">
+        <div class="rounded">
+          <main class="container clear"> 
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+  </div> 
+
+  <div class="wrapper row5">
+    <div id="copyright" class="clear"> 
+      <!-- ################################################################################################ -->
+      <p class="fl_left">Copyright &copy; Team Silver 2023 - All Rights Reserved - <a href="#">Monarch Course Explorer</a></p>
+      <!--
+      <p class="fl_right">Template by <a target="_blank" href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+      -->
+      <!-- ################################################################################################ --> 
+    </div>
+  </div>
+  
+  <!-- JAVASCRIPTS --> 
+  <script src="../../static/layout/scripts/jquery.min.js"></script>
+    <script src="../../static/layout/scripts/jquery.fitvids.min.js"></script>
+    <script src="../../static/layout/scripts/jquery.mobilemenu.js"></script>
+
+</body>
+</html>
