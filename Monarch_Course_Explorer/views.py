@@ -16,3 +16,15 @@ def quizView(request):
 # Render the provideFeedback page
 def provideFeedbackView(request):
     return render(request, 'pages/provideFeedback.html')
+
+# Render the grades page
+def provideGradesView(request):
+    return render(request, 'pages/grades.html')
+
+# Render the browse feedback page 
+def provideBrowseFeedbackView(request):
+    return render(request, 'pages/browseFeedback.html')
+
+# Render the syllabus page
+def provideSyllabusView(request):
+    return render(request, 'pages/syllabus.html')
