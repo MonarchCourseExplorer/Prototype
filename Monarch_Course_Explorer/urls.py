@@ -23,7 +23,7 @@ urlpatterns = [
     path('index.html', views.homeView, name='home'),
     path('admin/', admin.site.urls),
     path('pages/gallery.html', views.galleryView, name='gallery'),
-    path('catalogue/templates/MCEQuiz/RecQuestion.html', views.quizView, name='quiz'),
+    path('pages/RecQuestion.html', views.quizView, name='quiz'),
     path('pages/provideFeedback.html', views.provideFeedbackView, name='provideFeedback'),
     path('pages/browseFeedback.html', views.provideBrowseFeedbackView, name='browseFeedback'),
     path('pages/grades.html', views.provideGradesView, name='grades'),
