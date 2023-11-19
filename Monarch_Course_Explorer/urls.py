@@ -21,6 +21,7 @@ from Monarch_Course_Explorer import views
 urlpatterns = [
     path('', views.homeView),
     path('index.html', views.homeView, name='home'),
+    path('Monarch_Course_Explorer/templates/index.html', views.homeViewFromLoginAndRegisterPages, name='homeViewLoginRegistration'),
     path('admin/', admin.site.urls),
     path('pages/gallery.html', views.galleryView, name='gallery'),
     path('pages/RecQuestion.html', views.quizView, name='quiz'),
@@ -29,5 +30,10 @@ urlpatterns = [
     path('pages/grades.html', views.provideGradesView, name='grades'),
     path('pages/syllabus.html', views.provideSyllabusView, name='syllabus'),
     path('users/', include('django.contrib.auth.urls')) ,
-    path('users/', include('users.urls')) 
+    path('users/', include('users.urls')),
+    path('users/templates/authenticate/register.html', views.provideRegisterView, name='registerView'),
+    path('users/templates/authenticate/login.html', views.provideStudentLoginView, name='studentLogin'),
+    path('users/templates/authenticate/faculty_login.html', views.provideFacultyLoginView, name='facultyLogin')
+    
+
 ]

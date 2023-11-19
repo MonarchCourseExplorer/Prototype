@@ -228,8 +228,8 @@ td{border-width:0 1px;}
 
 .faico a{display:block; width:40px; height:40px; line-height:40px; font-size:20px; text-align:center;}
 
-.faico a{color:#FFFFFF;}
-.faico a:hover{color:#FFFFFF; background-color:#CCCCCC;}
+.faico a{color:rgb(80, 77, 77);}
+.faico a:hover{color:#666363; background-color:#585757;}
 
 .faicon-facebook{background-color:#3B5998;}
 .faicon-flickr{background-color:#FF0084;}
@@ -268,19 +268,20 @@ td{border-width:0 1px;}
 
 /* Colours
 --------------------------------------------------------------------------------------------------------------- */
-body{color:#F9F9F9; background-color:#06213F;}
+/*body{color:#F9F9F9; background-color:#06213F;}*/
+body{color:#423e3e; background-color:#06213F;}
 
 a{color:#55ABDA;}
 
-hr, .borderedbox{border-color:#D7D7D7;}
+hr, .borderedbox{border-color:#423e3e;}
 
 label span{color:#FF0000; background-color:inherit;}
 
-.rounded{color:inherit; background-color:#F9F9F9;}
+.rounded{color:inherit; background-color:#423e3e;}
 
 
 /* Rows */
-.row0, .row0 a{color:#F9F9F9; background-color:#06213F;}
+.row0, .row0 a{color:#646161; background-color:#06213F;}
 .row1{color:#979797; background-color:#06213F;}
 .row1 a{color:#F9F9F9; background-color:inherit;}
 .row2, .row2 a{color:#06213F; background-color:inherit;}
@@ -290,7 +291,7 @@ label span{color:#FF0000; background-color:inherit;}
 
 
 /* Top Bar */
-#topbar li{border-color:#FFFFFF;}
+#topbar li{border-color:#423e3e;}
 
 
 /* Header */
@@ -299,10 +300,10 @@ label span{color:#FF0000; background-color:inherit;}
 
 
 /* Homepage Slider */
-#slide-wrapper figure figcaption{color:#666666; background-color:rgba(255,255,255,.5);}
-#slide-wrapper figure figcaption:hover{background-color:rgba(255,255,255,1);}
-#slider #slide-tabs li a{color:#666666; background-color:#DEDACB; border-color:#666666;}
-#slider #slide-tabs li a:hover, #slider #slide-tabs li.active a{color:#FFFFFF; background-color:#06213F;}
+#slide-wrapper figure figcaption{color:#666666; background-color:rgba(97, 93, 93, 0.5);}
+#slide-wrapper figure figcaption:hover{background-color:rgb(78, 76, 76);}
+#slider #slide-tabs li a{color:#666666; background-color:#3a3938; border-color:#666666;}
+#slider #slide-tabs li a:hover, #slider #slide-tabs li.active a{color:#646262; background-color:#06213F;}
 
 
 /* Content Area */
@@ -343,9 +344,9 @@ label span{color:#FF0000; background-color:inherit;}
 
 /* Tables + Comments */
 table, th, td, #comments .avatar, #comments input, #comments textarea{border-color:#D7D7D7;}
-th{color:#FFFFFF; background-color:#373737;}
-tr, #comments li, #comments input[type="submit"], #comments input[type="reset"]{color:inherit; background-color:#FBFBFB;}
-tr:nth-child(odd), #comments li:nth-child(odd){color:inherit; background-color:#FFFFFF;}
+th{color:#686565; background-color:#373737;}
+tr, #comments li, #comments input[type="submit"], #comments input[type="reset"]{color:inherit; background-color:#5e5a5a;}
+tr:nth-child(odd), #comments li:nth-child(odd){color:inherit; background-color:#535151;}
 table a, #comments a{background-color:inherit;}
 
 
@@ -460,14 +461,14 @@ table a, #comments a{background-color:inherit;}
 
 .card a {
     text-decoration: none;
-    color: white;
+    color: rgb(179, 174, 174);
     /* font-size:20px; */
     font-size: 15px;
     font-weight: bold;
 }
 
 .card p{
-    color: white;
+    color: rgb(160, 155, 155);
 	font-size: 15px;
 }
 
