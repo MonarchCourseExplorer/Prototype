@@ -559,3 +559,12 @@ table a, #comments a{background-color:inherit;}
     width: 100%;
     text-align:center;
 }
+
+.choices input {
+    margin-right: 10px;
+    display: inline-block;
+}
+    .choices label {
+        display: inline-block;
+        margin-right: 10px; /* Adjust the margin as needed */
+    }
