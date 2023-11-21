@@ -7,4 +7,5 @@ urlpatterns = [
     #path('recommendation/', views.show_recommendation, name='show_recommendation'),
     path('upload/', views.upload_Syllabus, name= 'upload'),
     path('success', views.success, name="success"),
+    path('view/<int:document_id>/', views.view_document, name ='view_syllabus'),
 ]

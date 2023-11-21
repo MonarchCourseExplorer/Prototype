@@ -33,8 +33,11 @@ class Section(models.Model):
 class Syllabus(models.Model):
     #SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
     class_name =models.CharField('Course',default= 'name',max_length=50 )
-    OriginalLocation = models.FileField(upload_to='documents/')
+    file = models.FileField(upload_to='documents/')
     NormalizedLocation = models.CharField('Normalized Location', max_length=120)
+
+    def filename(self):
+        return self.file.name.split('/')[-1]
     
 
     def __str__(self):

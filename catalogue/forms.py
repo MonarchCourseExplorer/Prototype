@@ -8,9 +8,9 @@ class SyllabusForm(forms.ModelForm):
     class Meta:
         model = Syllabus
         #field = "__all__"   gets all fields from user
-        fields = ('OriginalLocation',)
-    OriginalLocation = forms.FileField(widget=forms.FileInput())
-    
+        fields = ('class_name','file')
+    file = forms.FileField(widget=forms.FileInput())
+
 #Create Section Form
 class SectionForm(ModelForm):
     class Meta:
