@@ -55,17 +55,17 @@ class Feedback(models.Model):
     
 
 #MCE Recommendations Quiz
-class MCEQuestions(models.Model):
-    questions_text = models.CharField(max_length=200)
+class recQuestions(models.Model):
+    questions_text = models.CharField(max_length=255)
 
-class MCEAnswer(models.Model):
-    question = models.ForeignKey(MCEQuestions, on_delete=models.CASCADE)
-    answer_text = models.CharField(max_length=200)
-
-class MCEUserResponse(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    answer = models.ForeignKey(MCEAnswer, on_delete=models.CASCADE)
+class recAnswer(models.Model):
+    question = models.ForeignKey(recQuestions, on_delete=models.CASCADE)
+    choice = models.CharField(max_length=150)
     
 class MCERecommendation(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=255)
     content = models.TextField()
+    course = models.CharField(max_length=15)
+    
+    def __str__(self):
+        return self.title
