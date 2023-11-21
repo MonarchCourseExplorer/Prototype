@@ -1,11 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from .forms import SyllabusForm
 
 from .models import MCEQuestions, MCEAnswer, MCEUserResponse, MCERecommendation
 from .forms import FeedbackForm
 
 
+def success(request):
+    return render(request,'pages/success.html')
 
+def upload_Syllabus(request): 
+    
+    if request.method == 'POST':
+        form = SyllabusForm(request.POST, request.FILES)
+        #file = request.FILES['file']
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = SyllabusForm()
+    
+    return render(request, 'pages/upload.html', {'form': form})
 # MCE Recommendations Quiz Page
 def quiz_question(request, question_id):
     question = MCEQuestions.objects.get(pk=question_id)

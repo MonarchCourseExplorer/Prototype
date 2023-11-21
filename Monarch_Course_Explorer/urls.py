@@ -33,7 +33,9 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('users/templates/authenticate/register.html', views.provideRegisterView, name='registerView'),
     path('users/templates/authenticate/login.html', views.provideStudentLoginView, name='studentLogin'),
-    path('users/templates/authenticate/faculty_login.html', views.provideFacultyLoginView, name='facultyLogin')
+    path('users/templates/authenticate/faculty_login.html', views.provideFacultyLoginView, name='facultyLogin'),
+    path('catalogue/', include('catalogue.urls')),
+
     
 
 ]
