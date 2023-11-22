@@ -77,5 +77,21 @@ class MCERecommendation(models.Model):
     
     def __str__(self):
         return self.title
-    
+    #MCE Recommendations Quiz
+class MCEQuestions(models.Model):
+    questions_text = models.CharField(max_length=200)
+
+class MCEAnswer(models.Model):
+    question = models.ForeignKey(MCEQuestions, on_delete=models.CASCADE)
+    answer_text = models.CharField(max_length=200)
+
+class MCEUserResponse(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    answer = models.ForeignKey(MCEAnswer, on_delete=models.CASCADE)
+"""    
+class MCERecommendation(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()    
+"""
+
     #
