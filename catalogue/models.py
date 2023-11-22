@@ -43,15 +43,18 @@ class Syllabus(models.Model):
 
 #MCE Feedback
 class Feedback(models.Model):
-    SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
+    SectionID = models.ForeignKey(Section,on_delete= models.CASCADE) #CourseNumber
+    Subject = models.TextField(blank= True) #Subject for course RECENTLY ADDED
+    Semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
     #StudentID = models.IntegerField('StudentID')
-    StudentID = models.ForeignKey(Student, on_delete= models.CASCADE)
-    ProfessorID = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    Review =  models.TextField(blank= True)
-    Rating = models.IntegerField(blank=True)
+    StudentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
+    ProfessorID = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
+    Review =  models.TextField(blank= True) #Share your thoughts
+    Rating = models.IntegerField(blank=True) #Group must add this on front end -- still need a rating averager
 
     def __str__(self):
         return "Feedback for " + self.SectionID
+    
     
 
 #MCE Recommendations Quiz
@@ -69,3 +72,5 @@ class MCERecommendation(models.Model):
     
     def __str__(self):
         return self.title
+    
+    #

@@ -21,6 +21,6 @@ class SectionForm(ModelForm):
 class FeedbackForm(ModelForm):
     class Meta:
         model = Feedback
-        fields = "__all__"
+        fields = ('Subject', 'SectionID', 'ProfessorID', 'Semester', 'Review')
 
         
