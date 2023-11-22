@@ -31,12 +31,20 @@ class Section(models.Model):
         return self.course + " " + self.professor.first_name + " " + self.professor.last_name
 
 class Syllabus(models.Model):
-    SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
-    OrginalLocation = models.CharField('Orginal Location', max_length = 120)
+    #SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
+    class_name =models.CharField('Course',default= 'name',max_length=50 )
+    file = models.FileField(upload_to='documents/')
+    file_contents = models.TextField(blank= True)
     NormalizedLocation = models.CharField('Normalized Location', max_length=120)
 
+    def filename(self):
+        return self.file.name.split('/')[-1]
+    
+
+
     def __str__(self):
-        return  "Syllabus for " + self.SectionID
+        return  "Syllabus for " + self.class_name
+
 
 #MCE Feedback
 class Feedback(models.Model):
