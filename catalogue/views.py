@@ -21,11 +21,21 @@ def upload_Syllabus(request):
             return redirect('success')
     else:
         form = SyllabusForm()
-
-
     
     return render(request, 'pages/upload.html', {'form': form})
 
+def upload_Syllabus(request): 
+    
+    if request.method == 'POST':
+        form = SyllabusForm(request.POST, request.FILES)
+        #file = request.FILES['file']
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = SyllabusForm()
+    
+    return render(request, 'pages/upload.html', {'form': form})
 # MCE Recommendations Quiz Page
 def quiz_question(request, question_id):
     question = MCEQuestions.objects.get(pk=question_id)

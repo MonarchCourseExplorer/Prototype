@@ -6,12 +6,14 @@ from .models import Feedback
 
 
 #Create Syllabus form
-class SyllabusForm(ModelForm):
+
+
+class SyllabusForm(forms.ModelForm):
     class Meta:
         model = Syllabus
         #field = "__all__"   gets all fields from user
         fields = ('class_name','file')
-        
+
     file = forms.FileField(widget=forms.FileInput())
 
 #Create Section Form
