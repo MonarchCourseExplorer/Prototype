@@ -7,7 +7,9 @@
 
           <div id="comments">
             <h1>Provide Course Feedback</h1>
-            <form action="#" method="post">
+            <form action="" method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
               <label for="comments">
                 <strong>Which class are you reviewing?</strong>
             </label>

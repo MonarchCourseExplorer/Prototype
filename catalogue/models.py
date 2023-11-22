@@ -48,29 +48,34 @@ class Syllabus(models.Model):
 
 #MCE Feedback
 class Feedback(models.Model):
-    SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
+    SectionID = models.ForeignKey(Section,on_delete= models.CASCADE) #CourseNumber
+    Subject = models.TextField(blank= True) #Subject for course RECENTLY ADDED
+    Semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
     #StudentID = models.IntegerField('StudentID')
-    StudentID = models.ForeignKey(Student, on_delete= models.CASCADE)
-    ProfessorID = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    Review =  models.TextField(blank= True)
-    Rating = models.IntegerField(blank=True)
+    StudentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
+    ProfessorID = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
+    Review =  models.TextField(blank= True) #Share your thoughts
+    Rating = models.IntegerField(blank=True) #Group must add this on front end -- still need a rating averager
 
     def __str__(self):
         return "Feedback for " + self.SectionID
     
+    
 
 #MCE Recommendations Quiz
-class MCEQuestions(models.Model):
-    questions_text = models.CharField(max_length=200)
+class recQuestions(models.Model):
+    questions_text = models.CharField(max_length=255)
 
-class MCEAnswer(models.Model):
-    question = models.ForeignKey(MCEQuestions, on_delete=models.CASCADE)
-    answer_text = models.CharField(max_length=200)
-
-class MCEUserResponse(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    answer = models.ForeignKey(MCEAnswer, on_delete=models.CASCADE)
+class recAnswer(models.Model):
+    question = models.ForeignKey(recQuestions, on_delete=models.CASCADE)
+    choice = models.CharField(max_length=150)
     
 class MCERecommendation(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=255)
     content = models.TextField()
+    course = models.CharField(max_length=15)
+    
+    def __str__(self):
+        return self.title
+    
+    #
