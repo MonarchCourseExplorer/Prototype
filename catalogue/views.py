@@ -55,6 +55,18 @@ def quiz_view(request):
     
     quizzes = recQuestions.objects.all()
     return render(request, 'RecQuestion.html', {'quizzes': quizzes})
+
+def quiz_question(request, question_id):
+    question = MCEQuestions.objects.get(pk=question_id)
+    answers = MCEAnswer.objects.filter(question=question)
+    return render(request, 'MCEQuiz/RecQuestion.html', {'question': question, 'answers': answers})
+
+def submit_answer(request):
+    if request.method == 'POST':
+        pass
+ 
+def show_recommendation(request):
+    pass
   
 
 def upload_Syllabus(request): 
@@ -72,17 +84,17 @@ def upload_Syllabus(request):
 
 
 #MCE Feedback
-def add_feedback(request):
+def provideFeedback(request):
     submitted = False
     if request.method == "POST":
         form = FeedbackForm(request.POST)
         if form.is_valid():
             form.save()
             #Redirect user back to feedback page. --look into how to output feedback
-            return HttpResponseRedirect('/add_feedback?submitted=True') 
+            return HttpResponseRedirect('/provideFeedback?submitted=True') 
         else:
             form = FeedbackForm
             if 'submitted' in request.GET:
                 submitted = True
     form = FeedbackForm
-    return render(request, 'Feedback/UserFeedback.html', {'form':form, 'submitted':submitted})
+    return render(request, 'pages/provideFeedback.html', {'form':form, 'submitted':submitted})
