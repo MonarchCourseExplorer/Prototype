@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from .models import Syllabus
 from .models import Section
 from .models import Feedback
+from .models import MCERecommendation, recAnswer, recQuestions
 
 class SyllabusForm(forms.ModelForm):
     class Meta:
@@ -23,4 +24,7 @@ class FeedbackForm(ModelForm):
         model = Feedback
         fields = "__all__"
 
-        
+class RecommendationForm(ModelForm):
+    class Meta:
+        model = MCERecommendation, recAnswer, recQuestions
+        fields = "__all__"      
