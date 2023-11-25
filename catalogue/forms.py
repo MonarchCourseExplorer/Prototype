@@ -22,7 +22,7 @@ class SectionForm(forms.ModelForm):
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        fields = "__all__"
+        fields = ('Subject', 'SectionID', 'ProfessorID', 'Semester', 'Review')
 
 class RecommendationForm(forms.ModelForm):
     class Meta:

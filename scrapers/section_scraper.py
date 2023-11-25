@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import sys
 
 @dataclass
 class Section:
@@ -22,31 +23,49 @@ class Section:
     location = ""
     delivery = "" #This should be converted to a lookup table, assuming a certain level of consistency
 
-@dataclass
+@dataclass(eq=False)
 class Professor:
     first = ""
     last = ""
+
+    def __eq__(self, other):
+        if not isinstance(other, Professor):
+            return NotImplemented
+        return self.first == other.first and self.last == other.last
 
 def scrapeSections(driver, url):
     #TODO - change records to 100 - not sure if it'll help, but it'll be an accomplishment
     
     driver.get(url)
     try:
-        #wait for 5 seconds, or until an even row is available - yes, this doesn't work if there is only 1 section, but it is good enough
-        elem = WebDriverWait(driver, 2).until(EC.invisibilityOfElementLocated((By.CLASS_NAME, "dataTables_empty"))) 
+        #wait for 2 seconds, or until a table body row with the btnaddcta class is available
+        elem = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.XPATH, "//tbody/tr/td[contains(@class, 'btnaddcta')]"))) 
     except (Exception) as e:
-        #print(e)
+        #print(e, file=sys.stderr)
         pass
+
+    #Get the number of entries, as a check to make sure we are getting everything
+    #Should be in the form 'Showing x to y of n entries
+    soup = BeautifulSoup(driver.page_source, "html.parser")
+    entries = soup.find("div", {"id": "course_table_info"})
+    if entries != None:
+        numEntries = int(entries.text.split()[5])
+
 
     sections = []
     while True:
         #extract course table
-        soup = BeautifulSoup(driver.page_source, "html.parser")
-        courseTable = soup.find("table", {"id": "course_table"})
-        courseTable = courseTable.find("tbody")
+        try:
+            soup = BeautifulSoup(driver.page_source, "html.parser")
+            courseTableContainer = soup.find("table", {"id": "course_table"})
+            courseTable = courseTableContainer.find("tbody")
+        except (Exception) as e:
+            print(e)
+            print("Soup: {0}, Table tage: {1}, Table body: {2}".format(soup == None, courseTableContainer == None, courseTable == None))
 
-        if courseTable.find("td", {"class": "dataTables_empty"}) != None:
-            sections = None
+        if courseTable == None:
+            break
+        elif courseTable.find("td", {"class": "dataTables_empty"}) != None:
             break
 
         sections.extend(extractTable(courseTable))
@@ -59,6 +78,15 @@ def scrapeSections(driver, url):
             l = driver.find_element(By.ID, "course_table_next")
             driver.execute_script("arguments[0].click();", l)
             time.sleep(0.1) #a little time for the next page to load
+
+    if len(sections) == 0:
+        #print("No sections found in {0}".format(url))
+        pass
+    elif len(sections) != numEntries: 
+        print("Expected {0} sessions, found {1}, in {2}".format(numEntries, len(sections), url))
+    else:
+        #print(numEntries)
+        pass
 
     return sections
 
@@ -85,7 +113,7 @@ def extractTable(courseTable):
             p = Professor()
             if "," in instructor:
                 p.last = instructor.split(",")[0]
-                p.first = "".join(instructor.split(",")[1:])
+                p.first = "".join(instructor.split(",")[1:]).strip()
             else:
                 p.last = instructor
 
@@ -106,7 +134,8 @@ def extractTable(courseTable):
 
 def syncSections(sections, session, conn):
     professors = []
-    selectSQL = "SELECT id FROM catalogue_section WHERE CRN = %s;"
+    courses = []
+    selectSQL = "SELECT id FROM catalogue_section WHERE CRN = %s AND session = %s;"
     updateSQL = """UPDATE catalogue_section 
                 SET offering_time = %s,
                     professor_id = users_professor.id,
@@ -127,17 +156,25 @@ def syncSections(sections, session, conn):
     #loop through all the sections
     for s in sections:
         #check for professor
+        #print("{0}|{1}|{2}|{3}".format(s.instructor.first, s.instructor.last, s.instructor in professors, s.instructor != None))
         if not s.instructor in professors and s.instructor != None:
             addProfessor(s.instructor, conn)
             professors.append(s.instructor)
 
+        if not s.course in courses and s.course != None:
+            addCourse(s.course, conn)
+            courses.append(s.course)
+
         try:
             #add or update the section
-            cur.execute(selectSQL, (s.crn, ))
+            cur.execute(selectSQL, (s.crn, session))
             if cur.rowcount > 0:
                 cur.execute(updateSQL, (s.meetingTime, s.delivery, cur.fetchone()[0], s.instructor.first, s.instructor.last, s.course))
             else:
                 cur.execute(insertSQL, (s.crn, session, s.meetingTime, s.delivery, s.instructor.first, s.instructor.last, s.course))
+
+            if cur.rowcount != 1:
+                print("Error with section {0}, please review to make sure {1} {2} or {3} are in the database".format(s.crn, s.instructor.first, s.instructor.last, s.course))
         except (Exception) as e:
             print(e)
         conn.commit()
@@ -146,16 +183,28 @@ def syncSections(sections, session, conn):
 
 def addProfessor(name, conn):
     selectSQL = "SELECT id FROM users_professor WHERE first_name = %s AND last_name = %s;"
-    insertSQL = "INSERT INTO users_professor ( first_name, last_name, email ) VALUES (%s, %s, %s);"
+    insertSQL = "INSERT INTO users_professor ( first_name, last_name, email ) VALUES (%s, %s, '');"
 
     cur = conn.cursor()
 
     cur.execute(selectSQL, (name.first, name.last))
     if cur.rowcount == 0:
-        cur.execute(insertSQL, (name.first, name.last, ""))
+        cur.execute(insertSQL, (name.first, name.last))
 
     conn.commit()
     cur.close()
+
+def addCourse(course, conn):
+    selectSQL = "SELECT id FROM catalogue_course WHERE department = %s AND number = %s;"
+    insertSQL = "INSERT INTO catalogue_course ( department, number, name, description, credits ) VALUES (%s, %s, '', '', '');"
+    d = course.split()[0]
+    n = course.split()[1]
+
+    cur = conn.cursor()
+
+    cur.execute(selectSQL, (d, n))
+    if cur.rowcount == 0:
+        cur.execute(insertSQL, (d, n))
 
 
 def findElement(o, tag, cls):
@@ -218,6 +267,7 @@ if __name__ == "__main__":
     
     terms = scrapeTerms(driver)
 
+    conn = ""
     conn = createConnection()
 
     if conn != None:
@@ -228,12 +278,12 @@ if __name__ == "__main__":
             for d in departments:
                 url = "https://courses.odu.edu/search?subject={0}&term={1}&".format(d, t)
                 
-                #print(url)
                 try:
                     s = scrapeSections(driver, url)
                     if s != None: syncSections(s, t, conn)
                 except (Exception) as error:
                     print(error)
+                    print(url)
 
     driver.close()
     driver.quit()

@@ -559,3 +559,28 @@ table a, #comments a{background-color:inherit;}
     width: 100%;
     text-align:center;
 }
+
+.choices input {
+    margin-right: 10px;
+    display: inline-block;
+}
+    .choices label {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .rating-inputs {
+        display: flex;
+        margin-bottom: 10px; 
+      }
+
+      .rating-inputs input[type="range"] {
+        width: 350px; /*Width of Slider */
+      }
+
+      .rating-inputs input[type="number"] {
+        width: 60px; /* Number Input Width */ 
+        color:black;
+        text-align: center;
+        padding: 3px; /* Add padding for a bit more space inside the input box */
+      }

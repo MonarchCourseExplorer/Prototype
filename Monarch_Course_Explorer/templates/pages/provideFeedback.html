@@ -5,90 +5,148 @@
 
 {% block content %}
 
-          <div id="comments">
-            <h1>Provide Course Feedback</h1>
-            <form action="#" method="post">
-              <label for="comments">
-                <strong>Which class are you reviewing?</strong>
+<div id="comments">
+  <h1>Provide Course Feedback</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+
+
+    <label for="comments">
+      <strong>Which class are you reviewing?</strong>
+    </label>
+    <div class="block clear">
+      <div class="group">
+        <div class="subject-question">
+          <p>Subject:</p>
+          <div class="subject-input">
+            <label>
+              <input type="text" name="subject" list="subjects" placeholder="Enter subject here">
             </label>
-              <div class="block clear">
-                <div class="group">
-                    <div class="subject-question">
-                      <p>Subject:</p>
-                      <div class="subject-input">
-                        <label>
-                          <input type="text" name="subject" list="subjects" placeholder="Enter subject here" {background: grey}>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="course-question">
-                      <p>Course Number:</p>
-                      <div class="course-input">
-                        <label>
-                          <input type="text" name="course" list="courses" placeholder="Enter course number here">
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="instructor-question">
-                      <p>Instructor:</p>
-                      <div class="instructor-input">
-                        <label>
-                          <input type="text" name="instructor" list="instructors" placeholder="Enter instructor here">
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="semester-question">
-                      <p>Semester:</p>
-                      <div class="semester-input">
-                        <label>
-                          <input type="text" name="semester" list=semesters" placeholder="Enter semester here">
-                        </label>
-                        <!-- Need to make this based on the chosen subject AND course previously AND semester -->
-                        {% comment %} <datalist id="instructors">
-                          <option value="Computer Science">
-                          <option value="Math"> 
-                        </datalist> {% endcomment %}
-                      </div>
-                    </div>
-
-                </div>
-              </div>
-
-              <div class="block clear">
-                <label for="comments"
-                  ><strong>Share your thoughts about the course and professor</strong></label
-                >
-                <textarea
-                  name="comments"
-                  id="comments"
-                  cols="25"
-                  rows="10"
-                  placeholder="(Some suggestions on what to write about are information about the professor's teaching style and methodologies, the workload, types of assignments, what you liked, as well as areas that could be improved on. Consider sharing insights that would benefit future students taking the course.)"
-                ></textarea>
-              </div>
-              <div>
-                <input name="submit" type="submit" value="Submit Form" />
-                &nbsp;
-              </div>
-            </form>
           </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
+        </div>
 
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    
+        <div class="course-question">
+          <p>Course Number:</p>
+          <div class="course-input">
+            <label>
+              <input type="text" name="course" list="courses" placeholder="Enter course number here">
+            </label>
+          </div>
+        </div>
 
-  </body>
+        <div class="instructor-question">
+          <p>Instructor:</p>
+          <div class="instructor-input">
+            <label>
+              <input type="text" name="instructor" list="instructors" placeholder="Enter instructor here">
+            </label>
+          </div>
+        </div>
+
+        <div class="semester-question">
+          <p>Semester:</p>
+          <div class="semester-input">
+            <label>
+              <input type="text" name="semester" list="semesters" placeholder="Enter semester here">
+            </label>
+            <!-- Need to make this based on the chosen subject AND course previously AND semester -->
+            {% comment %} <datalist id="instructors">
+              <option value="Computer Science">
+              <option value="Math">
+            </datalist> {% endcomment %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="height: 1px; background-color: white; margin-bottom: 20px; padding: 0;"></div>
+
+
+    <div class="block clear">
+      <label for="comments"><strong>Share your thoughts about the course and professor</strong></label>
+      <textarea name="comments" id="comments" cols="25" rows="10"
+        placeholder="(Some suggestions on what to write about are information about the professor's teaching style and methodologies, the workload, types of assignments, what you liked, as well as areas that could be improved on. Consider sharing insights that would benefit future students taking the course.)"></textarea>
+    </div>
+
+</div> <!-- end div "comments"-->
+
+<div style="height: 1px; background-color: white; margin-bottom: 30px; margin-top:30px; padding: 0;"></div>
+
+<!--Course Rating-->
+<div class="ratings-container">
+  <label for="course-rating">
+    <strong>Rate the Course</strong>
+    <p>Please provide your feedback on the following aspects of the course by assigning a rating from 1 to 5, where:</p>
+    <ul>
+      <li>1 is Poor</li>
+      <li>2 is Below Average</li>
+      <li>3 is Average</li>
+      <li>4 is Good</li>
+      <li>5 is Excellent</li>
+    </ul>
+  </label>
+
+
+  
+
+  <!--Rate Difficulty-->
+  <div class="rating">
+    <p>Difficulty</p>
+    <div class="rating-inputs">
+      <input type="range" id="difficultySlider" name="difficulty" min="1" max="5" value="1" step="1">
+      <input type="number" id="difficultyValue" name="difficultyValue" min="1" max="5" value="1">
+    </div>
+  </div>
+
+  <!--Rate Workload-->
+  <div class="rating">
+  <p>Workload</p>
+  <div class="rating-inputs">
+    <input type="range" id="workloadSlider" name="workload" min="1" max="5" value="1" step="1">
+    <input type="number" id="workloadValue" name="workloadValue" min="1" max="5" value="1">
+  </div>
+</div>
+
+  <!--Rate how open the instructor is to questions and how well they answer the questions-->
+  <div class="rating">
+  <p>Instructor Openness to Questions and Quality of Responses</p>
+  <div class="rating-inputs">
+    <input type="range" id="instructorSlider" name="instructor" min="1" max="5" value="1" step="1">
+    <input type="number" id="instructorValue" name="instructorValue" min="1" max="5" value="1">
+  </div>
+</div>
+
+</div>
+
+<br>
+
+<div>
+  <input name="submit" type="submit" value="Submit Review" style="background-color: #3498db; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;"/>
+  &nbsp;
+</div>
+</form>
+
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+
+</body>
+
 </html>
 
 
 {% endblock %}
+
+
 
 
 <!DOCTYPE html>
