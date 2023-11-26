@@ -73,4 +73,7 @@ class MCERecommendation(models.Model):
     def __str__(self):
         return self.title
     
-    #
+class recCombined(models.Model):
+    recommendation = models.OneToOneField(MCERecommendation, on_delete=models.CASCADE)
+    answer = models.ForeignKey(recAnswer, on_delete=models.CASCADE)
+    question = models.ForeignKey(recQuestions, on_delete=models.CASCADE)

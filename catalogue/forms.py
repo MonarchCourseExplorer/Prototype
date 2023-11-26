@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from .models import Syllabus
 from .models import Section
 from .models import Feedback
-from .models import MCERecommendation, recAnswer, recQuestions
+from .models import MCERecommendation, recAnswer, recQuestions, recCombined
 
 class SyllabusForm(forms.ModelForm):
     class Meta:
@@ -13,18 +13,18 @@ class SyllabusForm(forms.ModelForm):
     OriginalLocation = forms.FileField(widget=forms.FileInput())
     
 #Create Section Form
-class SectionForm(ModelForm):
+class SectionForm(forms.ModelForm):
     class Meta:
         model = Section
         fields = "__all__"
 
 
-class FeedbackForm(ModelForm):
+class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
         fields = ('Subject', 'SectionID', 'ProfessorID', 'Semester', 'Review')
 
-class RecommendationForm(ModelForm):
+class RecommendationForm(forms.ModelForm):
     class Meta:
-        model = MCERecommendation, recAnswer, recQuestions
+        model = recCombined
         fields = "__all__"      
