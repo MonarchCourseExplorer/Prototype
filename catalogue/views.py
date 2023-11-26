@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from .forms import SyllabusForm
 
 from .models import recQuestions, recAnswer, MCERecommendation
+from .forms import RecommendationForm
 from .forms import FeedbackForm
 
 
@@ -11,19 +12,6 @@ def success(request):
 
 
 # Recommendations Quiz Page
-def quiz_view(request):
-    if request.method == 'POST':
-        for question_id, choice in request.POST.items():
-            if question_id.startswitch('questions_text'):
-                quiz_id = question_id.spilt('_')[1]
-                question = recQuestions.objects.get(id=quiz_id)
-                recAnswer.objects.create(question=question, choice=choice)
-
-        return redirect('results') #This redirects to another page called "Results" or can be changed to another view name
-    
-    quizzes = recQuestions.objects.all()
-    return render(request, 'RecQuestion.html', {'quizzes': quizzes})
-
 def generate_recommendations(answers): 
     # The answer being the course the user entered
     user_course = answers[0].choice
@@ -54,6 +42,15 @@ def quiz_view(request):
         return render(request, 'results.html', {'recommendations': recommendations})
     
     quizzes = recQuestions.objects.all()
+        
+    if request.method == 'POST':
+        form = RecommendationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = RecommendationForm()
+    
     return render(request, 'RecQuestion.html', {'quizzes': quizzes})
 
 def quiz_question(request, question_id):
