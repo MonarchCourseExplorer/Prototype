@@ -44,7 +44,7 @@ class Syllabus(models.Model):
 #MCE Feedback
 class Feedback(models.Model):
     SectionID = models.ForeignKey(Section,on_delete= models.CASCADE) #CourseNumber
-    Subject = models.TextField(blank= True) #Subject for course RECENTLY ADDED
+    #Subject = models.TextField(blank= True) #Subject for course RECENTLY ADDED
     Semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
     #StudentID = models.IntegerField('StudentID')
     StudentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
