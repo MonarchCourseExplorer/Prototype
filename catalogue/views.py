@@ -88,10 +88,11 @@ def provideFeedback(request):
         if form.is_valid():
             form.save()
             #Redirect user back to feedback page. --look into how to output feedback
-            return HttpResponseRedirect('/provideFeedback?submitted=True') 
+            #return HttpResponseRedirect('/provideFeedback?submitted=True')
+            return redirect('success')
         else:
-            form = FeedbackForm
-            if 'submitted' in request.GET:
-                submitted = True
-    form = FeedbackForm
-    return render(request, 'pages/provideFeedback.html', {'form':form, 'submitted':submitted})
+            #form = FeedbackForm
+            #if 'submitted' in request.GET:
+                #submitted = True
+            form = FeedbackForm()
+    return render(request, 'pages/provideFeedback.html', {'form':form}) #, 'submitted':submitted})
