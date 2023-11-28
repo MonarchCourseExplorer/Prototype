@@ -12,26 +12,26 @@ def success(request):
 
 
 # Recommendations Quiz Page
-def generate_recommendations(answers): 
+def generateRecommendations(answers): 
     # The answer being the course the user entered
-    user_course = answers[0].choice
+    userCourse = answers[0].choice
     # Retrieves the recommendation for the users' entered course
     recommendations = MCERecommendation.objects.filter(course=user_course)
     # Converts queryset to a list
-    recommendations_list = list(recommendations.values())
-    return recommendations_list
+    recommendationsList = list(recommendations.values())
+    return recommendationsList
 
-def quiz_view(request):
+def quizView(request):
     if request.method == 'POST':
         answers = []
-        for question_id, choice in request.POST.items():
-            if question_id.startswitch('questions_text_'):
-                quiz_id = question_id.spilt('_')[1]
-                question = recQuestions.objects.get(id=quiz_id)
+        for questionID, choice in request.POST.items():
+            if questionID.startswitch('questions_text_'):
+                quizID = questionID.spilt('_')[1]
+                question = recQuestions.objects.get(id=quizID)
                 answer = recAnswer(question=question, choice=choice)
                 answers.append(answer)
         
-        recommendations = generate_recommendations(answers)
+        recommendations = generateRecommendations(answers)
 
         # Saving the recommendations to the Database
         for recommendation in recommendations:
@@ -53,20 +53,20 @@ def quiz_view(request):
     
     return render(request, 'RecQuestion.html', {'quizzes': quizzes})
 
-def quiz_question(request, question_id):
-    question = recQuestions.objects.get(pk=question_id)
+def quizQuestion(request, questionID):
+    question = recQuestions.objects.get(pk=questionID)
     answers = recAnswer.objects.filter(question=question)
     return render(request, 'MCEQuiz/RecQuestion.html', {'question': question, 'answers': answers})
 
-def submit_answer(request):
+def submitAnswer(request):
     if request.method == 'POST':
         pass
  
-def show_recommendation(request):
+def showRecommendation(request):
     pass
   
 
-def upload_Syllabus(request): 
+def uploadSyllabus(request): 
     
     if request.method == 'POST':
         form = SyllabusForm(request.POST, request.FILES)

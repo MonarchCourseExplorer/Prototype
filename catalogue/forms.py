@@ -9,8 +9,8 @@ class SyllabusForm(forms.ModelForm):
     class Meta:
         model = Syllabus
         #field = "__all__"   gets all fields from user
-        fields = ('OriginalLocation',)
-    OriginalLocation = forms.FileField(widget=forms.FileInput())
+        fields = ('originalLocation',)
+    originalLocation = forms.FileField(widget=forms.FileInput())
     
 #Create Section Form
 class SectionForm(forms.ModelForm):
@@ -22,7 +22,7 @@ class SectionForm(forms.ModelForm):
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        fields = ('Subject', 'SectionID', 'ProfessorID', 'Semester', 'Review')
+        fields = ('subject', 'sectionID', 'professorID', 'semester', 'review')
 
 class RecommendationForm(forms.ModelForm):
     class Meta:

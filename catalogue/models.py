@@ -21,10 +21,10 @@ class Section(models.Model):
     #courseID = models.IntegerField() #is this the CRN?
     semester = models.CharField('Semester', max_length=50)
     session = models.CharField('Session', max_length=25)
-    offering_time = models.CharField(default='00:00:00', max_length =255) # models.TimeField(auto_now=False, auto_now_add=False)
+    offeringTime = models.CharField(default='00:00:00', max_length =255) # models.TimeField(auto_now=False, auto_now_add=False)
     professor = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    delivery_type = models.CharField(max_length=25)
-    meeting_type = models.CharField(max_length=25)
+    deliveryType = models.CharField(max_length=25)
+    meetingType = models.CharField(max_length=25)
     crn = models.IntegerField()
 
     def __str__(self):
@@ -32,9 +32,9 @@ class Section(models.Model):
 
 class Syllabus(models.Model):
     #SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
-    class_name =models.CharField('Course',default= 'name',max_length=50 )
-    OriginalLocation = models.FileField(upload_to='documents/')
-    NormalizedLocation = models.CharField('Normalized Location', max_length=120)
+    className = models.CharField('Course',default= 'name',max_length=50 )
+    originalLocation = models.FileField(upload_to='documents/')
+    normalizedLocation = models.CharField('Normalized Location', max_length=120)
     
 
     def __str__(self):
@@ -43,14 +43,14 @@ class Syllabus(models.Model):
 
 #MCE Feedback
 class Feedback(models.Model):
-    SectionID = models.ForeignKey(Section,on_delete= models.CASCADE) #CourseNumber
-    Subject = models.TextField(blank= True) #Subject for course RECENTLY ADDED
-    Semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
+    sectionID = models.ForeignKey(Section,on_delete= models.CASCADE) #CourseNumber
+    subject = models.TextField(blank= True) #Subject for course RECENTLY ADDED
+    semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
     #StudentID = models.IntegerField('StudentID')
-    StudentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
-    ProfessorID = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
-    Review =  models.TextField(blank= True) #Share your thoughts
-    Rating = models.IntegerField(blank=True) #Group must add this on front end -- still need a rating averager
+    studentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
+    professorID = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
+    review =  models.TextField(blank= True) #Share your thoughts
+    rating = models.IntegerField(blank=True) #Group must add this on front end -- still need a rating averager
 
     def __str__(self):
         return "Feedback for " + self.SectionID
@@ -59,7 +59,7 @@ class Feedback(models.Model):
 
 #MCE Recommendations Quiz
 class recQuestions(models.Model):
-    questions_text = models.CharField(max_length=255)
+    questionsText = models.CharField(max_length=255)
 
 class recAnswer(models.Model):
     question = models.ForeignKey(recQuestions, on_delete=models.CASCADE)
