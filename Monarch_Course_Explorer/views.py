@@ -20,8 +20,17 @@ def quizView(request):
     # return render(request, str(settings.CATALOGUE_DIR) + 'pages/RecQuestion.html')
 
 # Render the provideFeedback page
-def provideFeedbackView(request):
-    return render(request, 'pages/provideFeedback.html')
+def provideFeedbackView(request, pk):
+    feedback_obj = Feedback.objects.get(pk=pk)
+
+    context = {
+
+
+        "feedback": feedback_obj,
+
+    }
+
+    return render(request, "pages/provideFeedback.html", context)
 
 # Render the grades page
 def provideGradesView(request):

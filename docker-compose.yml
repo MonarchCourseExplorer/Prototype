@@ -14,7 +14,7 @@ services:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
     image: mce_django_local_django
-    container_name: django
+    container_name: adam-django
     depends_on:
       - postgres
     networks:
@@ -25,7 +25,7 @@ services:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
-      - '8000:8000'
+      - '9601:8000'
     command: /start
 
   postgres:
@@ -33,7 +33,7 @@ services:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
     image: mce_django_production_postgres
-    container_name: postgres
+    container_name: adam-postgres
     volumes:
       - mce_django_local_postgres_data:/var/lib/postgresql/data
       - mce_django_local_postgres_data_backups:/backups

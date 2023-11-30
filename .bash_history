@@ -1,23 +1,3 @@
-ls
-docker ps -a
-docker ps
-ls
-docker ps 
-ls
-nano docker-compose.yml 
-docker compose up -d 
-nano docker-compose.yml 
-docker compose up -d 
-nano docker-compose.yml 
-docker compose up -d 
-nano docker-compose.yml 
-docker compose up -d 
-nano docker-compose.yml 
-docker compose up -d 
-nano docker-compose.yml 
-docker ps
-nano docker-compose.yml 
-ls
 cd Monarch_Course_Explorer/
 ls
 cd templates/
@@ -311,3 +291,210 @@ cd postgres/
 ls
 nano Dockerfile 
 exit
+ls
+cd compose/
+ls
+cd production/
+cd ..
+cd local/
+ls
+cd docs
+ls
+cat Dockerfile 
+ls
+cd st
+cat start 
+cd ,,
+cd ..
+ls
+cd ..
+ls
+cd ..
+nano docker-compose.yml 
+docker ps
+docker ps 
+docker logs django
+nano docker-compose.yml 
+nano docker-compose.yml 
+docker compose up -d
+ls
+docker ps
+docker logs adam-django
+cd catalogue/
+ls
+nano models.py 
+cd ..
+git pull
+ls
+cd catalogue/
+ls
+cat models.py 
+cd ..
+docker compose up -d
+docker ps
+docker logs django
+docker logs adam-django
+cd catalogue/
+nano admin.py 
+cd ..
+docker compose up -d
+docker logs adam-django
+cd catalogue/
+nano admin.py 
+cd ..
+docker compose up -d
+docker logs adam-django
+cd cata
+cd catalogue/
+nano admin.py 
+cd ..
+docker compose up -d
+docker logs adam-django
+git pull
+git pull --f
+git pull -f
+git reset --hard
+git pull -f
+cd catalogue/
+ls
+cd model
+cat models.py 
+cd ..
+ls
+docker ps
+docker rm -f adam-postgres
+docker compose up -d
+docker ps
+docker rm -f django
+docker rm -f postgres
+docker ps
+docker ps -a
+docker ps
+docker logs django
+cd catalogue/
+ls
+nano models.py 
+ls
+docker logs postgres 
+pg_ctl -D /var/lib/postgresql/data -l logfile start
+docker exec -it postgres bash
+cat models
+cat models.py 
+ls
+cd ..
+ls
+cd scrapper/
+ls
+cd ..
+cd scrapers/
+ls
+cd ..
+ls
+ls
+docker exec -it postgres bash
+ls
+cd compose/
+ls
+cd production/
+ls
+cd postgres/
+ls
+cat Dockerfile 
+docker exec -it postgres bash
+ls
+docker ps
+ls
+cd ..
+ls
+cd cs_nnewt001/
+ls
+cd MonarchExp/
+ls
+cd Prototype/
+ls
+cd compose/
+ls
+cd production/
+ls
+cd postgres/
+ls
+cat Dockerfile 
+cd ~
+ls
+docker exec -it postgres bash
+ls
+cd scrapers/
+ls
+nano section_scraper.py 
+cd ..
+cd scrapers
+ls
+docker exec -it postgres bash
+nano section_scraper.py 
+ls
+cd ..
+ls
+cd catalogue/
+ls
+cat models.py 
+ls
+cd ..
+ls
+cd scrapers/
+ls
+docker cp sections_scraper.py django:/home/
+docker cp sections_scraper.py django:/home/sections_scraper.py
+ls
+docker cp course.py django:/home/test.py
+docker cp section_scraper.py django:/home/test2.py
+docker exec -it postgres bash
+docker cp section_scraper.py postgres:/home/test.py
+docker exec -it postgres bash
+nano section_scraper.py 
+docker cp section_scraper.py postgres:/home/test.py
+docker exec -it postgres bash
+ls
+nano section_scraper.py 
+docker exec -it postgres bash
+nano section_scraper.py 
+docker exec -it postgres bash
+ls
+cd ..
+ls
+nano docker-compose.yml 
+cd compose/
+ls
+cd production/
+ls
+cd postgres/
+ls
+cat Dockerfile 
+ls
+cd ..
+ls
+cd ..
+ls
+cd ..
+ls
+docker exec -it postgres bash
+ls
+cd compose/
+ls
+cd production/
+ls
+cd postgres/
+ls
+cat Dockerfile 
+ls
+cd ..
+ls
+cd ~
+ls
+cd my
+cat mydatabase 
+ls
+cd scrapers
+ls
+nano section_scraper.py 
+docker exec -it postgres bash
+docker ps
