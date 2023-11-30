@@ -8,7 +8,7 @@ urlpatterns = [
     #path('recommendation/', views.show_recommendation, name='show_recommendation'),
     #path('pages/provideFeedback.html', views.provideFeedback, name='provideFeedback'),
     #path('add_feedback', views.add_feedback, name='add-venu'),
-    path('upload/', views.upload_Syllabus, name= 'upload'),
+    path('upload/', views.uploadSyllabus, name= 'upload'),
     path('success', views.success, name="success"),
 
     
