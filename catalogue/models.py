@@ -35,17 +35,20 @@ class Section(models.Model):
         return f"{self.crn}"
 
 class Syllabus(models.Model):
-    #SectionID causes crash, className only works when pressing add first
-
+                            
     section_id = models.ForeignKey(Section, on_delete = models.CASCADE)
     class_name = models.CharField('Course', default= 'name', max_length=50 )
     original_location = models.FileField(upload_to='documents/')
     normalized_location = models.CharField('Normalized Location', max_length=120)
+
     
+
 
     def __str__(self):
         #return  "Syllabus for " + self.SectionID
         return f"{self.crn}"
+
+
 
 #MCE Feedback
 class Feedback(models.Model):
@@ -80,7 +83,19 @@ class MCERecommendation(models.Model):
     
     def __str__(self):
         return self.title
+
+class MCEQuestions(models.Model):
+    questions_text = models.CharField(max_length=200)
+
+class MCEAnswer(models.Model):
+    question = models.ForeignKey(MCEQuestions, on_delete=models.CASCADE)
+    answer_text = models.CharField(max_length=200)
+
+class MCEUserResponse(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    answer = models.ForeignKey(MCEAnswer, on_delete=models.CASCADE)
     
+
 class recCombined(models.Model):
     recommendation = models.OneToOneField(MCERecommendation, on_delete=models.CASCADE)
     answer = models.ForeignKey(recAnswer, on_delete=models.CASCADE)
