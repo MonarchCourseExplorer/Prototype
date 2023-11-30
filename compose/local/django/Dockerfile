@@ -75,7 +75,10 @@ RUN chmod +x /start
 
 
 
+
 # copy application code to WORKDIR
 COPY . ${APP_HOME}
+
+RUN chmod a+w /app/catalogue/migrations
 
 ENTRYPOINT ["/entrypoint"]
