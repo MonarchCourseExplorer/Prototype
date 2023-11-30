@@ -24,8 +24,8 @@ class Section(models.Model):
     session = models.CharField('Session', max_length=25)
     offering_time = models.CharField(default='00:00:00', max_length =255) # models.TimeField(auto_now=False, auto_now_add=False)
     professor = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    delivery_type = models.CharField(max_length=25)
-    meeting_type = models.CharField(max_length=25)
+    delivery_type = models.CharField(max_length=255)
+    meeting_type = models.CharField(max_length=255)
     crn = models.IntegerField()
 
     # def __str__(self):
