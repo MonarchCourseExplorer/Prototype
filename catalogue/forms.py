@@ -8,12 +8,13 @@ from .models import Feedback
 # from .models import recquestions
 #from .models import recCombined
 
-class SyllabusForm(forms.ModelForm):
+class SyllabusForm(ModelForm):
     class Meta:
         model = Syllabus
         #field = "__all__"   gets all fields from user
         fields = ('OrginalLocation',)
     OrginalLocation = forms.FileField(widget=forms.FileInput())
+
     
 #Create Section Form
 class SectionForm(forms.ModelForm):
