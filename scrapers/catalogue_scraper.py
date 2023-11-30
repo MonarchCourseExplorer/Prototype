@@ -68,7 +68,6 @@ def syncDepartments(departments, conn):
 
     cur = conn.cursor()
 
-    print("Num Departments: {0}".format(len(departments)))
     for d in departments:
         cur.execute(selectSQL, (d.abbreviation, ))
 
@@ -104,8 +103,6 @@ def syncCourses(courses, conn):
 
         if cur.rowcount == 0:
             print("Problem updating/inserting {0} {1}".format(course.department, course.number))
-        elif course.department == "BIOL":
-            course.printCourse()
 
     conn.commit()
     cur.close()
