@@ -276,8 +276,10 @@ a{color:#58b1e0;}
 hr, .borderedbox{border-color:#5c5656;}
 
 label span{color:#FF0000; background-color:inherit;}
-
+/*
 .rounded{color:inherit; background-color:#635d5d;}
+*/
+.rounded{color:inherit; background-color:#857b7b;}
 
 
 /* Rows */
@@ -285,7 +287,12 @@ label span{color:#FF0000; background-color:inherit;}
 .row1{color:#b1b0b0; background-color:#0d3d74;}
 .row1 a{color:#fdf3f3; background-color:inherit;}
 .row2, .row2 a{color:#0b386b; background-color:inherit;}
+/*
 .row3{color:#bebebe; background-color:inherit;}
+*/
+.row3{color:#1d1c1c; background-color:inherit;}
+
+
 .row4{color:#c5c4c4; background-color:inherit;}
 .row5, .row5 a{color:#5ebff3; background-color:#0b396d;}
 
