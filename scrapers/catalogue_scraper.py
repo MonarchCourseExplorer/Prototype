@@ -101,6 +101,9 @@ def syncCourses(courses, conn):
             #if not, insert it
             cur.execute(insertSQL, (course.department, course.number, course.title, course.credits, course.detail))
 
+        if cur.rowcount == 0:
+            print("Problem updating/inserting {0} {1}".format(course.department, course.number))
+
     conn.commit()
     cur.close()
 
