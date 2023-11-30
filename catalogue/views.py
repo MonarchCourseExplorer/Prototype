@@ -9,7 +9,7 @@ from .forms import FeedbackForm
 
 def success(request):
     return render(request,'pages/success.html')
-
+"""
 def upload_Syllabus(request): 
     
     if request.method == 'POST':
@@ -28,7 +28,7 @@ def upload_Syllabus(request):
 
     
     return render(request, 'pages/upload.html', {'form': form})
-
+"""
 # Recommendations Quiz Page
 # def generateRecommendations(answers): 
 #     # The answer being the course the user entered
