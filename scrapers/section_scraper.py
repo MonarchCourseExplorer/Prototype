@@ -10,6 +10,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import sys
 
+from catalogue_scraper import Department, syncDepartments
+
 @dataclass
 class Section:
     crn = ""
@@ -243,16 +245,27 @@ def scrapeTerms(driver):
 
 def scrapeDepartments(driver, term):
     #if we just search for the term, it will give us a list of departments in that term
+    #OK, thats a lie, but there is some level of filtering
     url = "https://courses.odu.edu/search?subject=&term={0}&".format(term)
 
     driver.get(url)
     elem = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.NAME, "subjectmain"))) 
 
     soup = BeautifulSoup(driver.page_source, "html.parser")
+    departmentElements = soup.find_all("input", {"name": "subjectmain"})
 
     departments = []
-    for element in soup.find_all("input", {"name": "subjectmain"}):
-        departments.append(element['value'])
+    for element in departmentElements:
+        d = Department()
+
+        label = soup.find("label", {"for": element['id']})
+        if label != None:            
+            d.abbreviation = element['value']
+            d.name = label.text.split(":")[0].strip()
+
+            departments.append(d)
+        else:
+            print("Could not find {0}".format(element['id']))
 
     return departments
 
@@ -274,9 +287,10 @@ if __name__ == "__main__":
         #search url is in the form https://courses.odu.edu/search?subject=<>&term=<>&
         for t in terms:
             departments = scrapeDepartments(driver, t)
+            syncDepartments(departments, conn)
 
             for d in departments:
-                url = "https://courses.odu.edu/search?subject={0}&term={1}&".format(d, t)
+                url = "https://courses.odu.edu/search?subject={0}&term={1}&".format(d.abbreviation, t)
                 
                 try:
                     s = scrapeSections(driver, url)
