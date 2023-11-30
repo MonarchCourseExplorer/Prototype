@@ -16,9 +16,10 @@ class Course(models.Model):
     def __str__(self):
         return self.name
     
+#What is a defined as a section -Jodi
 class Section(models.Model):
     course = models.ForeignKey(Course, blank=True, null=True, on_delete=models.CASCADE)
-    #courseID = models.IntegerField() #is this the CRN?
+    #course_id = models.IntegerField(default=0) #is this the CRN?
     semester = models.CharField('Semester', max_length=50)
     session = models.CharField('Session', max_length=25)
     offering_time = models.CharField(default='00:00:00', max_length =255) # models.TimeField(auto_now=False, auto_now_add=False)
@@ -27,47 +28,52 @@ class Section(models.Model):
     meeting_type = models.CharField(max_length=25)
     crn = models.IntegerField()
 
+    # def __str__(self):
+    #     return self.course + " " + self.professor.first_name + " " + self.professor.last_name
     def __str__(self):
-        return self.course + " " + self.professor.first_name + " " + self.professor.last_name
+        #return self.crn
+        return f"{self.crn}"
 
 class Syllabus(models.Model):
-    #SectionID = models.ForeignKey(Section,on_delete= models.CASCADE)
-    class_name =models.CharField('Course',default= 'name',max_length=50 )
-    file = models.FileField(upload_to='documents/')
-    file_contents = models.TextField(blank= True)
-    NormalizedLocation = models.CharField('Normalized Location', max_length=120)
+                            
+    section_id = models.ForeignKey(Section, on_delete = models.CASCADE)
+    class_name = models.CharField('Course', default= 'name', max_length=50 )
+    original_location = models.FileField(upload_to='documents/')
+    normalized_location = models.CharField('Normalized Location', max_length=120)
 
-    def filename(self):
-        return self.file.name.split('/')[-1]
     
 
 
     def __str__(self):
-        return  "Syllabus for " + self.class_name
+        #return  "Syllabus for " + self.SectionID
+        return f"{self.crn}"
+
 
 
 #MCE Feedback
 class Feedback(models.Model):
-    SectionID = models.ForeignKey(Section,on_delete= models.CASCADE) #CourseNumber
-    Subject = models.TextField(blank= True) #Subject for course RECENTLY ADDED
-    Semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
+    section_id = models.ForeignKey(Section, on_delete= models.CASCADE) #CourseNumber
+    subject = models.CharField(max_length=255) #Subject for course RECENTLY ADDED
+    semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
     #StudentID = models.IntegerField('StudentID')
-    StudentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
-    ProfessorID = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
-    Review =  models.TextField(blank= True) #Share your thoughts
-    Rating = models.IntegerField(blank=True) #Group must add this on front end -- still need a rating averager
+    #studentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
+    professor_id = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
+    review =  models.TextField(blank= True) #Share your thoughts
+    rating = models.IntegerField(blank=True) #Group must add this on front end -- still need a rating averager
 
+    #def __str__(self):
+        #return "Feedback for " + self.SectionID
     def __str__(self):
-        return "Feedback for " + self.SectionID
+        return f"{self.Review}"
     
     
 
 #MCE Recommendations Quiz
-class recQuestions(models.Model):
+class recquestions(models.Model):
     questions_text = models.CharField(max_length=255)
 
 class recAnswer(models.Model):
-    question = models.ForeignKey(recQuestions, on_delete=models.CASCADE)
+    question = models.ForeignKey(recquestions, on_delete=models.CASCADE)
     choice = models.CharField(max_length=150)
     
 class MCERecommendation(models.Model):
@@ -89,9 +95,8 @@ class MCEUserResponse(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     answer = models.ForeignKey(MCEAnswer, on_delete=models.CASCADE)
     
-"""   
-class MCERecommendation(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField() 
-"""
-    
+
+class recCombined(models.Model):
+    recommendation = models.OneToOneField(MCERecommendation, on_delete=models.CASCADE)
+    answer = models.ForeignKey(recAnswer, on_delete=models.CASCADE)
+    question = models.ForeignKey(recquestions, on_delete=models.CASCADE)

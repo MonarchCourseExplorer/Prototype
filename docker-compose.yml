@@ -41,4 +41,3 @@ services:
       - ./.envs/.local/.postgres
     networks:
       - mynet
-  

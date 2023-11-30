@@ -69,6 +69,21 @@
   <script src="../../static/layout/scripts/jquery.min.js"></script>
     <script src="../../static/layout/scripts/jquery.fitvids.min.js"></script>
     <script src="../../static/layout/scripts/jquery.mobilemenu.js"></script>
-
+    <script>
+      const sliders = ['difficulty', 'workload', 'instructor'];
+  
+      sliders.forEach((sliderName) => {
+        const slider = document.getElementById(`${sliderName}Slider`);
+        const sliderValue = document.getElementById(`${sliderName}Value`);
+  
+        slider.addEventListener('input', function () {
+          sliderValue.value = slider.value;
+        });
+  
+        sliderValue.addEventListener('input', function () {
+          slider.value = sliderValue.value;
+        });
+      });
+    </script>
 </body>
 </html>
