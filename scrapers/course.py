@@ -9,7 +9,7 @@ class Course:
         #a single block can represent 2 courses - a 400 and 500 level course
         #for now splitting them, but there should be a way to reference back beyond the last 2 numbers?
 
-        numbers = re.findall(r'\d+', number)
+        numbers = re.findall(r'\d+\w*', number)
         department = number.split()[0]
         
         if len(numbers) == 1:
