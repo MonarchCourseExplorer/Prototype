@@ -13,7 +13,7 @@
 
   {% else %}
 
-  <form action="" method="POST">
+  <form action="{% url 'success' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
 
