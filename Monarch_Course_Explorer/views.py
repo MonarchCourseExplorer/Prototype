@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from django.conf import settings
-
 from catalogue.forms import FeedbackForm
-from catalogue.models import Semester, Department
+from catalogue.models import Semester, Department, Course, Feedback
 from django.db import connection
 from .forms import CourseSearchForm
 
@@ -74,7 +72,14 @@ def provideGradesView(request):
 
 # Render the browse feedback page 
 def provideBrowseFeedbackView(request):
-    return render(request, 'pages/browseFeedback.html')
+    allSelectedFeedback = [] # All of the feedback for the selected course
+    if request.method == "POST":
+        requestPost = request.POST
+        if 'courseSelect' in requestPost: # Check if any feedback has been submitted about the selected course
+            for feedback in Feedback.objects.all():
+                if str(feedback.subject + ' ' + str(feedback.section_id)) == str(requestPost['courseSelect']): # Check for any feedback in the database that has the selected course name
+                    allSelectedFeedback.append(feedback)
+    return render(request, 'pages/browseFeedback.html', {"allCourses": Course.objects.all(), "allSelectedFeedback": allSelectedFeedback})
 
 # Render the syllabus page
 def provideSyllabusView(request):
