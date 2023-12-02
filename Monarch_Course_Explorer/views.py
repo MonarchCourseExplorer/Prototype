@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.conf import settings
+from catalogue.forms import FeedbackForm
 
 # Render the Monarch Course Explorer home page
 def homeView(request):
@@ -21,7 +22,20 @@ def quizView(request):
 
 # Render the provideFeedback page
 def provideFeedbackView(request):
-    return render(request, 'pages/provideFeedback.html')
+    submitted = False
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #Redirect user back to feedback page. --look into how to output feedback
+            return HttpResponseRedirect('/provideFeedback?submitted=True')
+        #     return redirect('success')
+    else:
+        form = FeedbackForm()
+        if 'submitted' in request.GET:
+            submitted = True
+            
+    return render(request, 'pages/provideFeedback.html', {'form':form, 'submitted':submitted})
 
 # Render the grades page
 def provideGradesView(request):
