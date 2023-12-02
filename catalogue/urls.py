@@ -4,7 +4,8 @@ from . import views
 urlpatterns = [
     path('upload/', views.uploadSyllabus, name= 'upload'),
     path('success', views.success, name="success"),
-
+    path('provide_feedback/', views.provideFeedback, name='provide_feedback'),
+    
 
     #path('quiz/<int:question_id>/', views.quiz_question, name='quiz_question'),
     #path('submit_answer/', views.submit_answer, name='submit_answer'),
@@ -12,4 +13,5 @@ urlpatterns = [
     #path('pages/provideFeedback.html', views.provideFeedback, name='provideFeedback'),
     #path('provideFeedback.html', views.provideFeedback, name='provideFeedback'),
     #path('add_feedback', views.add_feedback, name='add-venu'),
+
 ]
