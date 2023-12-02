@@ -52,17 +52,14 @@ class Syllabus(models.Model):
 
 #MCE Feedback
 class Feedback(models.Model):
-    section_id = models.IntegerField(blank=True) #CourseNumber
+    section_id = models.IntegerField('Course Number', blank=True) #CourseNumber
     subject = models.CharField(max_length=255) #Subject
-    semester = models.TextField(blank= True) #Semester (i.e. Fall 2020)
-    professor_id = models.CharField(max_length=255) #Professor Name (Thomas Kennedy)
+    semester = models.CharField(max_length=30) #Semester (i.e. Fall 2020)
+    professor_id = models.CharField('Professor Name', max_length=255) #Professor Name (Thomas Kennedy)
     review =  models.TextField(blank= True) #Share your thoughts
-    difficulty_rating = models.IntegerField(validators=[MaxValueValidator(5)],
-                                            help_text="Enter an integer between 1 and 5.") 
-    workload_rating = models.IntegerField(validators=[MaxValueValidator(5)],
-                                          help_text="Enter an integer between 1 and 5.")
-    openness_rating = models.IntegerField(validators=[MaxValueValidator(5)],
-                                          help_text="Enter an integer between 1 and 5.")
+    difficulty_rating = models.IntegerField('Difficulty Rating', validators=[MaxValueValidator(5)]) 
+    workload_rating = models.IntegerField('Workload Rating', validators=[MaxValueValidator(5)])
+    openness_rating = models.IntegerField('Openness Rating', validators=[MaxValueValidator(5)])
 
     #Deleted Model Fields
     #StudentID = models.IntegerField('StudentID')
