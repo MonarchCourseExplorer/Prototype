@@ -14,7 +14,7 @@
 
   {% else %}
 
-  <form action="" method="POST">
+  <form action="{% url 'provide_feedback' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
 
