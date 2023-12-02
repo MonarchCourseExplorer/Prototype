@@ -26,7 +26,7 @@ def searchResultsView(request):
     #Could I have looked harder to figure out how to join catalogue and users? Yes. Am I going to? No.
     with connection.cursor() as cur:
         strSQL = """SELECT course.department, course.number, course.name, course.description,
-                           section.crn,
+                           section.id, section.crn,
                            prof.first_name, prof.last_name
                     FROM catalogue_course AS course INNER JOIN catalogue_section AS section ON course.id = section.course_id
                         INNER JOIN users_professor AS prof ON section.professor_id = prof.id
@@ -37,6 +37,9 @@ def searchResultsView(request):
         results = dictfetchall(cur)
 
     return render(request, 'pages/searchResults.html', {'results': results})
+
+def sectionView(request):
+    return render(request, 'pages/viewSection.html')
 
 # Render gallery page
 def galleryView(request):
