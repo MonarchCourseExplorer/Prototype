@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.conf import settings
+
 from catalogue.forms import FeedbackForm
 from catalogue.models import Semester, Department
 from django.db import connection
@@ -54,11 +56,11 @@ def provideFeedbackView(request):
     submitted = False
     if request.method == "POST":
         form = FeedbackForm(request.POST)
+        print(request.POST)
         if form.is_valid():
             form.save()
             #Redirect user back to feedback page. --look into how to output feedback
             return HttpResponseRedirect('/provideFeedback?submitted=True')
-        #     return redirect('success')
     else:
         form = FeedbackForm()
         if 'submitted' in request.GET:
