@@ -7,22 +7,20 @@ from .forms import CourseSearchForm
 # Render the Monarch Course Explorer home page
 def homeView(request):
     if request.method == "POST":
-        print(request.POST)
         searchForm = CourseSearchForm(request.POST)
-        print(searchForm.is_valid())
-        print(searchForm.errors)
-        searchForm.full_clean()
-        print(searchForm.cleaned_data)
+        if searchForm.is_valid():
+            pass
     else:
         searchForm = CourseSearchForm()
 
     context = {
-        'semesters': Semester.objects.all().order_by('-short_name'),
-        'departments': Department.objects.all().order_by('name'),
         'form': searchForm
     }
 
     return render(request, 'index.html', context)
+
+def searchResultsView(request):
+    return render(request, 'pages/searchResults.html')
 
 # Render gallery page
 def galleryView(request):

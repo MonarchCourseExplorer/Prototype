@@ -90,7 +90,7 @@ def scrapeSections(driver, url):
         #print("No sections found in {0}".format(url))
         pass
     elif len(sections) != numEntries: 
-        print("Expected {0} sessions, found {1}, in {2}".format(numEntries, len(sections), url))
+        print("Expected {0} sections, found {1}, in {2}".format(numEntries, len(sections), url))
     else:
         #print(numEntries)
         pass
@@ -139,10 +139,10 @@ def extractTable(courseTable):
         
     return sections
 
-def syncSections(sections, session, conn):
+def syncSections(sections, semester, conn):
     professors = []
     courses = []
-    selectSQL = "SELECT id FROM catalogue_section WHERE CRN = %s AND session = %s;"
+    selectSQL = "SELECT id FROM catalogue_section WHERE CRN = %s AND semester = %s;"
     updateSQL = """UPDATE catalogue_section 
                 SET offering_time = %s,
                     professor_id = users_professor.id,
@@ -153,7 +153,7 @@ def syncSections(sections, session, conn):
                     AND users_professor.first_name = %s AND users_professor.last_name = %s
                     AND catalogue_course.department || ' ' || catalogue_course.number = %s;"""
     insertSQL = """INSERT INTO catalogue_section ( CRN, semester, session, offering_time, professor_id, delivery_type, meeting_type, course_id )
-                SELECT %s, '', %s, %s, users_professor.id, %s, '', catalogue_course.id
+                SELECT %s, %s, '', %s, users_professor.id, %s, '', catalogue_course.id
                 FROM users_professor, catalogue_course
                 WHERE users_professor.first_name = %s AND users_professor.last_name = %s
                     AND catalogue_course.department || ' ' || catalogue_course.number = %s;"""
@@ -174,11 +174,11 @@ def syncSections(sections, session, conn):
 
         try:
             #add or update the section
-            cur.execute(selectSQL, (s.crn, session))
+            cur.execute(selectSQL, (s.crn, semester))
             if cur.rowcount > 0:
                 cur.execute(updateSQL, (s.meetingTime, s.delivery, cur.fetchone()[0], s.instructor.first, s.instructor.last, s.course))
             else:
-                cur.execute(insertSQL, (s.crn, session, s.meetingTime, s.delivery, s.instructor.first, s.instructor.last, s.course))
+                cur.execute(insertSQL, (s.crn, semester, s.meetingTime, s.delivery, s.instructor.first, s.instructor.last, s.course))
 
             if cur.rowcount != 1:
                 print("Error with section {0}, please review to make sure {1} {2} or {3} are in the database".format(s.crn, s.instructor.first, s.instructor.last, s.course))

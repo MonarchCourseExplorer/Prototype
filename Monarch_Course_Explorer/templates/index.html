@@ -78,6 +78,7 @@ Licence URI: http://www.os-templates.com/template-terms
         <form action="" method="post">
           {% csrf_token %}
 
+          {{ form.errors }}
           <div class="search-bar">
             {{ form.semester }}
 
