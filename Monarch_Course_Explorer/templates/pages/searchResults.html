@@ -1,0 +1,27 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Search Results - Monarch Course Explorer{% endblock %}
+
+{% block content %}
+
+<div class="result-list">
+  <ul>
+    {% for x in results %}
+      <li>
+        <div class="result">
+          <a href="viewSection.html?id={{x.id}}">
+            <p>{{x.department}} {{x.number}}</p>
+            <p>{{x.name}}</p>
+            <p>CRN {{x.crn}}</p>
+            <p>{{x.last_name}}, {{x.first_name}}</p>
+          </a>
+          <div>
+            {{x.description}}
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

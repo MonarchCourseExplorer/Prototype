@@ -538,23 +538,38 @@ table a, #comments a{background-color:inherit;}
     align-content: center;
     justify-content: center; 
     padding: 10px;
+    font-size: 15px;
+}
+
+.search-bar select {
+    margin-right: 5px;
 }
 
 .search-bar input {
     color:black; /* change color inside search bar to black */ 
-    width: 500px;
+    width: 375px;
     padding: 10px;
-    font-size: 16px;
     border-radius: 4px; /* Rounded edges*/
     box-sizing: border-box; 
 }
 
 .search-bar button {
     padding: 10px 20px;
-    font-size: 16px;
     border-radius: 6px; /* rounded  border appearance */
     margin-left: 10px; /* Add some space between the input and button */
     height: 40px; /* Adjust the height to match the input */
+}
+
+.result-list ul {
+    list-style-type: none;
+}
+
+.result {
+    display: flex;
+    align-content: center;
+    justify-content: center; 
+    padding: 10px;
+    font-size: 12px;
 }
 
 /* To put search box at the center of the page on index.html homepage*/
