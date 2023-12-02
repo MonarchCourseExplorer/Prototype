@@ -13,6 +13,8 @@ urlpatterns = [
     #path('add_feedback', views.add_feedback, name='add-venu'),
     path('upload/', views.uploadSyllabus, name= 'upload'),
     path('success', views.success, name="success"),
+    path('provide_feedback/', views.provideFeedback, name='provide_feedback'),
+    
 
     
 ]
