@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator
 from users.models import Student, Professor
 
 #MCE Standard Databases
@@ -27,60 +28,57 @@ class Semester(models.Model):
     def __str__(self):
         return self.friendly_name
     
-#What is a defined as a section -Jodi
 class Section(models.Model):
     course = models.ForeignKey(Course, blank=True, null=True, on_delete=models.CASCADE)
-    #course_id = models.IntegerField(default=0) #is this the CRN?
-    semester = models.CharField('Semester', max_length=50) #semester.short_name
+    semester = models.CharField('Semester', max_length=50)
     session = models.CharField('Session', max_length=25)
-    offering_time = models.CharField(default='00:00:00', max_length =255) # models.TimeField(auto_now=False, auto_now_add=False)
+    offering_time = models.CharField(default='00:00:00', max_length =255)
     professor = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    delivery_type = models.CharField(max_length=255) #Needs to be greater than 25. 255 is a typical number for SQL text fields
+    delivery_type = models.CharField(max_length=255) 
     meeting_type = models.CharField(max_length=255)
     crn = models.IntegerField()
 
-    # def __str__(self):
-    #     return self.course + " " + self.professor.first_name + " " + self.professor.last_name
     def __str__(self):
-        #return self.crn
         return f"{self.crn}"
 
 class Syllabus(models.Model):
-    #SectionID causes crash, className only works when pressing add first
-
     section_id = models.ForeignKey(Section, on_delete = models.CASCADE)
     class_name = models.CharField('Course', default= 'name', max_length=50 )
     original_location = models.FileField(upload_to='documents/')
     normalized_location = models.CharField('Normalized Location', max_length=120)
     
-
     def __str__(self):
-        #return  "Syllabus for " + self.SectionID
         return f"{self.crn}"
 
 #MCE Feedback
 class Feedback(models.Model):
-    #section_id = models.ForeignKey(Section, on_delete= models.CASCADE) #CourseNumber
     section_id = models.IntegerField(blank=True) #CourseNumber
-    subject = models.CharField(max_length=255) #Subject for course RECENTLY ADDED
-    semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
+    subject = models.CharField(max_length=255) #Subject
+    semester = models.TextField(blank= True) #Semester (i.e. Fall 2020)
+    professor_id = models.CharField(max_length=255) #Professor Name (Thomas Kennedy)
+    review =  models.TextField(blank= True) #Share your thoughts
+    difficulty_rating = models.IntegerField(validators=[MaxValueValidator(5)],
+                                            help_text="Enter an integer between 1 and 5.") 
+    workload_rating = models.IntegerField(validators=[MaxValueValidator(5)],
+                                          help_text="Enter an integer between 1 and 5.")
+    openness_rating = models.IntegerField(validators=[MaxValueValidator(5)],
+                                          help_text="Enter an integer between 1 and 5.")
+
+    #Deleted Model Fields
     #StudentID = models.IntegerField('StudentID')
     #studentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
     #professor_id = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
-    professor_id = models.CharField(max_length=255)
-    review =  models.TextField(blank= True) #Share your thoughts
+    #section_id = models.ForeignKey(Section, on_delete= models.CASCADE) #CourseNumber
     #rating = models.IntegerField(blank=True)
-    difficulty_rating = models.IntegerField(blank=True)
-    workload_rating = models.IntegerField(blank=True)
-    openness_rating = models.IntegerField(blank=True)
 
-    #def __str__(self):
-        #return "Feedback for " + self.SectionID
     def __str__(self):
-        return self.professor_id
-    
-    
+        return f"{self.professor_id, self.subject, self.section_id}"
 
+    
+    
+"""
+To be continued...
+"""
 #MCE Recommendations Quiz
 
 # class recquestions(models.Model):

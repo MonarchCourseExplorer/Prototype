@@ -1,14 +1,27 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 from .forms import SyllabusForm
-# from .models import recquestions
+
+#from .models import recquestions
 #from .models import recAnswer 
 #from .models import MCERecommendation
-# from .forms import RecommendationForm
-from .forms import FeedbackForm
+#from .forms import RecommendationForm
 
 def success(request):
     return render(request,'pages/success.html')
+
+def uploadSyllabus(request): 
+    
+    if request.method == 'POST':
+        form = SyllabusForm(request.POST, request.FILES)
+        #file = request.FILES['file']
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = SyllabusForm()
+    
+    return render(request, 'pages/upload.html', {'form': form})
+
 
 # def upload_Syllabus(request): 
     
@@ -25,8 +38,6 @@ def success(request):
 #     else:
 #         form = SyllabusForm()
 
-
-    
 #     return render(request, 'pages/upload.html', {'form': form})
     
 # Recommendations Quiz Page
@@ -82,39 +93,3 @@ def success(request):
  
 # def showRecommendation(request):
 #     pass
-
-def uploadSyllabus(request): 
-    
-    if request.method == 'POST':
-        form = SyllabusForm(request.POST, request.FILES)
-        #file = request.FILES['file']
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = SyllabusForm()
-    
-    return render(request, 'pages/upload.html', {'form': form})
-
-
-
-# #MCE Feedback
-# def provideFeedback(request):
-#     submitted = False
-#     if request.method == "POST":
-#         form = FeedbackForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             #Redirect user back to feedback page. --look into how to output feedback
-#             return HttpResponseRedirect('/provideFeedback?submitted=True')
-#         #     return redirect('success')
-#     else:
-
-#         form = FeedbackForm
-#         if 'submitted' in request.GET:
-#             submitted = True
-            
-#     #return render(request, 'provideFeedback.html', {'form':form, 'submitted':submitted})
-#     return render(request, 'pages/provideFeedback.html', {'form':form, 'submitted':submitted})
-    
-
