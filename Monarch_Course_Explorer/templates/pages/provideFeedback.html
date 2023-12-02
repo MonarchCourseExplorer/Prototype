@@ -1,96 +1,49 @@
 {% extends 'pages/base.html' %}
 
 
-{% block title %}Grades - Monarch Course Explorer{% endblock %}
+{% block title %}Provide Feedback - Monarch Course Explorer{% endblock %}
 
 {% block content %}
 
-          <div id="comments">
-            <h1>Provide Course Feedback</h1>
-            <form action="" method="POST">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <label for="comments">
-                <strong>Which class are you reviewing?</strong>
-            </label>
-              <div class="block clear">
-                <div class="group">
-                    <div class="subject-question">
-                      <p>Subject:</p>
-                      <div class="subject-input">
-                        <label>
-                          <input type="text" name="subject" list="subjects" placeholder="Enter subject here" {background: grey}>
-                        </label>
-                      </div>
-                    </div>
+<div id="comments">
+  <h1>Provide Course Feedback</h1>
 
-                    <div class="course-question">
-                      <p>Course Number:</p>
-                      <div class="course-input">
-                        <label>
-                          <input type="text" name="course" list="courses" placeholder="Enter course number here">
-                        </label>
-                      </div>
-                    </div>
+  {% if submitted %}
+    Feedback Was Submitted Successfully!
 
-                    <div class="instructor-question">
-                      <p>Instructor:</p>
-                      <div class="instructor-input">
-                        <label>
-                          <input type="text" name="instructor" list="instructors" placeholder="Enter instructor here">
-                        </label>
-                      </div>
-                    </div>
 
-                    <div class="semester-question">
-                      <p>Semester:</p>
-                      <div class="semester-input">
-                        <label>
-                          <input type="text" name="semester" list=semesters" placeholder="Enter semester here">
-                        </label>
-                        <!-- Need to make this based on the chosen subject AND course previously AND semester -->
-                        {% comment %} <datalist id="instructors">
-                          <option value="Computer Science">
-                          <option value="Math"> 
-                        </datalist> {% endcomment %}
-                      </div>
-                    </div>
+  {% else %}
 
-                </div>
-              </div>
+  <form action="{% url 'provide_feedback' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
 
-              <div class="block clear">
-                <label for="comments"
-                  ><strong>Share your thoughts about the course and professor</strong></label
-                >
-                <textarea
-                  name="comments"
-                  id="comments"
-                  cols="25"
-                  rows="10"
-                  placeholder="(Some suggestions on what to write about are information about the professor's teaching style and methodologies, the workload, types of assignments, what you liked, as well as areas that could be improved on. Consider sharing insights that would benefit future students taking the course.)"
-                ></textarea>
-              </div>
-              <div>
-                <input name="submit" type="submit" value="Submit Form" />
-                &nbsp;
-              </div>
-            </form>
-          </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
 
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    
 
-  </body>
+<div>
+  <input name="submit" type="submit" value="Submit Review" style="background-color: #3498db; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;"/>
+  &nbsp;
+</div>
+</form>
+
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+
+</body>
+
 </html>
 
-
+  {% endif %}
 {% endblock %}
+
+
 
 
 <!DOCTYPE html>

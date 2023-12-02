@@ -10,6 +10,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import sys
 
+from catalogue_scraper import Department, syncDepartments, createConnection
+
 @dataclass
 class Section:
     crn = ""
@@ -32,6 +34,11 @@ class Professor:
         if not isinstance(other, Professor):
             return NotImplemented
         return self.first == other.first and self.last == other.last
+
+@dataclass
+class Semester:
+    short_name = ""
+    friendly_name = ""
 
 def scrapeSections(driver, url):
     #TODO - change records to 100 - not sure if it'll help, but it'll be an accomplishment
@@ -83,7 +90,7 @@ def scrapeSections(driver, url):
         #print("No sections found in {0}".format(url))
         pass
     elif len(sections) != numEntries: 
-        print("Expected {0} sessions, found {1}, in {2}".format(numEntries, len(sections), url))
+        print("Expected {0} sections, found {1}, in {2}".format(numEntries, len(sections), url))
     else:
         #print(numEntries)
         pass
@@ -132,10 +139,10 @@ def extractTable(courseTable):
         
     return sections
 
-def syncSections(sections, session, conn):
+def syncSections(sections, semester, conn):
     professors = []
     courses = []
-    selectSQL = "SELECT id FROM catalogue_section WHERE CRN = %s AND session = %s;"
+    selectSQL = "SELECT id FROM catalogue_section WHERE CRN = %s AND semester = %s;"
     updateSQL = """UPDATE catalogue_section 
                 SET offering_time = %s,
                     professor_id = users_professor.id,
@@ -146,7 +153,7 @@ def syncSections(sections, session, conn):
                     AND users_professor.first_name = %s AND users_professor.last_name = %s
                     AND catalogue_course.department || ' ' || catalogue_course.number = %s;"""
     insertSQL = """INSERT INTO catalogue_section ( CRN, semester, session, offering_time, professor_id, delivery_type, meeting_type, course_id )
-                SELECT %s, '', %s, %s, users_professor.id, %s, '', catalogue_course.id
+                SELECT %s, %s, '', %s, users_professor.id, %s, '', catalogue_course.id
                 FROM users_professor, catalogue_course
                 WHERE users_professor.first_name = %s AND users_professor.last_name = %s
                     AND catalogue_course.department || ' ' || catalogue_course.number = %s;"""
@@ -167,11 +174,11 @@ def syncSections(sections, session, conn):
 
         try:
             #add or update the section
-            cur.execute(selectSQL, (s.crn, session))
+            cur.execute(selectSQL, (s.crn, semester))
             if cur.rowcount > 0:
                 cur.execute(updateSQL, (s.meetingTime, s.delivery, cur.fetchone()[0], s.instructor.first, s.instructor.last, s.course))
             else:
-                cur.execute(insertSQL, (s.crn, session, s.meetingTime, s.delivery, s.instructor.first, s.instructor.last, s.course))
+                cur.execute(insertSQL, (s.crn, semester, s.meetingTime, s.delivery, s.instructor.first, s.instructor.last, s.course))
 
             if cur.rowcount != 1:
                 print("Error with section {0}, please review to make sure {1} {2} or {3} are in the database".format(s.crn, s.instructor.first, s.instructor.last, s.course))
@@ -213,20 +220,6 @@ def findElement(o, tag, cls):
     else:
         return ""
 
-def createConnection():
-    conn = None
-
-    try:
-        #This is SUPER bad practice, but...it's already out there
-        conn = psycopg.connect(host="postgres",
-            dbname="mce_django",
-            user="qrAKoIzpncvkHaCzUeBwGkXnhKgVypHZ",
-            password="yVzY2BMfTNn4jW4pPr3Xcvuz0St5snmVPPJiHEFc1oP4O3JMlJcYOjzkZSxzAgJO")
-    except (Exception) as error:
-        print(error)
-
-    return conn
-
 def scrapeTerms(driver):
     url = "https://courses.odu.edu/"
     driver.get(url)
@@ -237,22 +230,57 @@ def scrapeTerms(driver):
     #Load terms from the main page first
     terms = []
     for element in results.find_all("option"):
-        if element['value'] != "": terms.append(element['value'])
+        if element['value'] != "": 
+            t = Semester()
+            t.short_name = element['value']
+            t.friendly_name = element.text
+            if '(' in t.friendly_name:
+                t.friendly_name = t.friendly_name[:t.friendly_name.index('(')]
+
+            terms.append(t)
 
     return terms
 
+def syncTerms(terms, conn):
+    selectSQL = "SELECT ID FROM catalogue_semester WHERE short_name = %s;"
+    #read only should be true for new semesters
+    #long term, there should be an automatic process to update readonly 
+    insertSQL = "INSERT INTO catalogue_semester ( short_name, friendly_name, readonly ) VALUES (%s, %s, TRUE);"
+
+    cur = conn.cursor()
+
+    for t in terms:
+        cur.execute(selectSQL, (t.short_name, ))
+
+        if cur.rowcount == 0:
+            cur.execute(insertSQL, (t.short_name, t.friendly_name))
+
+    conn.commit()
+    cur.close()
+
 def scrapeDepartments(driver, term):
     #if we just search for the term, it will give us a list of departments in that term
+    #OK, thats a lie, but there is some level of filtering
     url = "https://courses.odu.edu/search?subject=&term={0}&".format(term)
 
     driver.get(url)
     elem = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.NAME, "subjectmain"))) 
 
     soup = BeautifulSoup(driver.page_source, "html.parser")
+    departmentElements = soup.find_all("input", {"name": "subjectmain"})
 
     departments = []
-    for element in soup.find_all("input", {"name": "subjectmain"}):
-        departments.append(element['value'])
+    for element in departmentElements:
+        d = Department()
+
+        label = soup.find("label", {"for": element['id']})
+        if label != None:            
+            d.abbreviation = element['value']
+            d.name = label.text.split(":")[0].strip()
+
+            departments.append(d)
+        else:
+            print("Could not find {0}".format(element['id']))
 
     return departments
 
@@ -271,16 +299,18 @@ if __name__ == "__main__":
     conn = createConnection()
 
     if conn != None:
+        syncTerms(terms, conn)
         #search url is in the form https://courses.odu.edu/search?subject=<>&term=<>&
         for t in terms:
-            departments = scrapeDepartments(driver, t)
+            departments = scrapeDepartments(driver, t.short_name)
+            syncDepartments(departments, conn)
 
             for d in departments:
-                url = "https://courses.odu.edu/search?subject={0}&term={1}&".format(d, t)
+                url = "https://courses.odu.edu/search?subject={0}&term={1}&".format(d.abbreviation, t.short_name)
                 
                 try:
                     s = scrapeSections(driver, url)
-                    if s != None: syncSections(s, t, conn)
+                    if s != None: syncSections(s, t.short_name, conn)
                 except (Exception) as error:
                     print(error)
                     print(url)

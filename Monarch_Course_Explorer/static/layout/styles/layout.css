@@ -276,8 +276,10 @@ a{color:#58b1e0;}
 hr, .borderedbox{border-color:#5c5656;}
 
 label span{color:#FF0000; background-color:inherit;}
-
+/*
 .rounded{color:inherit; background-color:#635d5d;}
+*/
+.rounded{color:inherit; background-color:#857b7b;}
 
 
 /* Rows */
@@ -285,9 +287,10 @@ label span{color:#FF0000; background-color:inherit;}
 .row1{color:#b1b0b0; background-color:#0d3d74;}
 .row1 a{color:#fdf3f3; background-color:inherit;}
 .row2, .row2 a{color:#0b386b; background-color:inherit;}
+/*
 .row3{color:#bebebe; background-color:inherit;}
-.row4{color:#c5c4c4; background-color:inherit;}
-.row5, .row5 a{color:#5ebff3; background-color:#0b396d;}
+*/
+.row3{color:#1d1c1c; background-color:inherit;}
 
 
 /* Top Bar */
@@ -535,23 +538,38 @@ table a, #comments a{background-color:inherit;}
     align-content: center;
     justify-content: center; 
     padding: 10px;
+    font-size: 15px;
+}
+
+.search-bar select {
+    margin-right: 5px;
 }
 
 .search-bar input {
     color:black; /* change color inside search bar to black */ 
-    width: 500px;
+    width: 375px;
     padding: 10px;
-    font-size: 16px;
     border-radius: 4px; /* Rounded edges*/
     box-sizing: border-box; 
 }
 
 .search-bar button {
     padding: 10px 20px;
-    font-size: 16px;
     border-radius: 6px; /* rounded  border appearance */
     margin-left: 10px; /* Add some space between the input and button */
     height: 40px; /* Adjust the height to match the input */
+}
+
+.result-list ul {
+    list-style-type: none;
+}
+
+.result {
+    display: flex;
+    align-content: center;
+    justify-content: center; 
+    padding: 10px;
+    font-size: 12px;
 }
 
 /* To put search box at the center of the page on index.html homepage*/
@@ -566,5 +584,21 @@ table a, #comments a{background-color:inherit;}
 }
     .choices label {
         display: inline-block;
-        margin-right: 10px; /* Adjust the margin as needed */
+        margin-right: 10px;
     }
+
+    .rating-inputs {
+        display: flex;
+        margin-bottom: 10px; 
+      }
+
+      .rating-inputs input[type="range"] {
+        width: 350px; /*Width of Slider */
+      }
+
+      .rating-inputs input[type="number"] {
+        width: 60px; /* Number Input Width */ 
+        color:black;
+        text-align: center;
+        padding: 3px; /* Add padding for a bit more space inside the input box */
+      }
