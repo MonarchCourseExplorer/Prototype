@@ -6,26 +6,37 @@ class Department(models.Model):
     abbreviation = models.CharField(max_length=10)
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 class Course(models.Model):
     name = models.CharField('Course Name', max_length= 120)
-    department = models.CharField(max_length=120)
+    department = models.CharField(max_length=120) #department.abbreviation
     description = models.TextField(blank= True)
     number = models.CharField('Course Number',default='100', max_length=10) #probably excessive, but it doesn't hurt
     credits = models.CharField(max_length=10,default=3) #We aren't doing anything with this, so leave it as char so 1-3 works
 
     def __str__(self):
         return self.name
+
+class Semester(models.Model):
+    short_name = models.CharField('Abbreviated semester, i.e. 202410', max_length=50)
+    friendly_name = models.CharField('Readable semester, i.e. Fall 2014', max_length=255)
+    readonly = models.BooleanField()
+
+    def __str__(self):
+        return self.friendly_name
     
 #What is a defined as a section -Jodi
 class Section(models.Model):
     course = models.ForeignKey(Course, blank=True, null=True, on_delete=models.CASCADE)
     #course_id = models.IntegerField(default=0) #is this the CRN?
-    semester = models.CharField('Semester', max_length=50)
+    semester = models.CharField('Semester', max_length=50) #semester.short_name
     session = models.CharField('Session', max_length=25)
     offering_time = models.CharField(default='00:00:00', max_length =255) # models.TimeField(auto_now=False, auto_now_add=False)
     professor = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    delivery_type = models.CharField(max_length=25)
-    meeting_type = models.CharField(max_length=25)
+    delivery_type = models.CharField(max_length=255) #Needs to be greater than 25. 255 is a typical number for SQL text fields
+    meeting_type = models.CharField(max_length=255)
     crn = models.IntegerField()
 
     # def __str__(self):
