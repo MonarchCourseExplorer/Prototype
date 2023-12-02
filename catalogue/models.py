@@ -66,7 +66,7 @@ class Feedback(models.Model):
     #def __str__(self):
         #return "Feedback for " + self.SectionID
     def __str__(self):
-        return f"{self.Review}"
+        return self.professor_id
     
     
 

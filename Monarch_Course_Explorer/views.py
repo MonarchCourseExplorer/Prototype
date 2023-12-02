@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.conf import settings
+from django.http import HttpResponseRedirect
 from catalogue.forms import FeedbackForm
 
 # Render the Monarch Course Explorer home page
@@ -25,11 +25,11 @@ def provideFeedbackView(request):
     submitted = False
     if request.method == "POST":
         form = FeedbackForm(request.POST)
+        print(request.POST)
         if form.is_valid():
             form.save()
             #Redirect user back to feedback page. --look into how to output feedback
             return HttpResponseRedirect('/provideFeedback?submitted=True')
-        #     return redirect('success')
     else:
         form = FeedbackForm()
         if 'submitted' in request.GET:
