@@ -49,14 +49,19 @@ class Syllabus(models.Model):
 
 #MCE Feedback
 class Feedback(models.Model):
-    section_id = models.ForeignKey(Section, on_delete= models.CASCADE) #CourseNumber
+    #section_id = models.ForeignKey(Section, on_delete= models.CASCADE) #CourseNumber
+    section_id = models.IntegerField(blank=True) #CourseNumber
     subject = models.CharField(max_length=255) #Subject for course RECENTLY ADDED
     semester = models.TextField(blank= True) #semester of section RECENTLY ADDED
     #StudentID = models.IntegerField('StudentID')
     #studentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
-    professor_id = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
+    #professor_id = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
+    professor_id = models.CharField(max_length=255)
     review =  models.TextField(blank= True) #Share your thoughts
-    rating = models.IntegerField(blank=True) #Group must add this on front end -- still need a rating averager
+    #rating = models.IntegerField(blank=True)
+    difficulty_rating = models.IntegerField(blank=True)
+    workload_rating = models.IntegerField(blank=True)
+    openness_rating = models.IntegerField(blank=True)
 
     #def __str__(self):
         #return "Feedback for " + self.SectionID

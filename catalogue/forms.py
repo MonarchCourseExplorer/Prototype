@@ -17,16 +17,18 @@ class SyllabusForm(ModelForm):
 
     
 #Create Section Form
-class SectionForm(forms.ModelForm):
+class SectionForm(ModelForm):
     class Meta:
         model = Section
         fields = "__all__"
 
 
-class FeedbackForm(forms.ModelForm):
+class FeedbackForm(ModelForm):
     class Meta:
         model = Feedback
         fields = "__all__"
+
+        #Check to see if you need to define your fields, if this does not work 5:38
 
 # class RecommendationForm(forms.ModelForm):
 #     class Meta:
