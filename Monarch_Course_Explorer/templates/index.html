@@ -73,12 +73,21 @@ Licence URI: http://www.os-templates.com/template-terms
       <div class = "title-above-search">
         <!-- <img src="../static/images/placeholder-logo/logo.png" alt="monarch course explorer logo"> -->
         <h1>Search for a Course or a Professor, or use the buttons below.</h1>
-        </div>    
+      </div>    
       <div class="search-container">
+        <form action="" method="post">
+          {% csrf_token %}
+
+          {{ form.errors }}
           <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search for a Course or a Professor" />
-            <button onclick="search()">Search</button>
+            {{ form.semester }}
+
+            {{ form.department }}
+
+            {{ form.search }}
+            <button type="submit">Search</button>
           </div>
+        </form>
       </div>      
     </div>
   </div>
