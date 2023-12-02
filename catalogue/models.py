@@ -6,6 +6,9 @@ class Department(models.Model):
     abbreviation = models.CharField(max_length=10)
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 class Course(models.Model):
     name = models.CharField('Course Name', max_length= 120)
     department = models.CharField(max_length=120)

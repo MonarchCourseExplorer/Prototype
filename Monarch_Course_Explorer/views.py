@@ -1,15 +1,28 @@
 from django.shortcuts import render
 from django.conf import settings
 from catalogue.forms import FeedbackForm
-
+from catalogue.models import Semester, Department
+from .forms import CourseSearchForm
 
 # Render the Monarch Course Explorer home page
 def homeView(request):
-    return render(request, 'index.html')
+    if request.method == "POST":
+        print(request.POST)
+        searchForm = CourseSearchForm(request.POST)
+        print(searchForm.is_valid())
+        print(searchForm.errors)
+        searchForm.full_clean()
+        print(searchForm.cleaned_data)
+    else:
+        searchForm = CourseSearchForm()
 
-# Render the Monarch Course Explorer home page when on the Login and Registration Pages
-def homeViewFromLoginAndRegisterPages(request):
-    return render(request, 'Monarch_Course_Explorer/templates/index.html')
+    context = {
+        'semesters': Semester.objects.all().order_by('-short_name'),
+        'departments': Department.objects.all().order_by('name'),
+        'form': searchForm
+    }
+
+    return render(request, 'index.html', context)
 
 # Render gallery page
 def galleryView(request):

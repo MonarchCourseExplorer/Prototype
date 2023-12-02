@@ -23,7 +23,6 @@ from Monarch_Course_Explorer import views
 urlpatterns = [
     path('', views.homeView),
     path('index.html', views.homeView, name='home'),
-    path('Monarch_Course_Explorer/templates/index.html', views.homeViewFromLoginAndRegisterPages, name='homeViewLoginRegistration'),
     path('admin/', admin.site.urls),
     path('pages/gallery.html', views.galleryView, name='gallery'),
     path('pages/RecQuestion.html', views.quizView, name='quiz'),
