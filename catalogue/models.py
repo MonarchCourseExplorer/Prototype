@@ -72,10 +72,7 @@ class Feedback(models.Model):
         return f"{self.professor_id, self.subject, self.section_id}"
 
     
-    
-"""
-To be continued...
-"""
+
 #MCE Recommendations Quiz
 
 # class recquestions(models.Model):
