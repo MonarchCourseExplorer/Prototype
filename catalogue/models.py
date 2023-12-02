@@ -15,6 +15,14 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
+class Semester(models.Model):
+    short_name = models.CharField('Abbreviated semester, i.e. 202410', max_length=50)
+    friendly_name = models.CharField('Readable semester, i.e. Fall 2014', max_length=255)
+    readonly = models.BooleanField()
+
+    def __str__(self):
+        return self.friendly_name
     
 #What is a defined as a section -Jodi
 class Section(models.Model):
@@ -24,8 +32,8 @@ class Section(models.Model):
     session = models.CharField('Session', max_length=25)
     offering_time = models.CharField(default='00:00:00', max_length =255) # models.TimeField(auto_now=False, auto_now_add=False)
     professor = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    delivery_type = models.CharField(max_length=25)
-    meeting_type = models.CharField(max_length=25)
+    delivery_type = models.CharField(max_length=255) #Needs to be greater than 25. 255 is a typical number for SQL text fields
+    meeting_type = models.CharField(max_length=255)
     crn = models.IntegerField()
 
     # def __str__(self):
