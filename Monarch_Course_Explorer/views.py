@@ -97,6 +97,9 @@ def provideStudentLoginView(request):
 def provideFacultyLoginView(request):
     return render(request, '../../users/templates/authenticate/faculty_login.html')
 
+# Render the success page
+def successView(request):
+    return render(request, 'pages/success.html')
 
 def dictfetchall(cursor):
     """
