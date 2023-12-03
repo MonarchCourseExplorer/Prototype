@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SyllabusForm
+from .forms import SyllabusForm, FeedbackForm
 
 #from .models import recquestions
 #from .models import recAnswer 
