@@ -11,9 +11,10 @@
   {% if submitted %}
     Feedback Was Submitted Successfully!
 
+
   {% else %}
 
-  <form action="{% url 'success' %}" method="POST">
+  <form action="{% url 'provide_feedback' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
 
