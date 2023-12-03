@@ -16,11 +16,12 @@
         {% endfor %}
     </select>
     <input name="courseSubmit" type="submit"/>
+    <br>
 
     <!-- Show selected feedback -->
     
     {% for feedback in allSelectedFeedback %}
-        {{feedback.subject}} {{feedback.section_id}}
+        {{feedback.subject}} {{feedback.section_id}} <b>|</b> {{feedback.professor_id}} <b>|</b> {{feedback.semester}}
         <br>
         {{feedback.review}}
         <br><br>
