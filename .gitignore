@@ -278,3 +278,5 @@ mce_django/media/
 .env
 .envs/*
 !.envs/.local/
+# Ignore media files
+/media/

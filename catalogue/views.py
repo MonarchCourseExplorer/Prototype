@@ -22,7 +22,7 @@ def uploadSyllabus(request):
     
     return render(request, 'pages/upload.html', {'form': form})
 
-
+"""
 def uploadSyllabus(request): 
     
     if request.method == 'POST':
@@ -35,7 +35,7 @@ def uploadSyllabus(request):
         form = SyllabusForm()
     
     return render(request, 'pages/upload.html', {'form': form})
-
+"""
 
 
 # #MCE Feedback
