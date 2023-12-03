@@ -42,10 +42,10 @@ class Section(models.Model):
         return f"{self.crn}"
 
 class Syllabus(models.Model):
-    section_id = models.ForeignKey(Section, on_delete = models.CASCADE)
+    section = models.ForeignKey(Section, on_delete = models.CASCADE)
     class_name = models.CharField('Course', default= 'name', max_length=50 )
     original_location = models.FileField(upload_to='documents/')
-    normalized_location = models.CharField('Normalized Location', max_length=120)
+    #normalized_location = models.CharField('Normalized Location', max_length=120)
     
     def __str__(self):
         return f"{self.crn}"
