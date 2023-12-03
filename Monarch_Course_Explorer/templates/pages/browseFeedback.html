@@ -1,9 +1,31 @@
 {% extends 'pages/base.html' %}
 
-
 {% block title %}Browse Feedback - Monarch Course Explorer{% endblock %}
 
-
 {% block content %}
+
+<h2>Browse Feedback</h2>
+
+<form id="courseFeedbackSelectionForm" method="POST" action="{% url 'browseFeedback' %}">
+    {% csrf_token %}
+
+    <!-- Course selection dropdown menu -->
+    <select name="courseSelect">
+        {% for course in allCourses %}
+            <option value="{{course.department}} {{course.number}}">{{course.department}} {{course.number}}</option>
+        {% endfor %}
+    </select>
+    <input name="courseSubmit" type="submit"/>
+    <br>
+
+    <!-- Show selected feedback -->
+    
+    {% for feedback in allSelectedFeedback %}
+        {{feedback.subject}} {{feedback.section_id}} <b>|</b> {{feedback.professor_id}} <b>|</b> {{feedback.semester}}
+        <br>
+        {{feedback.review}}
+        <br><br>
+    {% endfor %}
+</form>
 
 {% endblock %}
