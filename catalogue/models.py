@@ -52,15 +52,17 @@ class Syllabus(models.Model):
 
 #MCE Feedback
 class Feedback(models.Model):
-    section_id = models.IntegerField('Course Number', blank=True) #CourseNumber
+    #section_id = models.IntegerField('Course Number', blank=True) #CourseNumber
+    section = models.ForeignKey(Section, on_delete= models.CASCADE)
     subject = models.CharField(max_length=255) #Subject
     semester = models.CharField(max_length=30) #Semester (i.e. Fall 2020)
-    professor_id = models.CharField('Professor Name', max_length=255) #Professor Name (Thomas Kennedy)
+    #professor_id = models.CharField('Professor Name', max_length=255) #Professor Name (Thomas Kennedy)
+    professor = models.ForeignKey(Professor, on_delete= models.CASCADE)
     review =  models.TextField(blank= True) #Share your thoughts
     difficulty_rating = models.IntegerField('Difficulty Rating', validators=[MaxValueValidator(5)]) 
     workload_rating = models.IntegerField('Workload Rating', validators=[MaxValueValidator(5)])
     openness_rating = models.IntegerField('Openness Rating', validators=[MaxValueValidator(5)])
-
+    
     #Deleted Model Fields
     #StudentID = models.IntegerField('StudentID')
     #studentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
