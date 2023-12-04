@@ -1,6 +1,6 @@
 import urllib.request
 from bs4 import BeautifulSoup
-import psycopg
+import psycopg2
 from selenium import webdriver
 from selenium.webdriver.support.select import Select
 from dataclasses import dataclass
