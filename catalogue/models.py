@@ -11,11 +11,11 @@ class Department(models.Model):
         return self.name
 
 class Course(models.Model):
-    name = models.CharField('Course Name', max_length= 120)
     department = models.CharField(max_length=120) #department.abbreviation
-    description = models.TextField(blank= True)
     number = models.CharField('Course Number',default='100', max_length=10) #probably excessive, but it doesn't hurt
     credits = models.CharField(max_length=10,default=3) #We aren't doing anything with this, so leave it as char so 1-3 works
+    name = models.CharField('Course Name', max_length= 120)
+    description = models.TextField(blank= True)
 
     def __str__(self):
         return self.name
@@ -29,17 +29,15 @@ class Semester(models.Model):
         return self.friendly_name
     
 class Section(models.Model):
-    course = models.ForeignKey(Course, blank=True, null=True, on_delete=models.CASCADE)
-    semester = models.CharField('Semester', max_length=50)
-    session = models.CharField('Session', max_length=25)
-    offering_time = models.CharField(default='00:00:00', max_length =255)
-    professor = models.ForeignKey(Professor, on_delete= models.CASCADE)
-    delivery_type = models.CharField(max_length=255) 
-    meeting_type = models.CharField(max_length=255)
-    crn = models.IntegerField()
+    semester = models.CharField('Semester', max_length=50) #semester.short_name
+    course = models.ForeignKey(Course, blank=True, null=True, on_delete=models.CASCADE) #couse_id in the database, links to course.id
+    professor = models.ForeignKey(Professor, on_delete= models.CASCADE) #professor_id in the database, links to professor.id
+    delivery_type = models.CharField(max_length=255) #How the course is delivered, in person, online, hybrid
+    offering_days = models.CharField(max_length=25) #what days does the course meet
+    offering_time = models.CharField(max_length =255) #when does the course meet, similar to 04:20 PM - 06:50 PM
 
     def __str__(self):
-        return f"{self.crn}"
+        return "{0}, {1} - {2}".format(self.semester, self.course, self.professor)
 
 class Syllabus(models.Model):
     section = models.ForeignKey(Section, on_delete = models.CASCADE)
