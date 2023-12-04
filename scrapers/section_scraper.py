@@ -200,7 +200,7 @@ class SectionScraper:
 
     def addProfessor(self, name, conn):
         selectSQL = "SELECT id FROM users_professor WHERE first_name = %s AND last_name = %s;"
-        insertSQL = "INSERT INTO users_professor ( first_name, last_name, email ) VALUES (%s, %s, '') RETURNING id;"
+        insertSQL = "INSERT INTO users_professor ( first_name, last_name, email, is_professor ) VALUES (%s, %s, '', TRUE) RETURNING id;"
 
         cur = conn.cursor()
 
