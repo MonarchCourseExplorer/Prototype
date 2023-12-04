@@ -19,9 +19,10 @@
     <br>
 
     <!-- Show selected feedback -->
-    
     {% for feedback in allSelectedFeedback %}
-        {{feedback.subject}} {{feedback.section_id}} <b>|</b> {{feedback.professor_id}} <b>|</b> {{feedback.semester}}
+        <b>{{feedback.subject}} {{feedback.section_id}} | {{feedback.professor_id}} | {{feedback.semester}}</b>
+        <br>
+        Difficulty: {{feedback.difficulty_rating}} <b>|</b> Workload: {{feedback.workload_rating}} <b>|</b> Openness: {{feedback.openness_rating}}
         <br>
         {{feedback.review}}
         <br><br>

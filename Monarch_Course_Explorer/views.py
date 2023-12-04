@@ -79,7 +79,7 @@ def provideBrowseFeedbackView(request):
             for feedback in Feedback.objects.all():
                 if str(feedback.subject + ' ' + str(feedback.section_id)) == str(requestPost['courseSelect']): # Check for any feedback in the database that has the selected course name
                     allSelectedFeedback.append(feedback)
-    return render(request, 'pages/browseFeedback.html', {"allCourses": Course.objects.all(), "allSelectedFeedback": allSelectedFeedback})
+    return render(request, 'pages/browseFeedback.html', {"allCourses": Course.objects.all().order_by('department'), "allSelectedFeedback": allSelectedFeedback})
 
 # Render the syllabus page
 def provideSyllabusView(request):
