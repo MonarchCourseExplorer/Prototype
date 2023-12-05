@@ -29,7 +29,7 @@
     <div class="wrapper row1">
       <header id="header" class="clear">
         <div id="logo" class="fl_left">
-          <h1><a href="../index.html">Monarch Course Explorer</a></h1>
+          <h1><a href="{% url 'home' %}">Monarch Course Explorer</a></h1>
           <p>Prototype</p>
         </div> 
 
@@ -39,11 +39,11 @@
       <div class="rounded">
         <nav id="mainav" class="clear">
           <ul class="clear">
-            <li><a href="../index.html">Home</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
             <li class="active">
               <a class="drop" href="#">Pages</a>
               <ul>
-                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="{% url 'gallery' %}">Gallery</a></li>
               </ul>
             </li>
           </ul>

@@ -24,15 +24,14 @@ class SectionForm(ModelForm):
 
 
 class FeedbackForm(ModelForm):
+    sections = Section.objects.filter(semester="202310").filter(course__department="CS")
+    section = forms.ModelChoiceField(sections, to_field_name="id")
+
     class Meta:
         model = Feedback
         fields = "__all__"
 
         widgets = {
-            'section_id': forms.TextInput(attrs={'placeholder':'Enter course number here'}),
-            'subject': forms.TextInput(attrs={'placeholder':'Enter subject here'}),
-            'semester': forms.TextInput(attrs={'placeholder':'Enter semester along with the year. i.e. (Fall 2020)'}),
-            'professor_id': forms.TextInput(attrs={'placeholder':'Enter professor name here'}),
             'review': forms.TextInput(attrs={'placeholder':'Please share some of your thoughts about the instructor.'}),
             'difficulty_rating': forms.TextInput(attrs={'placeholder':'Enter an integer between 1 and 5'}),
             'workload_rating': forms.TextInput(attrs={'placeholder':'Enter an integer between 1 and 5'}),

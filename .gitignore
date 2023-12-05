@@ -280,3 +280,9 @@ mce_django/media/
 !.envs/.local/
 # Ignore media files
 /media/
+
+#ignore generated feedback
+courses.csv
+feedback.csv
+.gitignore
+

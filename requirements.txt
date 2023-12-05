@@ -2,7 +2,8 @@ asgiref==3.7.2
 Django==4.2.6
 sqlparse==0.4.4
 typing_extensions==4.8.0
-psycopg[c]==3.1.12
+psycopg2
 django-environ==0.11.2 
 requests
 bs4
+selenium

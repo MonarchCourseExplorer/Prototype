@@ -12,16 +12,17 @@
     <!-- Course selection dropdown menu -->
     <select name="courseSelect">
         {% for course in allCourses %}
-            <option value="{{course.department}} {{course.number}}">{{course.department}} {{course.number}}</option>
+            <option value="{{course.id}}">{{course.department}} {{course.number}}</option>
         {% endfor %}
     </select>
     <input name="courseSubmit" type="submit"/>
     <br>
 
     <!-- Show selected feedback -->
-    
     {% for feedback in allSelectedFeedback %}
-        {{feedback.subject}} {{feedback.section_id}} <b>|</b> {{feedback.professor_id}} <b>|</b> {{feedback.semester}}
+        <b>{{feedback.department}} {{feedback.number}} {{feedback.name}} | {{feedback.delivery_type}} {{feedback.offering_days}} {{feedback.offering_time}} | {{feedback.last_name}}, {{feedback.first_name}} | {{feedback.friendly_name}}</b>
+        <br>
+        Difficulty: {{feedback.difficulty_rating}} <b>|</b> Workload: {{feedback.workload_rating}} <b>|</b> Openness: {{feedback.openness_rating}}
         <br>
         {{feedback.review}}
         <br><br>

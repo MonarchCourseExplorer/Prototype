@@ -1,7 +1,42 @@
+{% extends 'pages/base.html' %}
 
 
+{% block title %}Upload Syllabus - Monarch Course Explorer{% endblock %}
+
+{% block content %}
+<h1>Upload Syllabus</h1>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
+    <div id="comments">
+    <label for="{{ form.class_name.id_for_label }}">Course Name:</label>
+    <input type="text" name="{{ form.class_name.name }}" id="{{ form.class_name.id_for_label }}" value="{{ form.class_name.value }}" maxlength="50" required>
+
+    <br>
+
+    <label for="{{ form.section.id_for_label }}">Section:</label>
+    {{ form.section }}
+    <style>
+        select#{{ form.section.id_for_label }} {
+            width: 100%; /* Adjust the width as needed */
+            padding: 8px;
+            box-sizing: border-box;
+        }
+    </style>
+
+    <br>
+    <label for="{{ form.original_location.id_for_label }}">Original Location:</label>
+    {{ form.original_location }}
+    
+    <br>
+</div>
+
+    {% comment %} leaving this out for now, if what i added doesn't submit then take out what i added and uncomment this {% endcomment %}
+    {% comment %} {{ form.as_p }} {% endcomment %}
+
+    <button type="submit" style="background-color: #3498db; color: #ffffff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Upload </button>
 </form>
+
+{% endblock %}
+
+
+
