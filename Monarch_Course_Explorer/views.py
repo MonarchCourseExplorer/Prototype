@@ -74,7 +74,7 @@ def provideGradesView(request):
 def provideBrowseFeedbackView(request):
     allSelectedFeedback = [] # All of the feedback for the selected course
     #Again, screw django's ORM
-    strFrom = """SELECT course.department, course.number, 
+    strFrom = """SELECT course.department, course.number, course.name, 
                                 section.semester, section.delivery_type,section.offering_days, section.offering_time,
                                 semester.friendly_name,
                                 feedback.difficulty_rating, feedback.workload_rating, feedback.openness_rating, feedback.review,

@@ -50,9 +50,9 @@ class Syllabus(models.Model):
 
 #MCE Feedback
 class Feedback(models.Model):
-    section_id = models.IntegerField('Course Number', blank=True) #CourseNumber
-    subject = models.CharField(max_length=255) #Subject
-    semester = models.CharField(max_length=30) #Semester (i.e. Fall 2020)
+    section = models.ForeignKey(Section, on_delete=models.CASCADE) #section.id
+    #subject = models.CharField(max_length=255) #Subject
+    #semester = models.CharField(max_length=30) #Semester (i.e. Fall 2020)
     #professor_id = models.CharField('Professor Name', max_length=255) #Professor Name (Thomas Kennedy)
     review =  models.TextField(blank= True) #Share your thoughts
     difficulty_rating = models.IntegerField('Difficulty Rating', validators=[MaxValueValidator(5)]) 

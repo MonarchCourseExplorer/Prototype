@@ -20,7 +20,7 @@
 
     <!-- Show selected feedback -->
     {% for feedback in allSelectedFeedback %}
-        <b>{{feedback.department}} {{feedback.course}} | {{feedback.delivery_type}} {{feedback.offering_days}} {{feedback.offering_time}} | {{feedback.last_name}}, {{feedback.first_name}} | {{feedback.friendly_name}}</b>
+        <b>{{feedback.department}} {{feedback.number}} {{feedback.name}} | {{feedback.delivery_type}} {{feedback.offering_days}} {{feedback.offering_time}} | {{feedback.last_name}}, {{feedback.first_name}} | {{feedback.friendly_name}}</b>
         <br>
         Difficulty: {{feedback.difficulty_rating}} <b>|</b> Workload: {{feedback.workload_rating}} <b>|</b> Openness: {{feedback.openness_rating}}
         <br>

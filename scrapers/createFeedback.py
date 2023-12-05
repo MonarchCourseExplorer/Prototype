@@ -13,7 +13,7 @@ class Course:
 if __name__ == "__main__":
     #load courses from csv
     courses = []
-    with open('MonarchCourseExplorer/Prototype/courses.csv', 'r') as f:
+    with open('courses.csv', 'r') as f:
         coursereader = csv.reader(f, dialect='excel')
         for row in coursereader:
             if row[0] != "number":
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     llamaPath = "/home/davidj/Documents/cs410/llama.cpp/main"
     modelPath = "/home/davidj/Documents/cs410/llama.cpp/models/llama-2-13b.Q5_K_M.gguf"
 
-    with open('MonarchCourseExplorer/Prototype/feedback.csv', 'a') as f:
+    with open('feedback.csv', 'a') as f:
         fbwriter = csv.writer(f, dialect='excel')
         fbwriter.writerow(["department", "number", "rating", "feedback"])
 
