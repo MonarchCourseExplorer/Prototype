@@ -284,3 +284,5 @@ mce_django/media/
 #ignore generated feedback
 courses.csv
 feedback.csv
+.gitignore
+
