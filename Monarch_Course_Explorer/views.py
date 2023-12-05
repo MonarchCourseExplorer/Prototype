@@ -4,6 +4,7 @@ from catalogue.forms import FeedbackForm
 from catalogue.models import Semester, Department, Course, Feedback
 from django.db import connection
 from .forms import CourseSearchForm
+from urllib import parse
 
 
 # Render the Monarch Course Explorer home page
@@ -12,7 +13,8 @@ def homeView(request):
         searchForm = CourseSearchForm(request.POST)
         if searchForm.is_valid():
             data = searchForm.cleaned_data
-            return redirect('pages/searchResults.html?semester={0}&subject={1}&search={2}'.format(data['semester'].short_name, data['department'].abbreviation, data['search']))
+            print(parse.quote(data['search']))
+            return redirect('pages/searchResults.html?semester={0}&subject={1}&search={2}'.format(data['semester'].short_name, data['department'].abbreviation, parse.quote(data['search'])))
     else:
         searchForm = CourseSearchForm()
 
@@ -33,7 +35,7 @@ def searchResultsView(request):
                     WHERE course.department = %(subject)s AND section.semester = %(semester)s
                         AND (course.number ILIKE '%%' || %(search)s || '%%' OR prof.first_name || prof.last_name ILIKE '%%' || %(search)s || '%%');"""
         
-        cur.execute(strSQL, request.GET)
+        cur.execute(strSQL, {'subject': request.GET['subject'], 'semester': request.GET['semester'], 'search': parse.unquote(request.GET['search'])})
         results = dictfetchall(cur)
 
     return render(request, 'pages/searchResults.html', {'results': results})

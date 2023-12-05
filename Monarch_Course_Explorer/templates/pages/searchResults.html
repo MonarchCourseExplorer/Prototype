@@ -5,26 +5,30 @@
 {% block content %}
 
 <div class="result-list">
-  <ul>
-    {% for x in results %}
-      <li>
-        <div class="result">
-          <a href="browseFeedback.html?id={{x.id}}">
-            <div class="center-text">
-              <p>{{x.department}} {{x.number}}</p>
-              <p>{{x.last_name}}, {{x.first_name}}</p>
-              <p>{{x.delivery_type}}</p>
-              <p>{{x.offering_days}} {{x.offering_time}}</p>
+  {% if not results %}
+    <h1>No Results Found</h1>
+  {% else %}
+    <ul>
+      {% for x in results %}
+        <li>
+          <div class="result rounded">
+            <a href="browseFeedback.html?id={{x.id}}">
+              <div class="center-text rounded">
+                <p>{{x.department}} {{x.number}}<br>
+                {{x.last_name}}, {{x.first_name}}<br>
+                {{x.delivery_type}}<br>
+                {{x.offering_days}} {{x.offering_time}}</p>
+              </div>
+            </a>
+            <div class="result-description">
+              <p>{{x.name}}</p>
+              <p>{{x.description}}</p>
             </div>
-          </a>
-          <div class="result-description">
-            <p>{{x.name}}</p>
-            <p>{{x.description}}</p>
           </div>
-        </div>
-      </li>
-    {% endfor %}
-  </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </div>
 
 {% endblock %}

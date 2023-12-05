@@ -578,7 +578,6 @@ table a, #comments a{background-color:inherit;}
 }
 
 .result a {
-    background-color: #b1b0b0;
     width: 35%;
     text-align: center;
 }
@@ -590,6 +589,7 @@ table a, #comments a{background-color:inherit;}
 }
 
 .center-text {
+    background-color: #857b7b;
     display: flex;
     flex-direction: column;
     align-items: center;
