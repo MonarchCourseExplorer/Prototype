@@ -562,14 +562,37 @@ table a, #comments a{background-color:inherit;}
 
 .result-list ul {
     list-style-type: none;
+    padding:10px;
+}
+
+.result-list li {
+    padding-bottom: 5px;
 }
 
 .result {
     display: flex;
     align-content: center;
     justify-content: center; 
+    background-color: whitesmoke;
     padding: 10px;
-    font-size: 12px;
+}
+
+.result a {
+    width: 35%;
+    text-align: center;
+}
+
+.result-description {
+    padding: 10px;
+    max-width: 700px;
+    width: 65%;
+}
+
+.center-text {
+    background-color: #857b7b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* To put search box at the center of the page on index.html homepage*/
