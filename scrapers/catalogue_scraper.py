@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from course import Course
 from dataclasses import dataclass
-import psycopg
+import psycopg2
 
 @dataclass
 class Department:
@@ -113,7 +113,7 @@ def createConnection():
 
     try:
         #This is SUPER bad practice, but...it's already out there
-        conn = psycopg.connect(host="postgres",
+        conn = psycopg2.connect(host="postgres",
             dbname="mce_django",
             user="qrAKoIzpncvkHaCzUeBwGkXnhKgVypHZ",
             password="yVzY2BMfTNn4jW4pPr3Xcvuz0St5snmVPPJiHEFc1oP4O3JMlJcYOjzkZSxzAgJO")
