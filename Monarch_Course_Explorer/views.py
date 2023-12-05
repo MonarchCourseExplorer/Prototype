@@ -50,7 +50,7 @@ def quizView(request):
     return render(request, 'pages/RecQuestion.html')
 
 # Render the provideFeedback page
-<<<<<<< HEAD
+
 def provideFeedbackView(request, pk):
     feedback_obj = Feedback.objects.get(pk=pk)
 
@@ -62,7 +62,6 @@ def provideFeedbackView(request, pk):
     }
 
     return render(request, "pages/provideFeedback.html", context)
-=======
 def provideFeedbackView(request):
     submitted = False
     if request.method == "POST":
@@ -78,7 +77,7 @@ def provideFeedbackView(request):
             submitted = True
             
     return render(request, 'pages/provideFeedback.html', {'form':form, 'submitted':submitted})
->>>>>>> origin/main
+
 
 # Render the grades page
 def provideGradesView(request):
@@ -133,8 +132,6 @@ def provideStudentLoginView(request):
 # Render the faculty login page
 def provideFacultyLoginView(request):
     return render(request, '../../users/templates/authenticate/faculty_login.html')
-<<<<<<< HEAD
-=======
 
 # Render the success page
 def successView(request):
@@ -148,4 +145,4 @@ def dictfetchall(cursor):
     """
     columns = [col[0] for col in cursor.description]
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
->>>>>>> origin/main
+
