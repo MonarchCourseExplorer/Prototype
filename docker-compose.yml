@@ -41,3 +41,14 @@ services:
       - ./.envs/.local/.postgres
     networks:
       - mynet
+  
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    image: nginx
+    networks:
+      - mynet
+    container_name: nginx
+    volumes:
+      - ./compose/production/nginx/default.conf:/etc/nginx/conf.d/default.conf
