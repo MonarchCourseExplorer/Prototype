@@ -26,7 +26,7 @@ def searchResultsView(request):
     #Could I have looked harder to figure out how to join catalogue and users? Yes. Am I going to? No.
     with connection.cursor() as cur:
         strSQL = """SELECT course.department, course.number, course.name, course.description,
-                           section.id, section.crn,
+                           section.id, section.delivery_type,
                            prof.first_name, prof.last_name
                     FROM catalogue_course AS course INNER JOIN catalogue_section AS section ON course.id = section.course_id
                         INNER JOIN users_professor AS prof ON section.professor_id = prof.id
@@ -87,13 +87,36 @@ def provideGradesView(request):
 # Render the browse feedback page 
 def provideBrowseFeedbackView(request):
     allSelectedFeedback = [] # All of the feedback for the selected course
+    #Again, screw django's ORM
+    strFrom = """SELECT course.department, course.number, course.name, 
+                                section.semester, section.delivery_type,section.offering_days, section.offering_time,
+                                semester.friendly_name,
+                                feedback.difficulty_rating, feedback.workload_rating, feedback.openness_rating, feedback.review,
+                                prof.first_name, prof.last_name
+                            FROM catalogue_course AS course INNER JOIN catalogue_section AS section ON course.id = section.course_id
+                                INNER JOIN catalogue_semester AS semester ON section.semester = semester.short_name
+                                INNER JOIN users_professor AS prof ON section.professor_id = prof.id
+                                INNER JOIN catalogue_feedback AS feedback ON section.id = feedback.section_id """
+    strOrder = "ORDER BY section.semester, prof.last_name, prof.first_name, section.delivery_type, section.offering_time, section.offering_time;"
+
     if request.method == "POST":
         requestPost = request.POST
+
         if 'courseSelect' in requestPost: # Check if any feedback has been submitted about the selected course
-            for feedback in Feedback.objects.all():
-                if str(feedback.subject + ' ' + str(feedback.section_id)) == str(requestPost['courseSelect']): # Check for any feedback in the database that has the selected course name
-                    allSelectedFeedback.append(feedback)
-    return render(request, 'pages/browseFeedback.html', {"allCourses": Course.objects.all(), "allSelectedFeedback": allSelectedFeedback})
+            with connection.cursor() as cur:
+                strSQL = strFrom + "WHERE course.id = %s " + strOrder
+        
+                cur.execute(strSQL, (request.POST['courseSelect'], ))
+                allSelectedFeedback = dictfetchall(cur)
+    elif request.method == "GET":
+        if 'id' in request.GET:
+            with connection.cursor() as cur:
+                strSQL = strFrom + "WHERE section.id = %s " + strOrder
+        
+                cur.execute(strSQL, (request.GET['id'], ))
+                allSelectedFeedback = dictfetchall(cur)
+
+    return render(request, 'pages/browseFeedback.html', {"allCourses": Course.objects.all().order_by('department', 'number'), "allSelectedFeedback": allSelectedFeedback})
 
 # Render the syllabus page
 def provideSyllabusView(request):
@@ -113,6 +136,9 @@ def provideFacultyLoginView(request):
 <<<<<<< HEAD
 =======
 
+# Render the success page
+def successView(request):
+    return render(request, 'pages/success.html')
 
 def dictfetchall(cursor):
     """
