@@ -126,6 +126,9 @@ def provideFacultyLoginView(request):
 def successView(request):
     return render(request, 'pages/success.html')
 
+def syllabusView(request):
+    return render(request, '/media/documents/CS300T_Syllabus.pdf')
+
 def dictfetchall(cursor):
     """
     Return all rows from a cursor as a dict.
@@ -134,6 +137,3 @@ def dictfetchall(cursor):
     """
     columns = [col[0] for col in cursor.description]
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
-
-def syllabusView(request):
-    return render(request, '/media/documents/CS300T_Syllabus.pdf')

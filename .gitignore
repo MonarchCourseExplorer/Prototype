@@ -279,7 +279,8 @@ mce_django/media/
 .envs/*
 !.envs/.local/
 # Ignore media files
-/media/
+media/documents/*
+!media/documents/text
 
 #ignore generated feedback
 courses.csv
