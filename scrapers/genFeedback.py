@@ -24,8 +24,8 @@ def feedbackInput(conn):
     #select a random number between 1 and the number of sections for a given course and semester
     rowCount = "SELECT semester, course_id, trunc(random() * COUNT(*)) + 1 AS rand_row FROM catalogue_section GROUP BY semester, course_id "
     #Insert sections where the row number matches a random number. Select only the first match
-    insertSQL = """INSERT INTO catalogue_feedback (section_id, professor_id, difficulty_rating, openness_rating, workload_rating, review)
-        SELECT sections.section_id, 0, %(rating)s, %(rating)s, %(rating)s, %(review)s
+    insertSQL = """INSERT INTO catalogue_feedback (section_id, difficulty_rating, openness_rating, workload_rating, review)
+        SELECT sections.section_id, %(rating)s, %(rating)s, %(rating)s, %(review)s
         FROM ({0}) AS sections INNER JOIN ({1}) AS section_count ON sections.semester = section_count.semester AND sections.course_id = section_count.course_id 
         WHERE sections.row_num = section_count.rand_row;""".format(rowSelect, rowCount)
 
