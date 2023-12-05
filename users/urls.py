@@ -1,6 +1,7 @@
 
+from django.urls import path, include
 from django.urls import path
-from .import views
+from . import views
 #from Monarch_Course_Explorer import views
 
 urlpatterns = [
