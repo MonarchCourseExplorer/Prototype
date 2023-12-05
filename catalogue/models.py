@@ -18,7 +18,7 @@ class Course(models.Model):
     description = models.TextField(blank= True)
 
     def __str__(self):
-        return self.name
+        return "{0} {1}: {2}".format(self.department, self.number, self.name)
 
 class Semester(models.Model):
     short_name = models.CharField('Abbreviated semester, i.e. 202410', max_length=50)
@@ -67,7 +67,7 @@ class Feedback(models.Model):
     #rating = models.IntegerField(blank=True)
 
     def __str__(self):
-        return f"{self.professor_id, self.subject, self.section_id}"
+        return f"{self.section, self.review[:100]}"
 
     
 
