@@ -10,13 +10,16 @@
       <li>
         <div class="result">
           <a href="browseFeedback.html?id={{x.id}}">
-            <p>{{x.department}} {{x.number}}</p>
-            <p>{{x.name}}</p>
-            <p>{{x.delivery_type}}</p>
-            <p>{{x.last_name}}, {{x.first_name}}</p>
+            <div class="center-text">
+              <p>{{x.department}} {{x.number}}</p>
+              <p>{{x.last_name}}, {{x.first_name}}</p>
+              <p>{{x.delivery_type}}</p>
+              <p>{{x.offering_days}} {{x.offering_time}}</p>
+            </div>
           </a>
-          <div>
-            {{x.description}}
+          <div class="result-description">
+            <p>{{x.name}}</p>
+            <p>{{x.description}}</p>
           </div>
         </div>
       </li>

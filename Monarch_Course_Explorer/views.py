@@ -26,7 +26,7 @@ def searchResultsView(request):
     #Could I have looked harder to figure out how to join catalogue and users? Yes. Am I going to? No.
     with connection.cursor() as cur:
         strSQL = """SELECT course.department, course.number, course.name, course.description,
-                           section.id, section.delivery_type,
+                           section.id, section.delivery_type, section.offering_days, section.offering_time,
                            prof.first_name, prof.last_name
                     FROM catalogue_course AS course INNER JOIN catalogue_section AS section ON course.id = section.course_id
                         INNER JOIN users_professor AS prof ON section.professor_id = prof.id
@@ -75,7 +75,7 @@ def provideBrowseFeedbackView(request):
     allSelectedFeedback = [] # All of the feedback for the selected course
     #Again, screw django's ORM
     strFrom = """SELECT course.department, course.number, course.name, 
-                                section.semester, section.delivery_type,section.offering_days, section.offering_time,
+                                section.semester, section.delivery_type, section.offering_days, section.offering_time,
                                 semester.friendly_name,
                                 feedback.difficulty_rating, feedback.workload_rating, feedback.openness_rating, feedback.review,
                                 prof.first_name, prof.last_name
