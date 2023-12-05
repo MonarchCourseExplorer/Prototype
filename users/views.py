@@ -20,7 +20,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('test3')
+            return redirect('home')
             # Redirect to a success page.
         else:
             # Return an 'invalid login' error message.
@@ -37,7 +37,7 @@ def login_faculty_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('test2')
+            return redirect('home')
             # Redirect to a success page.
         else:
             # Return an 'invalid login' error message.
@@ -49,7 +49,7 @@ def login_faculty_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('test')
+    return redirect('home')
 
 def register_user(request):
     if request.method == 'POST':
@@ -61,7 +61,7 @@ def register_user(request):
             user = authenticate(username = username, password = password)
             login(request, user)
             messages.success(request, ('You have registered...'))
-            return redirect('test')
+            return redirect('home')
     else:
         form = SignUpForm()
     context = {'form':form}

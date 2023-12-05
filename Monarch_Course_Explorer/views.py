@@ -134,3 +134,6 @@ def dictfetchall(cursor):
     """
     columns = [col[0] for col in cursor.description]
     return [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+def syllabusView(request):
+    return render(request, '/media/documents/CS300T_Syllabus.pdf')

@@ -92,3 +92,5 @@ class Feedback(models.Model):
 #     recommendation = models.OneToOneField(MCERecommendation, on_delete=models.CASCADE)
 #     answer = models.ForeignKey(recAnswer, on_delete=models.CASCADE)
 #     question = models.ForeignKey(recquestions, on_delete=models.CASCADE)
+#
+#

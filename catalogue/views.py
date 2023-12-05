@@ -6,8 +6,13 @@ from .forms import SyllabusForm, FeedbackForm
 #from .models import MCERecommendation
 #from .forms import RecommendationForm
 
+# success for feedback
 def success(request):
     return render(request,'pages/success.html')
+
+# success for syllabus
+def syllabusSuccess(request):
+    return render(request,'pages/syllabusSuccess.html')
 
 def uploadSyllabus(request): 
     
@@ -16,7 +21,7 @@ def uploadSyllabus(request):
         #file = request.FILES['file']
         if form.is_valid():
             form.save()
-            return redirect('success')
+            return redirect('syllabusSuccess')
     else:
         form = SyllabusForm()
     
