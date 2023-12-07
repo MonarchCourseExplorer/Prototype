@@ -9,7 +9,7 @@ from .models import Feedback
 #from .models import recCombined
 
 class SyllabusForm(ModelForm):
-    sections = Section.objects.filter(semester="202310").filter(course__department="CS")
+    sections = Section.objects.filter(semester="202310").filter(course__department="CS").order_by("course__number")
     section = forms.ModelChoiceField(sections, to_field_name="id")
     
     class Meta:
@@ -27,7 +27,7 @@ class SectionForm(ModelForm):
 
 
 class FeedbackForm(ModelForm):
-    sections = Section.objects.filter(semester="202310").filter(course__department="CS")
+    sections = Section.objects.filter(semester="202310").filter(course__department="CS").order_by("course__number")
     section = forms.ModelChoiceField(sections, to_field_name="id")
 
     class Meta:

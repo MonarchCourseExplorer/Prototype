@@ -46,7 +46,7 @@ class Syllabus(models.Model):
     #normalized_location = models.CharField('Normalized Location', max_length=120)
     
     def __str__(self):
-        return f"{self.crn}"
+        return f"{self.section}"
 
 #MCE Feedback
 class Feedback(models.Model):
