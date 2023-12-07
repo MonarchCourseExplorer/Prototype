@@ -1,20 +1,10 @@
 @charset "utf-8";
-/*
-Template Name: Academic Education V2
-Author: <a href="http://www.os-templates.com/">OS Templates</a>
-Author URI: http://www.os-templates.com/
-Licence: Free to use under our free template licence terms
-Licence URI: http://www.os-templates.com/template-terms
-File: Layout CSS
-*/
 
 @import url("fontawesome-4.2.0.min.css");
 @import url("../scripts/nivo-lightbox/nivo-lightbox.min.css");
 @import url("framework.css");
 
-
-/* Rows
---------------------------------------------------------------------------------------------------------------- */
+/* Rows */
 .row0, .row0 a{}
 .row1, .row1 a{}
 .row2, .row2 a{}
@@ -22,17 +12,13 @@ File: Layout CSS
 .row4, .row4 a{}
 .row5, .row5 a{}
 
-
-/* Top Bar
---------------------------------------------------------------------------------------------------------------- */
+/* Top Bar */
 #topbar{padding:10px 0 0 0; text-align:right; font-size:.8em;}
 
 #topbar li{display:inline; margin-right:3px; padding-right:8px; border-right:1px solid;}
 #topbar li:last-child{margin-right:0; padding-right:0; border:none;}
 
-
-/* Header
---------------------------------------------------------------------------------------------------------------- */
+/* Header */
 #header{}
 
 #header #logo{}
@@ -45,9 +31,7 @@ File: Layout CSS
 #header button{position:absolute; top:0; right:0; width:35px; font-size:16px; cursor:pointer;}
 #header button em{display:none;}
 
-
-/* Homepage Slider
---------------------------------------------------------------------------------------------------------------- */
+/* Homepage Slider */
 #slider{position:relative; overflow:hidden;}
 #slider .rounded{padding:9px;}
 #slider a, #slider ul, #slider img{margin:0; padding:0; border:none; outline:none; list-style:none; text-decoration:none;}
@@ -63,9 +47,7 @@ File: Layout CSS
 #slider #slide-tabs li a{display:block; width:192px; min-height:60px; padding:10px; box-sizing:border-box; border:solid; border-width:0 0 1px 1px; font-weight:bold; text-align:center; text-transform:uppercase;}
 #slider #slide-tabs li:last-child a{border-width:0 1px 1px 1px;}
 
-
-/* Content Area
---------------------------------------------------------------------------------------------------------------- */
+/* Content Area */
 .container{padding:20px 10px;}
 
 .container h1, .container h2, .container h3, .container h4, .container h5, .container h6, .container .heading{padding-bottom:8px; border-bottom:1px solid;}
@@ -110,9 +92,7 @@ File: Layout CSS
 .sidebar .sdb_holder{margin-bottom:50px;}
 .sidebar .sdb_holder:last-child{margin-bottom:0;}
 
-
-/* Footer
---------------------------------------------------------------------------------------------------------------- */
+/* Footer */
 #footer{padding:10px;}
 
 #footer .faico{margin-bottom:10px;}
@@ -127,22 +107,11 @@ File: Layout CSS
 #footer button{position:absolute; bottom:0; right:0; width:35px; font-size:16px; cursor:pointer;}
 #footer button em{display:none;}
 
-
-/* Copyright
---------------------------------------------------------------------------------------------------------------- */
+/* Copyright */
 #copyright{}
 #copyright p{margin:0; padding:0;}
 
-
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-
-
-/* Navigation
---------------------------------------------------------------------------------------------------------------- */
+/* Navigation */
 nav ul, nav ol{margin:0; padding:0; list-style:none;}
 
 #mainav .drop::after, #mainav li li .drop::after, #breadcrumb li a::after, .sidebar nav a::after{position:absolute; font-family:"FontAwesome"; font-size:10px; line-height:10px;}
@@ -196,32 +165,24 @@ nav ul, nav ol{margin:0; padding:0; list-style:none;}
 .pagination li:last-child{margin-right:0;}
 .pagination a, .pagination strong{display:block; padding:8px 11px; border:1px solid; font-weight:normal; background-clip:padding-box;}
 
-
-/* Tables
---------------------------------------------------------------------------------------------------------------- */
+/* Tables */
 table, th, td{border:1px solid; border-collapse:collapse; vertical-align:top; box-sizing:border-box;}
 table, th{table-layout:auto;}
 table{width:100%; margin-bottom:15px;}
 th, td{padding:5px 8px;}
 td{border-width:0 1px;}
 
-
-/* Gallery
---------------------------------------------------------------------------------------------------------------- */
+/* Gallery */
 #gallery{display:block; width:100%; margin-bottom:50px;}
 #gallery figure figcaption{display:block; width:100%; clear:both;}
 #gallery li{margin-bottom:30px;}
 #gallery li a{display:block;}
 
-
-/* Portfolio
---------------------------------------------------------------------------------------------------------------- */
+/* Portfolio */
 #portfolio{display:block; width:100%; margin-bottom:20px;}
 #portfolio li, #portfolio img{margin-bottom:30px;}
 
-
-/* Font Awesome Social Icons
---------------------------------------------------------------------------------------------------------------- */
+/* Font Awesome Social Icons */
 .faico{margin:0; padding:0; list-style:none;}
 .faico li{display:inline-block; margin:0 2px 0 0; padding:0; line-height:normal;}
 .faico li:last-child{margin-right:0;}
@@ -237,16 +198,7 @@ td{border-width:0 1px;}
 .faicon-rss{background-color:#EE802F;}
 .faicon-twitter{background-color:#00ACEE;}
 
-
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-
-
-/* Rounded Corners
---------------------------------------------------------------------------------------------------------------- */
+/* Rounded Corners */
 .rounded, input, button, textarea, #header input, #footer input, #slide-wrapper figcaption, .avatar, #comments li, .faico a, #twitter, 
 .pagination a, .pagination strong{border-radius:8px;}
 
@@ -258,17 +210,7 @@ td{border-width:0 1px;}
 #slider #slide-tabs li:first-child a{border-radius:0 0 0 8px;}
 #slider #slide-tabs li:last-child a{border-radius:0 0 8px 0;}
 
-
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-
-
-/* Colours
---------------------------------------------------------------------------------------------------------------- */
-/*body{color:#F9F9F9; background-color:#06213F;}*/
+/* Colours */
 body{color:#555252; background-color:#0b3566;}
 
 a{color:#58b1e0;}
@@ -276,38 +218,28 @@ a{color:#58b1e0;}
 hr, .borderedbox{border-color:#5c5656;}
 
 label span{color:#FF0000; background-color:inherit;}
-/*
-.rounded{color:inherit; background-color:#635d5d;}
-*/
-.rounded{color:inherit; background-color:#857b7b;}
 
+.rounded{color:inherit; background-color:#857b7b;}
 
 /* Rows */
 .row0, .row0 a{color:#837f7f; background-color:#092e58;}
 .row1{color:#b1b0b0; background-color:#0d3d74;}
 .row1 a{color:#fdf3f3; background-color:inherit;}
 .row2, .row2 a{color:#0b386b; background-color:inherit;}
-/*
-.row3{color:#bebebe; background-color:inherit;}
-*/
 .row3{color:#1d1c1c; background-color:inherit;}
-
 
 /* Top Bar */
 #topbar li{border-color:#575151;}
 
-
 /* Header */
 #header input{color:#b4b4b4; background-color:#ffffff;}
 #header button{color:#faf8f8; background-color:#58b1e0;}
-
 
 /* Homepage Slider */
 #slide-wrapper figure figcaption{color:#868585; background-color:rgba(124, 119, 119, 0.5);}
 #slide-wrapper figure figcaption:hover{background-color:rgb(114, 112, 112);}
 #slider #slide-tabs li a{color:#888787; background-color:#5f5d5b; border-color:#838181;}
 #slider #slide-tabs li a:hover, #slider #slide-tabs li.active a{color:#696464; background-color:#0a305c;}
-
 
 /* Content Area */
 .container h1, .container h2, .container h3, .container h4, .container h5, .container h6, .container .heading{border-color:#D7D7D7;}
@@ -320,13 +252,11 @@ label span{color:#FF0000; background-color:inherit;}
 .quickinfo li a{color:#666666; background-color:#DEDACB;}
 .quickinfo li a:hover{color:#FFFFFF; background-color:#06213F;}
 
-
 /* Footer */
 #footer .faico a{box-shadow:2px 2px 0 0 rgba(0,0,0,.5); border-color:rgba(0,0,0,.2);}
 
 #footer input{color:#FFFFFF; background-color:#979797;}
 #footer button{color:#F9F9F9; background-color:#55ABDA;}
-
 
 /* Navigation */
 #mainav li a{color:inherit;}
@@ -344,7 +274,6 @@ label span{color:#FF0000; background-color:inherit;}
 .pagination a, .pagination strong{border-color:#D7D7D7;}
 .pagination .current strong{color:#FFFFFF; background-color:#06213F;}
 
-
 /* Tables + Comments */
 table, th, td, #comments .avatar, #comments input, #comments textarea{border-color:#D7D7D7;}
 th{color:#686565; background-color:#373737;}
@@ -352,21 +281,10 @@ tr, #comments li, #comments input[type="submit"], #comments input[type="reset"]{
 tr:nth-child(odd), #comments li:nth-child(odd){color:inherit; background-color:#535151;}
 table a, #comments a{background-color:inherit;}
 
-
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------------------------ */
-
-
-/* Media Queries
---------------------------------------------------------------------------------------------------------------- */
+/* Media Queries */
 @-ms-viewport{width:device-width;}
 
-
-/* Smartphone + Tablet
----------------------------------------------------------------------------------------------------------------------------------------*/
+/* Smartphone + Tablet*/
 @media screen and (min-width:180px) and (max-width:750px) {
 	.imgl, .imgr{display:inline-block; float:none; margin:0 0 10px 0;}
 	.fl_left, .fl_right{display:block; float:none;}
@@ -418,16 +336,12 @@ table a, #comments a{background-color:inherit;}
 	.quickinfo li a{padding:20px 5px 0 85px;}
 }
 
-
-/* Max Wrapper Width
----------------------------------------------------------------------------------------------------------------------------------------*/
+/* Max Wrapper Width*/
 @media screen and (min-width:978px) {
 	.wrapper{max-width:978px;}
 }
 
-
-/* Other
----------------------------------------------------------------------------------------------------------------------------------------*/
+/* Other */
 @media screen and (max-width:650px) {
 	.scrollable{display:block; width:100%; margin:0 0 30px 0; padding:0 0 15px 0; overflow:auto; overflow-x:scroll;}
 	.scrollable table{margin:0; padding:0; white-space:nowrap;}
@@ -436,26 +350,19 @@ table a, #comments a{background-color:inherit;}
 /* Initial Styling for cards, feel free to change*/
 .card-container {
     display: flex;
-    justify-content: space-around;
-	/* justify-content: flex-start; */
+    justify-content: space-around;	
     flex-wrap: wrap;
     font-family: 'Poppins', sans-serif;
-	margin-bottom: 50px;
-    /* padding: 20px; Adjust padding to control space around the cards */
-    /* margin-top: 50px; */
-    /* padding: 40px 40px 0; */
-	/* box-sizing: border-box; */
+	margin-bottom: 50px;    
 }
 
 .card {
     background-color: #003057;
     border-radius: 5px;
     text-align: center;
-    /* height: 250px; */
     height: auto;
     width: 178px; 
     margin-top: 25px;
-    /* padding: 30px; */
     padding:20px;
 	box-sizing: border-box;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -464,8 +371,7 @@ table a, #comments a{background-color:inherit;}
 
 .card a {
     text-decoration: none;
-    color: rgb(179, 174, 174);
-    /* font-size:20px; */
+    color: rgb(179, 174, 174);    
     font-size: 15px;
     font-weight: bold;
 }
@@ -512,27 +418,28 @@ table a, #comments a{background-color:inherit;}
 	color:black;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-    /* flex-direction: row; */
+	justify-content: center;    
 	text-align: center;
-	margin-top: 25px; /* orig 100 */
-	
+	margin-top: 25px; /* orig 100 */	
 }
+
 .title-above-search h1{
 	font-size: 30px;
-	margin: 0 auto;
-	
+	margin: 0 auto;	
 }
+
 .title-above-search img{
 	width:auto;
 	height: 300px;
 	
 }
+
 .search-container{
     display: flex;
     justify-content: center;
     margin-top: 5vh;
 }
+
 .search-bar {        
     display: flex;
     align-content: center;

@@ -1,7 +1,6 @@
 # define an alias for the specific python version used in this file.
 FROM python:3.11.6-slim-bullseye as python
 
-
 # Python build stage
 FROM python as python-build-stage
 
@@ -23,7 +22,6 @@ COPY ./requirements /requirements
 RUN pip wheel --no-cache-dir --wheel-dir /usr/src/app/wheels  \
   -r /requirements/local.txt -r /requirements/production.txt \
   && rm -rf /requirements
-
 
 # Python 'run' stage
 FROM python as python-run-stage

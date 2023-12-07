@@ -79,38 +79,5 @@ class Feedback(models.Model):
     workload_rating = models.IntegerField('Workload Rating', validators=[MaxValueValidator(5)])
     openness_rating = models.IntegerField('Openness Rating', validators=[MaxValueValidator(5)])
 
-    #Deleted Model Fields
-    #StudentID = models.IntegerField('StudentID')
-    #studentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
-    #professor_id = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
-    #section_id = models.ForeignKey(Section, on_delete= models.CASCADE) #CourseNumber
-    #rating = models.IntegerField(blank=True)
-
     def __str__(self):
         return f"{self.section, self.review[:100]}"
-
-    
-
-#MCE Recommendations Quiz
-
-# class recquestions(models.Model):
-#     questions_text = models.CharField(max_length=255)
-
-# class recAnswer(models.Model):
-#     question = models.ForeignKey(recquestions, on_delete=models.CASCADE)
-#     choice = models.CharField(max_length=150)
-    
-# class MCERecommendation(models.Model):
-#     title = models.CharField(max_length=255)
-#     content = models.TextField()
-#     course = models.CharField(max_length=15)
-    
-#     def __str__(self):
-#         return self.title
-    
-# class recCombined(models.Model):
-#     recommendation = models.OneToOneField(MCERecommendation, on_delete=models.CASCADE)
-#     answer = models.ForeignKey(recAnswer, on_delete=models.CASCADE)
-#     question = models.ForeignKey(recquestions, on_delete=models.CASCADE)
-#
-#
