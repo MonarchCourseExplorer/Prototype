@@ -1,14 +1,33 @@
 from django.shortcuts import render, redirect
-from .forms import SyllabusForm
+from .forms import SyllabusForm, FeedbackForm
 
 #from .models import recquestions
 #from .models import recAnswer 
 #from .models import MCERecommendation
 #from .forms import RecommendationForm
 
+# success for feedback
 def success(request):
     return render(request,'pages/success.html')
 
+# success for syllabus
+def syllabusSuccess(request):
+    return render(request,'pages/syllabusSuccess.html')
+
+def uploadSyllabus(request): 
+    
+    if request.method == 'POST':
+        form = SyllabusForm(request.POST, request.FILES)
+        #file = request.FILES['file']
+        if form.is_valid():
+            form.save()
+            return redirect('syllabusSuccess')
+    else:
+        form = SyllabusForm()
+    
+    return render(request, 'pages/upload.html', {'form': form})
+
+"""
 def uploadSyllabus(request): 
     
     if request.method == 'POST':
@@ -21,21 +40,7 @@ def uploadSyllabus(request):
         form = SyllabusForm()
     
     return render(request, 'pages/upload.html', {'form': form})
-
-
-def uploadSyllabus(request): 
-    
-    if request.method == 'POST':
-        form = SyllabusForm(request.POST, request.FILES)
-        #file = request.FILES['file']
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = SyllabusForm()
-    
-    return render(request, 'pages/upload.html', {'form': form})
-
+"""
 
 
 # #MCE Feedback
