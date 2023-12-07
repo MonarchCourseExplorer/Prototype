@@ -3,6 +3,7 @@
 
 {% block title %}Syllabi - Monarch Course Explorer{% endblock %}
 
+{block content %}
 <form id="courseFeedbackSelectionForm" method="POST" action="{% url 'syllabus' %}">
     {% csrf_token %}
 
@@ -17,19 +18,10 @@
 
     <!-- Show selected feedback -->
     {% for feedback in allSelectedFeedback %}
-        Course: {{Syllabus.class_name}} 
+        Course: {{Syllabus.class_name}}
         <br>
         {{Syllabus.syllabus_contents}}
         <br><br>
     {% endfor %}
 </form>
-
-
-{% block content %}
-<center> 
-        <object data="media/documents/CS300T_Syllabus.pdf" type="application/pdf">
-        <div>No online PDF viewer installed</div>
-    </object>
-    </center>
-
 {% endblock %}
