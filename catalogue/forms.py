@@ -9,6 +9,9 @@ from .models import Feedback
 #from .models import recCombined
 
 class SyllabusForm(ModelForm):
+    sections = Section.objects.filter(semester="202310").filter(course__department="CS")
+    section = forms.ModelChoiceField(sections, to_field_name="id")
+    
     class Meta:
         model = Syllabus
         #field = "__all__"   gets all fields from user
