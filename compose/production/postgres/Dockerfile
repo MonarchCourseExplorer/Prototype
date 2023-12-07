@@ -8,6 +8,7 @@ RUN mv /usr/local/bin/maintenance/* /usr/local/bin \
 RUN apt update -y
 RUN apt install firefox-esr -y
 RUN apt install python3-pip -y 
-RUN apt install python3-bs4 -y 
-RUN apt install python3-selenium -y
-RUN apt install python3-requests -y
+RUN pip install bs4 -y 
+RUN pip install selenium -y
+RUN pip install requests -y
+RUN pip install psycopg2-binary -y
