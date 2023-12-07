@@ -26,7 +26,7 @@ urlpatterns = [
     path('users/templates/authenticate/login.html', views.provideStudentLoginView, name='studentLogin'),
     path('users/templates/authenticate/faculty_login.html', views.provideFacultyLoginView, name='facultyLogin'),
     path('catalogue/', include('catalogue.urls')),
+    path('../media/documents/CS300T_Syllabus.pdf', views.syllabusView, name='sylli'),
 
-    
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

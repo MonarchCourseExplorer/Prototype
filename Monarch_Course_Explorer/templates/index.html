@@ -24,9 +24,17 @@ Licence URI: http://www.os-templates.com/template-terms
         Just in case Kennedy wants us to put some sort of contact link.           
         <li><a href="#">Contact Us</a></li>
         -->
-        <li><a href="../../users/templates/authenticate/register.html">Register</a></li>
-        <li><a href="../../users/templates/authenticate/login.html">Student Login</a></li>
-        <li><a href="../../users/templates/authenticate/faculty_login.html">Staff Login</a></li>
+        <li><a href="{% url 'home' %}">Home</a></li>
+             
+              <li class="nav-item">
+                <a class="nav-link" href=" {% url 'logout' %} ">Logout</a>
+              </li>
+
+              <li><a href=" {% url 'login' %} ">Student Login</a></li>
+              <li><a href=" {% url 'flogin' %} ">Staff Login</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href=" {% url 'register' %} ">Register</a>
+              </li>
       </ul>
     </nav>    
   </div>
@@ -113,7 +121,7 @@ Licence URI: http://www.os-templates.com/template-terms
               <a href="pages/syllabus.html">Browse Course Syllabi</a>
               <p>See what each course expects and offers</p>
             </div>
-            <!-- <div class="card">
+            <div class="card">
               <img
                 src="../static/images/cards-images/grades-LB.png"
                 alt="Grades Distribution Icon Light Blue"
@@ -124,9 +132,9 @@ Licence URI: http://www.os-templates.com/template-terms
                 alt="Grades Distribution Icon Dark Blue"
                 class="DB-image"
               />
-              <a href="pages/grades.html">Browse Grade Distributions</a>
-              <p>Explore grade distributions from past semesters</p>
-            </div> -->
+              <a href= "{% url 'upload' %}">Upload Course Syllabi</a>
+              <p>Upload a courses Syllabus</p>
+            </div> 
             <div class="card">
               <img
                 src="../static/images/cards-images/read-feedback-LB.png"
@@ -141,7 +149,7 @@ Licence URI: http://www.os-templates.com/template-terms
               <a href="pages/browseFeedback.html">Browse Course Feedback</a>
               <p>Check out course feedback from other ODU monarchs</p>
             </div>
-            <!-- <div class="card">
+            <!--div class="card">
               <img
                 src="../static/images/cards-images/quiz-LB.png"
                 alt="Read Feedback Icon Light Blue"
@@ -154,7 +162,7 @@ Licence URI: http://www.os-templates.com/template-terms
               />
               <a href="pages/RecQuestion.html">Get Course Recommendation</a>
               <p>Take a quiz to get a personalized course recommendation</p>
-            </div> -->
+            </div-->
             <div class="card">
               <img
                 src="../static/images/cards-images/write-feedback-LB.png"
