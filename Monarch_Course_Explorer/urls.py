@@ -27,6 +27,5 @@ urlpatterns = [
     path('users/templates/authenticate/faculty_login.html', views.provideFacultyLoginView, name='facultyLogin'),
     path('catalogue/', include('catalogue.urls'))
 
-    
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
