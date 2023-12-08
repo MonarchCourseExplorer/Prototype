@@ -3,7 +3,7 @@
 
 {% block title %}Syllabi - Monarch Course Explorer{% endblock %}
 
-{block content %}
+{% block content %}
 <form id="courseFeedbackSelectionForm" method="POST" action="{% url 'syllabus' %}">
     {% csrf_token %}
 
