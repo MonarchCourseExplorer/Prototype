@@ -45,7 +45,6 @@ def feedbackInput(conn):
                 cur.execute(insertSQL, {'sem': semester, 'dep': department, 'num': number, 'rating': rating, 'review': disclaimer + feedback})
                 conn.commit()
 
-
 if __name__ == "__main__":
     conn = createConnection()
 

@@ -22,7 +22,6 @@ COPY ./requirements.txt .
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
   -r ./requirements.txt 
 
-
 # Python 'run' stage
 FROM python as python-run-stage
 
@@ -35,7 +34,6 @@ ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 
 WORKDIR ${APP_HOME}
 
-
 # devcontainer dependencies and utils
 RUN apt-get update && apt-get install --no-install-recommends -y \
   sudo git bash-completion nano ssh
@@ -45,7 +43,6 @@ RUN groupadd --gid 1000 dev-user \
   && useradd --uid 1000 --gid dev-user --shell /bin/bash --create-home dev-user \
   && echo dev-user ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/dev-user \
   && chmod 0440 /etc/sudoers.d/dev-user
-
 
 # Install required system dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -72,9 +69,6 @@ RUN chmod +x /entrypoint
 COPY ./compose/local/django/start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
-
-
-
 
 # copy application code to WORKDIR
 COPY . ${APP_HOME}

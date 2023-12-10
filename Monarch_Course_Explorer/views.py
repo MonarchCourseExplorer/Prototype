@@ -6,7 +6,6 @@ from django.db import connection
 from .forms import CourseSearchForm
 from urllib import parse
 
-
 # Render the Monarch Course Explorer home page
 def homeView(request):
     if request.method == "POST":
@@ -24,8 +23,7 @@ def homeView(request):
 
     return render(request, 'index.html', context)
 
-def searchResultsView(request):
-    #Could I have looked harder to figure out how to join catalogue and users? Yes. Am I going to? No.
+def searchResultsView(request):    
     with connection.cursor() as cur:
         strSQL = """SELECT course.department, course.number, course.name, course.description,
                            section.id, section.delivery_type, section.offering_days, section.offering_time,
@@ -58,8 +56,7 @@ def provideFeedbackView(request):
         form = FeedbackForm(request.POST)
         print(request.POST)
         if form.is_valid():
-            form.save()
-            #Redirect user back to feedback page. --look into how to output feedback
+            form.save()            
             return HttpResponseRedirect('/provideFeedback?submitted=True')
     else:
         form = FeedbackForm()
@@ -74,8 +71,7 @@ def provideGradesView(request):
 
 # Render the browse feedback page 
 def provideBrowseFeedbackView(request):
-    allSelectedFeedback = [] # All of the feedback for the selected course
-    #Again, screw django's ORM
+    allSelectedFeedback = [] # All of the feedback for the selected course    
     strFrom = """SELECT course.department, course.number, course.name, 
                                 section.semester, section.delivery_type, section.offering_days, section.offering_time,
                                 semester.friendly_name,
