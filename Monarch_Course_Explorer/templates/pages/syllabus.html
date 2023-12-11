@@ -3,8 +3,8 @@
 
 {% block title %}Syllabi - Monarch Course Explorer{% endblock %}
 
-{block content %}
-<form id="courseFeedbackSelectionForm" method="POST" action="{% url 'syllabus' %}">
+{% block content %}
+<form id="courseSyllabusSelectionForm" method="POST" action="{% url 'syllabus' %}">
     {% csrf_token %}
 
     <!-- Course selection dropdown menu -->
@@ -17,11 +17,12 @@
     <br>
 
     <!-- Show selected feedback -->
-    {% for feedback in allSelectedFeedback %}
-        Course: {{Syllabus.class_name}}
-        <br>
-        {{Syllabus.syllabus_contents}}
-        <br><br>
+ <ul>
+    {% for item in data %}
+        <li>{{ item.class_name }} - {{ item.syllabus_contents }}</li>
     {% endfor %}
+</ul>
+
+
 </form>
 {% endblock %}

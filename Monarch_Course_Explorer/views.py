@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from catalogue.forms import FeedbackForm
-from catalogue.models import Semester, Department, Course, Feedback
+from catalogue.models import Semester, Department, Course, Feedback, Syllabus
 from django.db import connection
 from .forms import CourseSearchForm
 from urllib import parse
@@ -81,7 +81,7 @@ def provideBrowseFeedbackView(request):
                                 semester.friendly_name,
                                 feedback.difficulty_rating, feedback.workload_rating, feedback.openness_rating, feedback.review,
                                 prof.first_name, prof.last_name
-                            FROM catalogue_course AS course INNER JOIN catalogue_section AS section ON course.id = section.course_id
+                           FROM catalogue_course AS course INNER JOIN catalogue_section AS section ON course.id = section.course_id
                                 INNER JOIN catalogue_semester AS semester ON section.semester = semester.short_name
                                 INNER JOIN users_professor AS prof ON section.professor_id = prof.id
                                 INNER JOIN catalogue_feedback AS feedback ON section.id = feedback.section_id """
@@ -108,7 +108,36 @@ def provideBrowseFeedbackView(request):
 
 # Render the syllabus page
 def provideSyllabusView(request):
-    return render(request, 'pages/syllabus.html')
+    data = []
+
+
+    strFrom = """ SELECT course.department, course.number, course.name, Syllabus.class_name, Syllabus.syllabus_contents 
+                  FROM catalogue_course AS course INNER JOIN catalogue_section AS section ON course.id = section.course_id 
+                  FROM catalogue_Syllabus as Syllabus """
+
+    strOrder = "ORDER BY section.semester, prof.last_name, prof.first_name, section.delivery_type, section.offering_time, section.offering_time;"
+
+    if request.method == "POST":
+        requestPost = request.POST
+
+        if 'courseSelect' in requestPost: # Check if any feedback has been submitted about the selected course
+            with connection.cursor() as cur:
+                strSQL = strFrom + "WHERE course.id = %s " + strOrder
+
+                cur.execute(strSQL, (request.POST['courseSelect'], ))
+                data = dictfetchall(cur)
+    elif request.method == "GET":
+        if 'id' in request.GET:
+            with connection.cursor() as cur:
+                strSQL = strFrom + "WHERE section.id = %s " + strOrder
+
+                cur.execute(strSQL, (request.GET['id'], ))
+                data = dictfetchall(cur)
+
+    #data = Syllabus.objects.all()
+    return render(request, 'pages/syllabus.html', {"allCourses": Course.objects.all().order_by('department', 'number'), 'data': data})
+    
+
 
 # Render the Register page
 def provideRegisterView(request):
