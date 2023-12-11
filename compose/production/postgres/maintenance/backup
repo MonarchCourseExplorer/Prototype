@@ -1,24 +1,19 @@
 #!/usr/bin/env bash
 
-
 ### Create a database backup.
 ###
 ### Usage:
 ###     $ docker compose -f <environment>.yml (exec |run --rm) postgres backup
 
-
 set -o errexit
 set -o pipefail
 set -o nounset
-
 
 working_dir="$(dirname ${0})"
 source "${working_dir}/_sourced/constants.sh"
 source "${working_dir}/_sourced/messages.sh"
 
-
 message_welcome "Backing up the '${POSTGRES_DB}' database..."
-
 
 if [[ "${POSTGRES_USER}" == "postgres" ]]; then
     message_error "Backing up as 'postgres' user is not supported. Assign 'POSTGRES_USER' env with another one and try again."

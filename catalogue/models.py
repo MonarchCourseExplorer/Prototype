@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.db import models
 from django.core.validators import MaxValueValidator
 from users.models import Student, Professor
@@ -43,10 +45,28 @@ class Syllabus(models.Model):
     section = models.ForeignKey(Section, on_delete = models.CASCADE)
     class_name = models.CharField('Course', default= 'name', max_length=50 )
     original_location = models.FileField(upload_to='documents/')
+    syllabus_contents = models.TextField(blank = True)
     #normalized_location = models.CharField('Normalized Location', max_length=120)
     
     def __str__(self):
-        return f"{self.crn}"
+        return f"{self.section.course}"
+    
+    
+    def save(self, *args, **kwargs):
+
+        super().save(*args, **kwargs)
+
+        if self.original_location:
+             # Read file contents and store in syllabus_contents into syllabus_contents field
+            file_path = os.path.join(settings.MEDIA_ROOT, str(self.original_location))
+            with open(file_path, 'r') as file:
+                self.syllabus_contents = file.read()
+
+            
+            # Save the instance
+            super().save(*args, **kwargs)
+
+
 
 #MCE Feedback
 class Feedback(models.Model):
@@ -59,38 +79,5 @@ class Feedback(models.Model):
     workload_rating = models.IntegerField('Workload Rating', validators=[MaxValueValidator(5)])
     openness_rating = models.IntegerField('Openness Rating', validators=[MaxValueValidator(5)])
 
-    #Deleted Model Fields
-    #StudentID = models.IntegerField('StudentID')
-    #studentID = models.ForeignKey(Student, on_delete= models.CASCADE) #How will we incorporate this? 
-    #professor_id = models.ForeignKey(Professor, on_delete= models.CASCADE) #Instructor
-    #section_id = models.ForeignKey(Section, on_delete= models.CASCADE) #CourseNumber
-    #rating = models.IntegerField(blank=True)
-
     def __str__(self):
         return f"{self.section, self.review[:100]}"
-
-    
-
-#MCE Recommendations Quiz
-
-# class recquestions(models.Model):
-#     questions_text = models.CharField(max_length=255)
-
-# class recAnswer(models.Model):
-#     question = models.ForeignKey(recquestions, on_delete=models.CASCADE)
-#     choice = models.CharField(max_length=150)
-    
-# class MCERecommendation(models.Model):
-#     title = models.CharField(max_length=255)
-#     content = models.TextField()
-#     course = models.CharField(max_length=15)
-    
-#     def __str__(self):
-#         return self.title
-    
-# class recCombined(models.Model):
-#     recommendation = models.OneToOneField(MCERecommendation, on_delete=models.CASCADE)
-#     answer = models.ForeignKey(recAnswer, on_delete=models.CASCADE)
-#     question = models.ForeignKey(recquestions, on_delete=models.CASCADE)
-#
-#

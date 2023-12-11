@@ -67,7 +67,6 @@ class SectionScraper:
         if entries != None:
             numEntries = int(entries.text.split()[5])
 
-
         sections = []
         while True:
             #extract course table
@@ -227,7 +226,6 @@ class SectionScraper:
 
         self.courses[course] = cur.fetchone()[0]
 
-
     def findElement(self, o, tag, cls):
         if o.find(tag, class_=cls) != None: 
             return o.find(tag, class_=cls).text
@@ -297,7 +295,6 @@ class SectionScraper:
                 print("Could not find {0}".format(element['id']))
 
         return departments
-
 
 if __name__ == "__main__":
     #This is a little harder than the course catalog

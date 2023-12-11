@@ -79,7 +79,6 @@ def syncDepartments(departments, conn):
     conn.commit()
     cur.close()
 
-
 def syncCourses(courses, conn):
     selectSQL = "SELECT ID FROM catalogue_course WHERE department = %s AND number = %s;"
     insertSQL = """INSERT INTO catalogue_course ( department, number, name, credits, description ) 
@@ -106,7 +105,6 @@ def syncCourses(courses, conn):
 
     conn.commit()
     cur.close()
-
 
 def createConnection():
     conn = None
