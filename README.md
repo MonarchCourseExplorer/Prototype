@@ -10,3 +10,6 @@ Working with local Docker container (Make sure your terminal is in the folder wh
 - Run server: docker-compose -f local.yml up
     - When running, you should be able to see the server in Docker Desktop and at 127.0.0.1:8000 in your browser
 - Stop server: Ctrl+C in terminal or user Docker Desktop to stop the server
+
+- Contributors:
+- nnewt001@odu.edu jbanks9
