@@ -110,17 +110,20 @@ def provideBrowseFeedbackView(request):
 def provideSyllabusView(request):
     data = []
 
-
-    strFrom = """ SELECT course.department, course.number, course.name, Syllabus.class_name, Syllabus.syllabus_contents 
-                  FROM catalogue_course AS course INNER JOIN catalogue_section AS section ON course.id = section.course_id 
-                  FROM catalogue_Syllabus as Syllabus """
+    strFrom = """SELECT course.department, course.number, course.name, Syllabus.class_name, Syllabus.syllabus_contents,
+                        section.semester, section.delivery_type, section.offering_days, section.offering_time,
+                        semester.friendly_name
+                FROM catalogue_course AS course 
+                INNER JOIN catalogue_section AS section ON course.id = section.course_id
+                INNER JOIN catalogue_Syllabus as Syllabus ON course.id = section.course_id 
+                INNER JOIN users_professor AS prof ON section.professor_id = prof.id """
 
     strOrder = "ORDER BY section.semester, prof.last_name, prof.first_name, section.delivery_type, section.offering_time, section.offering_time;"
 
     if request.method == "POST":
         requestPost = request.POST
 
-        if 'courseSelect' in requestPost: # Check if any feedback has been submitted about the selected course
+        if 'courseSelect' in requestPost:
             with connection.cursor() as cur:
                 strSQL = strFrom + "WHERE course.id = %s " + strOrder
 
@@ -133,13 +136,16 @@ def provideSyllabusView(request):
 
                 cur.execute(strSQL, (request.GET['id'], ))
                 data = dictfetchall(cur)
+        else:
+            # If there's no specific ID, don't include the WHERE clause
+            with connection.cursor() as cur:
+                strSQL = strFrom + strOrder
 
-    #data = Syllabus.objects.all()
+                cur.execute(strSQL)
+                data = dictfetchall(cur)
+
     return render(request, 'pages/syllabus.html', {"allCourses": Course.objects.all().order_by('department', 'number'), 'data': data})
-    
-
-
-# Render the Register page
+#Render the Register page
 def provideRegisterView(request):
     return render(request, '../../users/templates/authenticate/register.html')
 
