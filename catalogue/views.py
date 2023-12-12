@@ -22,21 +22,20 @@ def uploadSyllabus(request):
     
     return render(request, 'pages/upload.html', {'form': form})
 
-"""
-def uploadSyllabus(request): 
-    
-    if request.method == 'POST':
-        form = SyllabusForm(request.POST, request.FILES)
-        #file = request.FILES['file']
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = SyllabusForm()
-    
-    return render(request, 'pages/upload.html', {'form': form})
-"""
 
+# """
+# def uploadSyllabus(request): 
+#    if request.method == 'POST':
+#        form = SyllabusForm(request.POST, request.FILES)
+#        file = request.FILES['file']
+#        if form.is_valid():
+#            form.save()
+#            return redirect('success')
+#    else:
+#        form = SyllabusForm()
+#
+#    return render(request, 'pages/upload.html', {'form': form})
+# """
 
 # MCE Feedback
 def provideFeedback(request):
@@ -49,19 +48,14 @@ def provideFeedback(request):
             # return HttpResponseRedirect('/provideFeedback?submitted=True')
             return redirect('success')
     else:
-
         form = FeedbackForm()
         if 'submitted' in request.GET:
             submitted = True
             
     #return render(request, 'provideFeedback.html', {'form':form, 'submitted':submitted})
-    return render(request, 'pages/provideFeedback.html', {'form':form, 'submitted':submitted})
-
+    return render(request, 'pages/provideFeedback.html', {'form':form, 'submitted':submitted})  
   
-  
-  
-  # def upload_Syllabus(request): 
-    
+# def upload_Syllabus(request):     
 #     if request.method == 'POST':
 #         form = SyllabusForm(request.POST, request.FILES)
 #         #file = request.FILES['file']
@@ -74,6 +68,5 @@ def provideFeedback(request):
 #             return redirect('success')
 #     else:
 #         form = SyllabusForm()
-
-#     return render(request, 'pages/upload.html', {'form': form})
-    
+#
+#     return render(request, 'pages/upload.html', {'form': form})    

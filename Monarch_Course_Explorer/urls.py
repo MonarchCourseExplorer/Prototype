@@ -1,6 +1,6 @@
-"""
-URL configuration for Monarch_Course_Explorer project.
-"""
+# """
+# URL configuration for Monarch_Course_Explorer project.
+# """
 
 from django.conf import settings
 from django.conf.urls.static import static

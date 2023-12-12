@@ -109,8 +109,7 @@ def syncCourses(courses, conn):
 def createConnection():
     conn = None
 
-    try:
-        #This is SUPER bad practice, but...it's already out there
+    try:        
         conn = psycopg2.connect(host="postgres",
             dbname="mce_django",
             user="qrAKoIzpncvkHaCzUeBwGkXnhKgVypHZ",
