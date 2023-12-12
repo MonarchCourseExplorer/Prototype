@@ -1,6 +1,7 @@
 # Monarch-Course-Explorer Prototype
 Old Dominion University's CS411W 
 Team Silver Prototype: Monarch Course Explorer
+
 Fall 2023
 
 - Team website: https://monarchcourseexplorer.github.io/Monarch-Course-Explorer/header.html
@@ -17,9 +18,7 @@ Fall 2023
 - wvarnier - Will Varnier - wvarn001@odu.edu
 - philewj - Phillip Wilson - pwils008@odu.edu
 
-
 Please see our wiki for the user manual: https://github.com/KCarr030/Monarch-Course-Explorer/wiki
-
 
 Django notes:
 - HTML files are loaded from the templates folder

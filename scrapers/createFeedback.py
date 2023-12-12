@@ -37,7 +37,6 @@ if __name__ == "__main__":
             print(course.number)
             for rating in ratings:
                 prompt = "You are a student at ODU. Please give some feedback on the course \"{1}\", similar to RateMyProfessor.com. Include how hard it was, if the textbook was useful, and how the professor taught. You rated this course {0} out of 5.\nFeedback: ".format(rating, course.name)
-                for i in range(course.count):
-                    #there ought to be a way to query this multiple times without reloading the model, but I haven't quite figured it out yet
+                for i in range(course.count):                    
                     result = subprocess.run([llamaPath, "-m", modelPath, "-p", prompt, "-n", "200", "-e", "-c", "2048"], capture_output=True, text=True)
                     fbwriter.writerow([course.department, course.number, rating[:1], result.stdout[len(prompt):]])

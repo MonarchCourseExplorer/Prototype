@@ -49,8 +49,7 @@ class Syllabus(models.Model):
     #normalized_location = models.CharField('Normalized Location', max_length=120)
     
     def __str__(self):
-        return f"{self.section.course}"
-    
+        return f"{self.section.course}"    
     
     def save(self, *args, **kwargs):
 
@@ -61,12 +60,9 @@ class Syllabus(models.Model):
             file_path = os.path.join(settings.MEDIA_ROOT, str(self.original_location))
             with open(file_path, 'r') as file:
                 self.syllabus_contents = file.read()
-
             
             # Save the instance
             super().save(*args, **kwargs)
-
-
 
 #MCE Feedback
 class Feedback(models.Model):

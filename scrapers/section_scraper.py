@@ -50,7 +50,7 @@ class SectionScraper:
         self.professors = dict([])
 
     def scrapeSections(self, driver, url):
-        #TODO - change records to 100 - not sure if it'll help, but it'll be an accomplishment
+        #TODO - change records to 100.
         
         driver.get(url)
         try:
@@ -105,8 +105,7 @@ class SectionScraper:
 
         return sections
 
-    def extractTable(self, courseTable):
-        #I'm starting to think this was not designed with scraping in mind...let's try not to get IP banned
+    def extractTable(self, courseTable):        
         #CRN - btnaddcta
         #Course - crsenumcls
         #Course Title - crse_title
@@ -270,9 +269,7 @@ class SectionScraper:
         conn.commit()
         cur.close()
 
-    def scrapeDepartments(self, driver, term):
-        #if we just search for the term, it will give us a list of departments in that term
-        #OK, thats a lie, but there is some level of filtering
+    def scrapeDepartments(self, driver, term):        
         url = "https://courses.odu.edu/search?subject=&term={0}&".format(term)
 
         driver.get(url)
@@ -296,9 +293,7 @@ class SectionScraper:
 
         return departments
 
-if __name__ == "__main__":
-    #This is a little harder than the course catalog
-    #portions are loaded by JavaScript (may it suffer a thousand indignities), so we actually have to simulate a webpage
+if __name__ == "__main__":    
     options  = webdriver.FirefoxOptions()
     options.add_argument("--headless")
 
