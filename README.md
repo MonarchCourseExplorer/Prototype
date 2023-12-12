@@ -3,8 +3,9 @@ Old Dominion University's CS411W
 Team Silver Prototype: Monarch Course Explorer
 Fall 2023
 
-Team website: https://monarchcourseexplorer.github.io/Monarch-Course-Explorer/header.html
-Monarch Course Explorer Prototype: http://172.18.12.9:8000/
+- Team website: https://monarchcourseexplorer.github.io/Monarch-Course-Explorer/header.html
+
+- Monarch Course Explorer Prototype: http://172.18.12.9:8000/
 
 # Team Members
 - kelseymara - Kelsey Marantan - kmara004@odu.edu
